@@ -1,11 +1,39 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
 /vendor
-.env
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
+
+# NPM
+/node_modules
 npm-debug.log
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+/public/js/*
+/public/css/*
+storage/*.key
+.env.*.php
+.env.php
+.env
+Homestead.yaml
+Homestead.json
+.phpunit.result.cache
+
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/
+
+# Yarn
 yarn-error.log
+
+# Vagrant
+/.vagrant
+
+# Idea
+/.idea
+
+# VSCode
+/.vscode
+
+.php_cs.cache

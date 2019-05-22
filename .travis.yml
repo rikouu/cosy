@@ -1,0 +1,36 @@
+sudo: required
+language: php
+dist: trusty
+
+cache:
+  apt: true
+  directories:
+    - node_modules
+    - vendor
+
+addons:
+  apt:
+    packages:
+      - sshpass
+
+  ssh_known_hosts:
+    - $DEPLOY_HOST
+
+php:
+  - 7.3
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE cosy;'
+
+install:
+  - cp .env.travis .env
+  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+  - php artisan key:generate
+
+script:
+  - php artisan vendor:publish --tag=storage
+  - php artisan migrate
+  - php artisan db:seed

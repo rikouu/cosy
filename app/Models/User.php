@@ -1,14 +1,32 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+/**
+ * Class User
+ *
+ * @property string slug
+ * @property string email
+ * @property string display_name
+ * @property string avatar
+ * @property string url
+ * @property string name
+ */
+class User extends Model implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract
 {
-    use Notifiable;
+    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'display_name', 'password', 'avatar', 'url',
     ];
 
     /**
@@ -36,4 +54,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @param array $param
+     *
+     * @return string
+     */
+    public function getLink($param = [])
+    {
+        return route('user.show', array_merge(['slug' => $this->slug], $param));
+    }
 }

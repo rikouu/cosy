@@ -1,17 +1,25 @@
 {
     "name": "loyep/cosy",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "A cosy system powered by laravel and vuejs.",
     "keywords": [
         "framework",
         "laravel"
     ],
-    "license": "MIT",
+    "license": "AGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Loren Liu",
+            "email": "mwl@live.com"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
+        "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
+        "simplesoftwareio/simple-qrcode": "^2.0",
         "symfony/dom-crawler": "^4.2"
     },
     "require-dev": {
@@ -39,6 +47,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/Helpers/helper.php"
         ]
     },
     "autoload-dev": {

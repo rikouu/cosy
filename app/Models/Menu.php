@@ -2,6 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
+
+/**
+ * Class Menu
+ *
+ * @property string     name
+ * @property string     description
+ * @property Collection items
+ */
 class Menu extends Model
 {
     /**
@@ -12,4 +22,12 @@ class Menu extends Model
     protected $fillable = [
         'name', 'description',
     ];
+    
+    /**
+     * @return HasMany
+     */
+    protected function items(): HasMany
+    {
+        return $this->hasMany(MenuItem::class);
+    }
 }

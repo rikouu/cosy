@@ -11,7 +11,7 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'cosy:install';
 
     /**
      * The console command description.

@@ -11,7 +11,7 @@ class Version extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'cosy:version';
 
     /**
      * The console command description.

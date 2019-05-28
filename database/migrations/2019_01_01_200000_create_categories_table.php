@@ -27,7 +27,6 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
         });
 
-
         Schema::create('article_category', function (Blueprint $table) {
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('category_id');

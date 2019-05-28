@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Cosy\Cosy;
 use Illuminate\Support\ServiceProvider;
 
 class CosyServiceProvider extends ServiceProvider
@@ -13,7 +14,9 @@ class CosyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('cosy', function () {
+            return $this->app->make(Cosy::class);
+        });
     }
 
     /**

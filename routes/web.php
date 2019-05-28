@@ -1,5 +1,6 @@
 <?php
 
+use App\Facades\Cosy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,8 @@ Auth::routes();
 
 Route::get('/', 'App\HomeController@home');
 
+Route::group(['prefix' => Cosy::path(),], function () {
+    Route::get('/', 'Admin\DashboardController@dashboard')->name('dashboard');
+    Route::get('/{any}', 'Admin\DashboardController@dashboard')->where('any', '.*');
+});
 

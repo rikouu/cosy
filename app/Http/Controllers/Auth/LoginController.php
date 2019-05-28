@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Facades\Cosy;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -23,9 +25,24 @@ class LoginController extends Controller
     /**
      * Where to redirect users after login.
      *
-     * @var string
+     * @return string
      */
-    protected $redirectTo = '/home';
+    public function redirectPath()
+    {
+        return Cosy::path();
+    }
+
+    /**
+     * Get the throttle key for the given request.
+     *
+     * @param Request $request
+     *
+     * @return string
+     */
+    protected function throttleKey(Request $request)
+    {
+        return $request->ip();
+    }
 
     /**
      * Create a new controller instance.

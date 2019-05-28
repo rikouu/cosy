@@ -22,13 +22,9 @@ use Illuminate\Notifications\Notifiable;
  * @property string url
  * @property string name
  */
-class User extends Model implements
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, Notifiable;
-    use Sluggable;
+    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, Notifiable, Sluggable;
 
     /**
      * The attributes that are mass assignable.

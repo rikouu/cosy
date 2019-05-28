@@ -18,7 +18,6 @@ class CreateArticlesTable extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('category_id')->index();
             $table->text('keywords')->nullable();
             $table->text('description')->nullable();
             $table->text('excerpt')->nullable();

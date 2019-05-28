@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Link extends Model
+class SearchHistory extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,7 @@ class Link extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'display_name', 'password', 'avatar', 'url',
+        'query', 'search_date', 'search_count', 'description',
     ];
+
 }

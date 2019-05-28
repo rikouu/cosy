@@ -27,16 +27,17 @@ class CreateMenusTable extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('url')->nullable();
-            $table->string('target')->default('_self');
+            $table->enum('target', ['_blank', '_self', '_parent', '_top'])->default('_self');
             $table->string('image')->nullable();
             $table->string('icon')->nullable();
-            $table->unsignedBigInteger('parent')->default(0);
-            $table->unsignedInteger('order')->default(0);
+            $table->unsignedBigInteger('parent_id')->default(0)->nullable();
+            $table->integer('order')->default(0);
             $table->string('route')->nullable();
             $table->text('parameters')->nullable();
             $table->boolean('status')->default(true);
             $table->softDeletes();
             $table->timestamps();
+            $table->index(['menu_id', 'parent_id']);
         });
     }
 

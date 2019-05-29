@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Cosy\Cosy;
+use App\Cosy\SEO\SEO;
 use Illuminate\Support\ServiceProvider;
 
 class CosyServiceProvider extends ServiceProvider
@@ -15,7 +16,11 @@ class CosyServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('cosy', function () {
-            return $this->app->make(Cosy::class);
+            return new Cosy();
+        });
+
+        $this->app->singleton('cosy.seo', function () {
+            return new SEO();
         });
     }
 

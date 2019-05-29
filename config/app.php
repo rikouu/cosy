@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\CosyServiceProvider::class,
 
         /*
          * Application Service Providers...

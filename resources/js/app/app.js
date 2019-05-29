@@ -9,7 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 require('./plugins/pjax');
-// require('./plugins/pangu');
+require('./plugins/pangu');
 require('./plugins/highlight');
 
 /**

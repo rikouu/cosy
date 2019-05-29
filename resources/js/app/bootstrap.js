@@ -1,4 +1,6 @@
 // window._ = require('lodash');
+window.Cosy = require('./cosy');
+window.NProgress = require('nprogress');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

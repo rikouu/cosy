@@ -3,13 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-    <!-- Styles -->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <style>
         html, body {
             background-color: #fff;
@@ -64,7 +60,8 @@
     </style>
 </head>
 <body>
-<div class="flex-center position-ref full-height">
+<div id="loader"></div>
+<div class="flex-center position-ref full-height" id="app">
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
@@ -83,7 +80,21 @@
         <div class="title m-b-md">
             Laravel
         </div>
-
+        <p>Laravel是一套简洁、优雅的PHP Web开发框架。今天出去买菜花了5000元。我家的光纤入屋宽频有 10Gbps，SSD 一共有 20TB</p>
+        <pre>
+            <code class="language-php">
+                let mix = require('laravel-mix');
+                mix.js('resources/js/app.js', 'public/js')
+                .sass('resources/sass/app.scss', 'public/css');
+            </code>
+        </pre>
+        <p>然后你可以移动目录并使用以下命令进行清理：</p>
+        <pre>
+            <code class="language-bash">
+                mv resources/assets/* resources
+                rm -rf resources/assets/
+            </code>
+        </pre>
         <div class="links">
             <a href="https://laravel.com/docs">Docs</a>
             <a href="https://laracasts.com">Laracasts</a>
@@ -95,5 +106,6 @@
         </div>
     </div>
 </div>
+<script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

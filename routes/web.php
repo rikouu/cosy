@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/', 'App\HomeController@home');
 
+Route::get('{slug}.html', 'App\ArticleController@show')->name('article.show');
+
 Route::group(['prefix' => Cosy::path(),], function () {
     Route::get('/', 'Admin\DashboardController@dashboard')->name('dashboard');
     Route::get('/{any}', 'Admin\DashboardController@dashboard')->where('any', '.*');

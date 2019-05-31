@@ -45,6 +45,7 @@ mix
       options: {
         browsers: [
           'last 6 versions',
+          "> 1%",
         ],
       },
     },

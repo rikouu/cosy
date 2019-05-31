@@ -1,26 +1,25 @@
 @php
     $index_menu_style = "immersed";
     $magazineClass = '';
-    if ($index_menu_style == 'immersed' || $index_menu_style == 'dark' || $index_menu_style == 'image') {
+    if ($index_menu_style === 'immersed' || $index_menu_style === 'dark' || $index_menu_style === 'image') {
         $magazineClass .= ' list-fixed';
     }
 
-    if ($index_menu_style == 'plain') {
+    if ($index_menu_style === 'plain') {
         $magazineClass .= ' bg-light ';
     }
 
-    if ($index_menu_style == 'dark') {
+    if ($index_menu_style === 'dark') {
         $magazineClass .= ' bg-dark';
     }
 @endphp
 
 @if ($slides->isNotEmpty())
     <section class="list-magazine {{ $magazineClass}}">
-        @if ($index_menu_style == 'immersed')
-            <div class="bg-effect bg-dark bg-image-color"></div>
-            <div class="bg-effect bg-cover bg-magazine"
-                 style="background-image: url('{{ asset('/images/bg.jpg') }}');"></div>
-        @elseif($index_menu_style == 'image')
+        @if ($index_menu_style === 'immersed')
+            <div class="bg-effect bg-dark bg-image-color" style="background: linear-gradient(rgb(178, 145, 90) 0%, rgb(28, 90, 119) 100%, rgb(100, 46, 46) 100%);"></div>
+            <div class="bg-effect bg-cover bg-magazine" style="background-image: url('{{ asset('/images/bg.jpg') }}');"></div>
+        @elseif($index_menu_style === 'image')
             <div class="bg-effect bg-cover" style="background-image:url('{{ asset('/images/bg.jpg') }}')"></div>
         @endif
         <div class="container">

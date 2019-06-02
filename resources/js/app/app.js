@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+require('@fortawesome/fontawesome-free');
 require('./plugins/pjax');
 require('./plugins/pangu');
 require('./plugins/highlight');

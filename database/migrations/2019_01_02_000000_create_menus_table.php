@@ -15,14 +15,6 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->unique();
-            $table->string('description')->nullable();
-            $table->softDeletes();
-            $table->timestamps();
-        });
-
-        Schema::create('menu_items', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->unsignedBigInteger('menu_id')->nullable();
             $table->string('title');
             $table->string('description')->nullable();
@@ -48,7 +40,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_items');
         Schema::dropIfExists('menus');
     }
 }

@@ -1905,7 +1905,7 @@ a.text-primary:hover {
 
 }
 
-.media-action .iconfont {
+.media-action .far, .media-action .fal, .media-action .fab {
   position: relative;
 }
 
@@ -2458,23 +2458,23 @@ a.text-primary:hover {
 /*--------------------------------------------------------------
    list overlay style
 --------------------------------------------------------------*/
-.list-nice-overlay {
+.list-item-overlay {
   margin-bottom: 0;
 }
 
-.list-nice-overlay .list-content {
+.list-item-overlay .list-content {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
 }
 
-.list-nice-overlay .list-content {
+.list-item-overlay .list-content {
   padding: 1rem;
   z-index: 1;
 }
 
-.list-nice-overlay .list-body {
+.list-item-overlay .list-body {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -2483,36 +2483,36 @@ a.text-primary:hover {
   flex: none;
 }
 
-.list-nice-overlay .list-title {
+.list-item-overlay .list-title {
   color: #FFF;
   font-size: .875rem;
 }
 
-.list-nice-overlay .text-muted:not(i) {
+.list-item-overlay .text-muted:not(i) {
   color: #e2e2e2 !important;
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .list-nice-overlay .list-content {
+  .list-item-overlay .list-content {
     padding: .75rem;
   }
 
-  .list-nice-overlay .list-title {
+  .list-item-overlay .list-title {
     font-size: .875rem;
   }
 
 }
 
 @media (max-width: 767.98px) {
-  .list-nice-overlay .list-content {
+  .list-item-overlay .list-content {
     padding: .75rem;
   }
 
-  .list-nice-overlay .list-title {
+  .list-item-overlay .list-title {
     font-size: .875rem;
   }
 
-  .list-nice-overlay .list-title.h5 {
+  .list-item-overlay .list-title.h5 {
     font-size: 1rem;
   }
 
@@ -5181,7 +5181,7 @@ padding: .75rem .875rem;
 .nice-style-radius .post .media,
 .nice-style-radius .post-cover .bg-img,
 .nice-style-radius .list-grouped .list-item,
-.nice-style-radius .list-grouped .list-item.list-nice-overlay {
+.nice-style-radius .list-grouped .list-item.list-item-overlay {
   -webkit-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
@@ -5228,8 +5228,8 @@ padding: .75rem .875rem;
   .nice-style-radius .post-cover .bg-img,
   .nice-style-radius .list-item .media,
   .nice-style-radius .list-grouped .list-item,
-  .nice-style-radius .list-grouped .list-item.list-nice-overlay,
-  .nice-style-radius .list-grouped .list-item.list-nice-overlay .media {
+  .nice-style-radius .list-grouped .list-item.list-item-overlay,
+  .nice-style-radius .list-grouped .list-item.list-item-overlay .media {
     -webkit-border-radius: 4px;
     -ms-border-radius: 4px;
     -o-border-radius: 4px;

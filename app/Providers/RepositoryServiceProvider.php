@@ -4,6 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class RepositoryServiceProvider
+ *
+ * @package App\Providers
+ */
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**

@@ -39,6 +39,7 @@ class HomeController extends Controller
     public function home()
     {
         $slides = $this->slides->top();
-        return view('home', compact('slides'));
+        $articles = $this->articles->paginate();
+        return view('home', compact('slides', 'articles'));
     }
 }

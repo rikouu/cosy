@@ -3,10 +3,16 @@
 namespace App\Models;
 
 use App\Models\Traits\Sluggable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Article
+ *
+ * @package App\Models
+ */
 class Article extends Model
 {
     use Sluggable;
@@ -23,9 +29,29 @@ class Article extends Model
     /**
      * @var array
      */
+    protected $dates = [
+        'published_at',
+    ];
+
+    /**
+     * @var array
+     */
     protected $searchable = [
 
     ];
+
+    /**
+     * @return mixed
+     */
+    public function getPublishedDate()
+    {
+        $date = $this->published_at;
+        if (Carbon::now() > $this->published_at->addDays(7)) {
+            return $date->toDateString();
+        }
+
+        return $date->diffForHumans();
+    }
 
     /**
      * @return BelongsTo
@@ -57,6 +83,16 @@ class Article extends Model
     protected function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * @param null|array $params
+     *
+     * @return string
+     */
+    public function getLink($params = null)
+    {
+        return route('article.show', ['id' => $this->slug]);
     }
 
 }

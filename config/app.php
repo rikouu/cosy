@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\RepositoryServiceProvider::class,
+        App\Providers\ThemeServiceProvider::class,
 
     ],
 
@@ -229,6 +230,7 @@ return [
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
         'Cosy'         => App\Facades\Cosy::class,
+        'Theme'        => App\Facades\Theme::class,
     ],
 
 ];

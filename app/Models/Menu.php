@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
 
 /**
  * Class Menu
  *
- * @property string     name
- * @property string     description
- * @property Collection items
+ * @package App\Models
  */
 class Menu extends Model
 {
@@ -20,14 +18,24 @@ class Menu extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description',
+        'title', 'description', 'url', 'target', 'image',
+        'icon', 'order', 'parent_id', 'route', 'parameters',
+        'status', 'menu_id',
     ];
-    
+
     /**
-     * @return HasMany
+     * @return BelongsTo|null
      */
-    protected function items(): HasMany
+    protected function parent(): ?BelongsTo
     {
-        return $this->hasMany(MenuItem::class);
+        return $this->belongsTo(self::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    protected function navigation(): BelongsTo
+    {
+        return $this->belongsTo(Navigation::class);
     }
 }

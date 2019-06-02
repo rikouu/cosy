@@ -15,12 +15,7 @@ use Illuminate\Notifications\Notifiable;
 /**
  * Class User
  *
- * @property string slug
- * @property string email
- * @property string display_name
- * @property string avatar
- * @property string url
- * @property string name
+ * @package App\Models
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {

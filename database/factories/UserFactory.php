@@ -19,11 +19,17 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    static $password;
+
+    $name = $faker->name;
+    $email = $faker->unique()->safeEmail;
+
     return [
-        'name'              => $faker->name,
-        'email'             => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password'          => Hash::make('password'), // password
-        'remember_token'    => Str::random(10),
+        'name'         => Str::slug($name) ?: Str::slug($faker->words(2, true)),
+        'email'        => $email,
+        'display_name' => $name,
+        'avatar'       => '',
+        'password'     => $password ?: $password = Hash::make('123123'),
+        'url'          => 'https://loyep.com',
     ];
 });

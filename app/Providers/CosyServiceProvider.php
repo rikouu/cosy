@@ -6,6 +6,11 @@ use App\Cosy\Cosy;
 use App\Cosy\SEO\SEO;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class CosyServiceProvider
+ *
+ * @package App\Providers
+ */
 class CosyServiceProvider extends ServiceProvider
 {
     /**
@@ -15,10 +20,6 @@ class CosyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('cosy', function () {
-            return new Cosy();
-        });
-
         $this->app->singleton('cosy.seo', function () {
             return new SEO();
         });
@@ -31,6 +32,8 @@ class CosyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->singleton('cosy', function () {
+            return new Cosy();
+        });
     }
 }

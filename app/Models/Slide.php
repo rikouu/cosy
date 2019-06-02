@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Slide
  *
- * @property string url
+ * @package App\Models
  */
 class Slide extends Model
 {

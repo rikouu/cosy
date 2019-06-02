@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row-sm">
                 <div class="col-12 col-md-6 d-flex">
-                    <div class="list-item list-prism-overlay custom-hover flex-fill">
+                    <div class="list-item list-item-overlay custom-hover flex-fill">
                         @php
                             $firstArticle = $slides->first();
                         @endphp
@@ -50,7 +50,7 @@
                         <div class="row-sm row-scroll my-n1 my-md-n2">
                             @foreach($slides->slice(1,4)->all() as $article)
                                 <div class="col-6 py-1 py-md-2">
-                                    <div class="list-item list-prism-overlay custom-hover">
+                                    <div class="list-item list-item-overlay custom-hover">
                                         <div class="media">
                                             <a href="{{ $article->getLink() }}" class="media-content"
                                                style="background-image: url('{{ $article->image ?? asset('/images/bg.jpg') }}')">

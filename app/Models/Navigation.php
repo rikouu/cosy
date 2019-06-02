@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MenuItem extends Model
+/**
+ * Class Menu
+ *
+ * @package App\Models
+ */
+class Navigation extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,9 +17,7 @@ class MenuItem extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'url', 'target', 'image',
-        'icon', 'order', 'parent_id', 'route', 'parameters',
-        'status', 'menu_id',
+        'name', 'description', 'position'
     ];
 
     /**
@@ -29,8 +31,8 @@ class MenuItem extends Model
     /**
      * @return BelongsTo
      */
-    protected function menu(): BelongsTo
+    protected function navigation(): BelongsTo
     {
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(Navigation::class);
     }
 }

@@ -4,6 +4,9 @@ namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * Class Cosy
+ */
 class Cosy extends Facade
 {
     /**

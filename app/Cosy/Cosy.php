@@ -8,4 +8,9 @@ class Cosy
     {
         return app('cosy.seo');
     }
+
+    public function name()
+    {
+        return config('app.name', 'Cosy');
+    }
 }

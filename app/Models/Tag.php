@@ -5,6 +5,11 @@ namespace App\Models;
 use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Class Tag
+ *
+ * @package App\Models
+ */
 class Tag extends Model
 {
     use Sluggable;

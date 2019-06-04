@@ -41,19 +41,11 @@ mix.webpackConfig({
 mix
   .options({
     extractVueStyle: true,
-    autoprefixer: {
-      options: {
-        browsers: [
-          'last 6 versions',
-          "> 1%",
-          "not ie <= 8"
-        ],
-      },
-    },
+    autoprefixer: {},
   })
-  .ts('resources/js/app/app.js', 'public/js/app.js')
+  .ts('resources/ts/app/app.ts', 'public/js/app.js')
   .less('resources/less/app/app.less', 'public/css/app.css')
-  .ts('resources/js/admin/admin.js', 'public/js/admin.js')
+  .js('resources/js/admin/admin.js', 'public/js/admin.js')
   .less('resources/less/admin/admin.less', 'public/css/admin.css')
   .version()
   .disableSuccessNotifications();

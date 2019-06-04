@@ -16,7 +16,7 @@
     ],
     "paths": {
       "@/*": [
-        "resources/js/*"
+        "resources/ts/*"
       ]
     },
     "lib": [
@@ -27,9 +27,9 @@
     ]
   },
   "include": [
-    "resources/js/**/*.ts",
-    "resources/js/**/*.tsx",
-    "resources/js/**/*.vue"
+    "resources/ts/**/*.ts",
+    "resources/ts/**/*.tsx",
+    "resources/ts/**/*.vue"
   ],
   "exclude": [
     "node_modules"

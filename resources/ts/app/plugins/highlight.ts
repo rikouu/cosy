@@ -1,6 +1,5 @@
-'use strict';
+import Prism from 'prismjs';
 
-const Prism = require('prismjs');
 require('prismjs/components/prism-json');
 require('prismjs/components/prism-css');
 require('prismjs/components/prism-javascript');
@@ -10,6 +9,11 @@ require('prismjs/components/prism-php');
 require('prismjs/components/prism-markup-templating');
 require('prismjs/components/prism-bash');
 
-Prism.highlightAll();
+export class Highlight {
+  public static highlight() {
+    Prism.highlightAll();
+  }
+}
 
-module.exports = Prism;
+Highlight.highlight();
+

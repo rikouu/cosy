@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\App\ArticleRepository;
 use App\Repositories\App\SlideRepository;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -40,6 +41,7 @@ class HomeController extends Controller
     {
         $slides = $this->slides->top();
         $articles = $this->articles->paginate();
-        return view('home', compact('slides', 'articles'));
+        $slideBg = Storage::disk('qiniu')->getUrl('images/bg.jpg');
+        return view('home', compact('slides', 'articles', 'slideBg'));
     }
 }

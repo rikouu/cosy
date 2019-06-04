@@ -11,5 +11,4 @@ require('prismjs/components/prism-markup-templating');
 require('prismjs/components/prism-bash');
 
 Prism.highlightAll();
-
 module.exports = Prism;

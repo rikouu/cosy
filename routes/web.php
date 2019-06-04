@@ -22,16 +22,19 @@ Route::get('/', 'App\HomeController@home');
 Route::get('history', 'App\HomeController@history')->name('history');
 Route::get('search', 'App\HomeController@history')->name('search');
 
+// 作者页
+Route::match(['get', 'post'], 'author/{name}', 'App\UserController@show')->name('user.show');
+
 Route::get('{slug}.html', 'App\ArticleController@show')->name('article.show');
 
 // 文章页
 Route::get('{slug}.html', 'App\ArticleController@show')->name('article.show');
 
 // 分类页
-Route::match(['get', 'post'], 'category/{slug}', 'CategoryController@show')->name('category.show');
+Route::match(['get', 'post'], 'category/{slug}', 'App\CategoryController@show')->name('category.show');
 
 // 标签页
-Route::match(['get', 'post'], 'tag/{slug}', 'TagController@show')->name('tag.show');
+Route::match(['get', 'post'], 'tag/{slug}', 'App\TagController@show')->name('tag.show');
 
 Route::group(['prefix' => Cosy::path(),], function () {
     Route::get('/', 'Admin\DashboardController@dashboard')->name('dashboard');

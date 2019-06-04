@@ -9,9 +9,10 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 require('@fortawesome/fontawesome-free');
-require('./plugins/pjax');
+// require('./plugins/pjax');
 require('./plugins/pangu');
 require('./plugins/highlight');
+require('./plugins/backtop');
 
 /**
  * The following block of code may be used to automatically register your

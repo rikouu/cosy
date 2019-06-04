@@ -12,7 +12,7 @@
             <div class="row-sm my-n2">
                 @foreach($articles as $article)
                     <div class="col-6 col-md-3 py-2">
-                        <div class="list-item list-prism-overlay custom-hover">
+                        <div class="list-item list-item-overlay custom-hover">
                             <div class="media media-3x2">
                                 <a class="media-content" href="{{ $article->getLink() }}">
                                     <img src="{{ thumbnail($article->image) }}">

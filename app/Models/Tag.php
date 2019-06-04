@@ -23,8 +23,21 @@ class Tag extends Model
         'name', 'slug', 'image', 'description',
     ];
 
+    /**
+     * @return BelongsToMany
+     */
     protected function articles(): BelongsToMany
     {
         return $this->belongsToMany(Article::class, 'article_tag');
+    }
+
+    /**
+     * @param array $params
+     *
+     * @return string
+     */
+    public function getLink($params = [])
+    {
+        return route('tag.show', array_merge($params, ['id' => $this->slug]));
     }
 }

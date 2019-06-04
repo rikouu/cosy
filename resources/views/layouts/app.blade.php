@@ -9,7 +9,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
-<body>
+<body class="cosy-style-shadow">
     <div id="app">
         @yield('content')
     </div>

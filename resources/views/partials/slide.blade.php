@@ -18,7 +18,7 @@
     <section class="list-magazine {{ $magazineClass}}">
         @if ($index_menu_style === 'immersed')
             <div class="bg-effect bg-dark bg-image-color" style="background: linear-gradient(rgb(178, 145, 90) 0%, rgb(28, 90, 119) 100%, rgb(100, 46, 46) 100%);"></div>
-            <div class="bg-effect bg-cover bg-magazine" style="background-image: url('{{ asset('/images/bg.jpg') }}');"></div>
+            <div class="bg-effect bg-cover bg-magazine" style="background-image: url('{{ $slideBg }}');"></div>
         @elseif($index_menu_style === 'image')
             <div class="bg-effect bg-cover" style="background-image:url('{{ asset('/images/bg.jpg') }}')"></div>
         @endif
@@ -31,7 +31,7 @@
                         @endphp
                         <div class="media d-flex flex-fill">
                             <a href="{{ $firstArticle->getLink() }}" class="media-content"
-                               style="background-image: url('{{ $firstArticle->image ?? asset('/images/bg.jpg') }}')">
+                               style="background-image: url('{{ $firstArticle->image ?? $slideBg }}')">
                                 <span class="overlay"></span>
                             </a>
                         </div>
@@ -53,7 +53,7 @@
                                     <div class="list-item list-item-overlay custom-hover">
                                         <div class="media">
                                             <a href="{{ $article->getLink() }}" class="media-content"
-                                               style="background-image: url('{{ $article->image ?? asset('/images/bg.jpg') }}')">
+                                               style="background-image: url('{{ $article->image ?? $slideBg }}')">
                                                 <span class="overlay"></span>
                                             </a>
                                         </div>

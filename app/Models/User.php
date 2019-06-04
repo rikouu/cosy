@@ -55,6 +55,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function getLink($param = [])
     {
-        return route('user.show', array_merge(['slug' => $this->slug], $param));
+        return route('user.show', array_merge(['name' => $this->name], $param));
+    }
+
+    /**
+     * @param $avatar
+     *
+     * @return string
+     */
+    public function getAvatarAttribute($avatar)
+    {
+        return !empty($avatar) ? $avatar : getAvatar($this->email);
     }
 }

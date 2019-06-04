@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
 
 class ArticleController extends Controller
@@ -19,12 +21,23 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param string $slug
      *
      * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        return view('article.show');
+        try {
+            $article = Article::with('content', 'category', 'tags', 'user')->where('slug', $slug)->firstOrFail();
+            $isLiked = true;
+            $content = $article->content;
+            if (empty($content)) {
+                abort(404);
+            }
+
+            return view('articles.' . $article->getTemplate(), compact('article', 'content', 'isLiked'));
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
     }
 }

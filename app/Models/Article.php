@@ -3,15 +3,20 @@
 namespace App\Models;
 
 use App\Models\Traits\Sluggable;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
 /**
  * Class Article
  *
- * @package App\Models
+ * @property string         slug
+ * @property ArticleContent content
+ * @property Carbon         published_at
+ * @property string         template
+ * @property string         type
  */
 class Article extends Model
 {
@@ -54,9 +59,29 @@ class Article extends Model
     }
 
     /**
+     * Next Article.
+     *
+     * @return Article
+     */
+    public function nextArticle()
+    {
+        return self::where('published_at', '>', $this->published_at)->where('status', 'published')->orderBy('published_at', 'asc')->first();
+    }
+
+    /**
+     * Previous Article.
+     *
+     * @return Article
+     */
+    public function prevArticle()
+    {
+        return self::where('published_at', '<', $this->published_at)->where('status', 'published')->orderBy('published_at', 'desc')->first();
+    }
+
+    /**
      * @return BelongsTo
      */
-    protected function user(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -64,7 +89,7 @@ class Article extends Model
     /**
      * @return BelongsTo
      */
-    protected function category(): BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
@@ -72,7 +97,7 @@ class Article extends Model
     /**
      * @return BelongsToMany
      */
-    protected function tags(): BelongsToMany
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'article_tag');
     }
@@ -80,19 +105,39 @@ class Article extends Model
     /**
      * @return HasMany
      */
-    protected function comments(): HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
     /**
-     * @param null|array $params
+     * @param array $params
      *
      * @return string
      */
-    public function getLink($params = null)
+    public function getLink($params = [])
     {
-        return route('article.show', ['id' => $this->slug]);
+        return route('article.show', array_merge($params, ['id' => $this->slug]));
     }
 
+    /**
+     * @return HasOne
+     */
+    public function content(): HasOne
+    {
+        return $this->hasOne(ArticleContent::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplate()
+    {
+        $template = $this->template;
+        if (empty($template)) {
+            $template = 'template.' . $this->type;
+        }
+
+        return $template;
+    }
 }

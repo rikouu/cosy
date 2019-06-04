@@ -22,7 +22,7 @@
                         <div class="{{ $rowClass }}">
                             @foreach($topArticles as $topArticle)
                                 <div class="{{ $cardClass }}">
-                                    <div class="list-item list-prism-overlay custom-hover">
+                                    <div class="list-item list-item-overlay custom-hover">
                                         <div class="media media-3x2">
                                             <a href="{{ $topArticle->getLink() }}" class="media-content custom-hover-img"
                                                style="background-image:url('{{ $topArticle->image }}')">

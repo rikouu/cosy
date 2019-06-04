@@ -178,7 +178,7 @@ return [
 
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ThemeServiceProvider::class,
-
+        Overtrue\LaravelFilesystem\Qiniu\QiniuStorageServiceProvider::class,
     ],
 
     /*

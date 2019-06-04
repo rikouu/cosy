@@ -4,6 +4,7 @@ namespace App\Repositories\App;
 
 use App\Models\Article;
 use App\Repositories\Repository;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleRepository extends Repository
 {

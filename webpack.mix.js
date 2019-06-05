@@ -45,6 +45,7 @@ mix
   })
   .ts('resources/ts/app/app.ts', 'public/js/app.js')
   .less('resources/less/app/app.less', 'public/css/app.css')
+  .less('resources/less/app/auth.less', 'public/css/auth.css')
   .js('resources/js/admin/admin.js', 'public/js/admin.js')
   .less('resources/less/admin/admin.less', 'public/css/admin.css')
   .version()

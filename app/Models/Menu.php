@@ -7,8 +7,6 @@ use Illuminate\Support\Collection;
 
 /**
  * Class Menu
- *
- * @package App\Models
  */
 class Menu extends Model
 {

@@ -23,7 +23,7 @@ class Navigation extends Model
     /**
      * @return BelongsTo|null
      */
-    protected function parent(): ?BelongsTo
+    public function parent(): ?BelongsTo
     {
         return $this->belongsTo(self::class);
     }
@@ -31,7 +31,7 @@ class Navigation extends Model
     /**
      * @return BelongsTo
      */
-    protected function navigation(): BelongsTo
+    public function navigation(): BelongsTo
     {
         return $this->belongsTo(Navigation::class);
     }

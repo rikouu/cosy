@@ -3,66 +3,49 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $categories = Category::withCount('articles')->paginate();
+        dd($categories);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param Request $request
+     * @param         $slug
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function show($id)
+    public function show(Request $request, $slug)
     {
-        //
-    }
+        $category = Category::withCount('articles')->whereSlug($slug)->firstOrFail();
+        $topCount = in_array($category->style, ['plain', 'medium']) ? 3 : 4;
+        $topArticles = Article::whereCategoryId($category->id)
+            ->take($topCount)
+            ->get();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $articles = Article::with('category')
+            ->whereCategoryId($category->id)
+            ->whereNotIn('id', $topArticles->pluck('id'))
+            ->paginate();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if ($request->ajax()) {
+            return view('components.card.article-list', compact('articles'));
+        }
+
+        return view('categories.show', compact('articles', 'category', 'topArticles'));
     }
 }

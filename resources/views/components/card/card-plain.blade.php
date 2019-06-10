@@ -20,21 +20,14 @@
             <div>{{ $article->getPublishedDate() }}</div>
             <div class="flex-fill"></div>
             <div class="text-nowrap">
-                <span class="d-none d-lg-inline-block pr-2">
-                    <i class="text-sm iconfont icon-view"></i>
-                    {{ $article->views_count }}
+                <span class="d-none d-lg-inline-block pr-2 px-md-3">
+                    <i class="text-sm fal fa-comment"></i>
+                    {{ $article->comments_count }}
                 </span>
 
-                @if ($article->allow_comment)
-                    <span class="d-none d-lg-inline-block pr-2 px-md-3">
-                        <i class="text-sm iconfont icon-duanxin"></i>
-                        {{ $article->comments_count }}
-                    </span>
-                @endif
-
                 <span class="d-none d-lg-inline-block">
-                    <i class="iconfont icon-shoucang"></i>
-                        {{ $article->likes_count }}
+                    <i class="fal fa-heart"></i>
+                    {{ $article->likes_count }}
                 </span>
             </div>
         </div>

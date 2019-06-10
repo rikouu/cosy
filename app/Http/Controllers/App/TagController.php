@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TagController extends Controller
 {
@@ -18,51 +21,28 @@ class TagController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param Request $request
+     * @param         $slug
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function show($id)
+    public function show(Request $request, $slug)
     {
-        //
-    }
+        $tag = Tag::withCount('articles')->where('slug', $slug)->first();
+        $articles = Article::whereHas('tags', function ($query) use ($tag) {
+            $query->where('id', $tag->id);
+        })->paginate();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        if ($request->ajax()) {
+            return view('components.card.article-list', compact('articles'));
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $topArticles = Article::whereHas('tags', function ($query) use ($tag) {
+            $query->where('id', $tag->id);
+        })->orderByDesc('published_at')->take(4)->get();
+
+        return view('tags.show', compact('articles', 'tag', 'topArticles'));
     }
 }

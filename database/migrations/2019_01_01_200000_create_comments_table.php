@@ -21,7 +21,7 @@ class CreateCommentsTable extends Migration
             $table->string('name', 100)->nullable();
             $table->string('url')->nullable();
             $table->string('email')->nullable();
-            $table->string('status', 100);
+            $table->enum('status', ['published'])->default('published');
             $table->string('type', 100);
             $table->ipAddress('ip')->default('::1');
             $table->string('agent')->nullable();

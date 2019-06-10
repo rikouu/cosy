@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Link
- *
- * @package App\Models
  */
 class Link extends Model
 {

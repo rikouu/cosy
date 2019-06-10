@@ -12,14 +12,16 @@ use Illuminate\Database\Eloquent\Model;
 class Slide extends Model
 {
     /**
+     * @param array $params
+     *
      * @return string
      */
-    public function getLink()
+    public function getLink($params = [])
     {
         if (!empty($this->url)) {
             return $this->url;
         }
+
         return 'javascript:;';
     }
-
 }

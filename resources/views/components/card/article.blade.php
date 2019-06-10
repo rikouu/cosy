@@ -16,16 +16,11 @@
                 <div>{{ $article->getPublishedDate() }}</div>
                 <div class="flex-fill"></div>
                 <div class="text-nowrap">
-{{--                    <span class="d-none d-lg-inline-block pr-2">--}}
-{{--                        <i class="text-sm fal fa-eye"></i>--}}
-{{--                        {{ $article->views_count }}--}}
-{{--                    </span>--}}
-                    @if ($article->allow_comment)
-                        <span class="d-none d-lg-inline-block pr-2">
-                            <i class="text-sm fal fa-comment"></i>
-                            {{ $article->comments_count }}
-                        </span>
-                    @endif
+                    <span class="d-none d-lg-inline-block pr-2">
+                        <i class="text-sm fal fa-comment"></i>
+                        {{ $article->comments_count }}
+                    </span>
+
                     <span class="d-none d-lg-inline-block">
                         <i class="fal fa-heart"></i>
                         {{ $article->likes_count }}

@@ -15,7 +15,8 @@ use Illuminate\Notifications\Notifiable;
 /**
  * Class User
  *
- * @package App\Models
+ * @property string name
+ * @property string email
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
@@ -55,7 +56,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function getLink($param = [])
     {
-        return route('user.show', array_merge(['name' => $this->name], $param));
+        return route('user.show', array_merge(['slug' => $this->name], $param));
     }
 
     /**

@@ -3,34 +3,13 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\App\ArticleRepository;
-use App\Repositories\App\SlideRepository;
+use App\Models\Article;
+use App\Models\Slide;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
-    /**
-     * @var SlideRepository
-     */
-    protected $slides;
-
-    /**
-     * @var ArticleRepository
-     */
-    protected $articles;
-
-    /**
-     * HomeController constructor.
-     *
-     * @param SlideRepository   $slides
-     * @param ArticleRepository $articles
-     */
-    public function __construct(SlideRepository $slides, ArticleRepository $articles)
-    {
-        $this->articles = $articles;
-        $this->slides = $slides;
-    }
 
     /**
      * Show the application dashboard.
@@ -39,8 +18,14 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $slides = $this->slides->top();
-        $articles = $this->articles->paginate();
+        $slides = Slide::take(5)->get();
+        $count = $slides->count();
+        while ($count < 5) {
+            $slides->push(new Slide());
+            $count++;
+        }
+
+        $articles = Article::with(['category'])->paginate();
         $slideBg = Storage::disk('qiniu')->getUrl('images/bg.jpg');
         return view('home', compact('slides', 'articles', 'slideBg'));
     }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\VisitorRegistry;
 
-class MenuController extends Controller
+class VisitorRegistryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +20,11 @@ class MenuController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param \App\Models\VisitorRegistry $visitorRegistry
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(VisitorRegistry $visitorRegistry)
     {
         //
     }

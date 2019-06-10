@@ -10,9 +10,8 @@
         $cardClass = 'col-6 col-md-3';
         $rowClass = 'row-md';
     }
-    $topArticles = $topArticles->take(in_array($style, ['plain', 'medium']) ? 3 : 4);
 @endphp
-@if(!empty($topPosts))
+@if(!empty($topArticles) && $topArticles->count() > 0)
     <div class="bg-light py-4 py-md-5">
         <div class="container">
             <div class="row {{ $style === 'plain' ? 'justify-content-md-center' : '' }}">

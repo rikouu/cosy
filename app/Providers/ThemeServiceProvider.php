@@ -21,7 +21,6 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
         View::composer('partials.search', function ($view) {
             $searches = Theme::searchTop();
             $view->with('searches', $searches);

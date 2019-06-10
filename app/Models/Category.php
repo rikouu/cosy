@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Builders\CategoryBuilder;
 use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Query\Builder;
 
 /**
  * Class Category
- *
- * @package App\Models
  */
 class Category extends Model
 {
@@ -26,7 +26,7 @@ class Category extends Model
     /**
      * @return HasMany
      */
-    protected function articles(): HasMany
+    public function articles(): ?HasMany
     {
         return $this->hasMany(Article::class);
     }
@@ -36,8 +36,9 @@ class Category extends Model
      *
      * @return string
      */
-    public function getLink($params = null)
+    public function getLink($params = [])
     {
-        return route('category.show', ['id' => $this->slug]);
+        return route('category.show', array_merge($params, ['slug' => $this->slug]));
     }
+
 }

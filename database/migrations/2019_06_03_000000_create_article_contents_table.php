@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateArticleContentsTable extends Migration
 {
@@ -25,6 +25,8 @@ class CreateArticleContentsTable extends Migration
             $table->text('excerpt')->nullable();
             $table->string('source')->nullable();
             $table->string('image')->nullable();
+            $table->text('scripts')->nullable();
+            $table->text('styles')->nullable();
             $table->string('password')->nullable();
             $table->timestamps();
             $table->softDeletes();

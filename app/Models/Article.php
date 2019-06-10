@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\PublishOrderScope;
 use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -46,6 +47,15 @@ class Article extends Model
     ];
 
     /**
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new PublishOrderScope());
+    }
+
+    /**
      * @return mixed
      */
     public function getPublishedDate()
@@ -65,7 +75,10 @@ class Article extends Model
      */
     public function nextArticle()
     {
-        return self::where('published_at', '>', $this->published_at)->where('status', 'published')->orderBy('published_at', 'asc')->first();
+        return self::withoutGlobalScope(PublishOrderScope::class)
+            ->where('published_at', '>', $this->published_at)
+            ->where('status', 'published')
+            ->orderBy('published_at', 'asc')->first();
     }
 
     /**
@@ -75,7 +88,9 @@ class Article extends Model
      */
     public function prevArticle()
     {
-        return self::where('published_at', '<', $this->published_at)->where('status', 'published')->orderBy('published_at', 'desc')->first();
+        return self::where('published_at', '<', $this->published_at)
+            ->where('status', 'published')
+            ->first();
     }
 
     /**
@@ -100,6 +115,14 @@ class Article extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'article_tag');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function topics(): BelongsToMany
+    {
+        return $this->belongsToMany(Topic::class, 'article_topic');
     }
 
     /**
@@ -140,4 +163,5 @@ class Article extends Model
 
         return $template;
     }
+
 }

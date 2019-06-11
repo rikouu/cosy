@@ -20,6 +20,5 @@
     @if (!empty($dot))
         <i class="cat-dot" style="{{ $color_style }}"></i>
     @endif
-    <a href="{{ $cat->getLink() }}" class="text-muted"
-       target="_blank">{{ $cat->name }}</a>
+    <a href="{{ $cat->getLink() }}" class="text-muted">{{ $cat->name }}</a>
 </div>

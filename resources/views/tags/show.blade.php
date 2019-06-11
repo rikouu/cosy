@@ -21,9 +21,7 @@
                         </div>
                         @if($articles->isNotEmpty())
                             <div class="{{ $grid_class }}" id="articles">
-                                @foreach($articles as $article)
-                                    @include('components.card.article', compact('article'))
-                                @endforeach
+                                @include('components.articles.' . $tag->style ?? 'small')
                             </div>
 
                             @if (config('prism.app.ajax.tag', true))
@@ -39,12 +37,10 @@
                                 </p>
                             </div>
                         @endif
-                        <?php //get_template_part('template-parts/ad/tax-ad');?>
                         @if($style === 'plain')
                     </div>
                 </div>
             @endif
         </div>
     </main>
-    @include('partials.footer')
 @endsection

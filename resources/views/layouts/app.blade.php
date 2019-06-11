@@ -12,6 +12,7 @@
 <body class="cosy-style-shadow">
     <div id="app">
         @yield('content')
+        @include('partials.footer')
     </div>
 <script src="{{ mix('js/app.js') }}"></script>
     @stack('scripts')

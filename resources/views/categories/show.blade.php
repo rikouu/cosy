@@ -25,9 +25,7 @@
                         </div>
                         @if($articles->count() > 0)
                             <div class="{{ $gridClass }}" id="articles">
-                                @foreach($articles as $article)
-                                    @include('components.card.card-' . $category->style , compact('article'))
-                                @endforeach
+                                @include('components.articles.' . $category->style ?? 'small')
                             </div>
                         @else
                             <div class="content-error h-v-66">

@@ -1,4 +1,4 @@
-import jQuery from 'jquery'
+import $ from 'jquery'
 
 export class BackTop {
 
@@ -41,7 +41,7 @@ export class BackTop {
   }
 }
 
-jQuery(($) => {
+$(() => {
   const backTop = new BackTop();
   backTop.start();
 });

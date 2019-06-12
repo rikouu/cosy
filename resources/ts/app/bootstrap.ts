@@ -11,10 +11,10 @@ import Popper from 'popper.js'
  */
 
 try {
-  (<any>window).Popper = Popper;
-  (<any>window).$ = (<any>window).jQuery = jQuery;
+  // (<any>window).Popper = Popper;
+  // (<any>window).$ = (<any>window).jQuery = jQuery;
   (<any>window).Cosy = Cosy;
-  require('bootstrap');
+  // require('bootstrap');
 } catch (e) {
 }
 

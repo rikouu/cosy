@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Article;
-use App\Models\Content;
+use App\Models\ArticleContent;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +16,7 @@ class ArticlesTableSeeder extends Seeder
     {
         factory(Article::class, 100)->create()->each(function ($article) {
             $article->tags()->createMany(factory(Tag::class, 2)->make()->toArray());
+            $article->content()->save(factory(ArticleContent::class)->make());
         });
     }
 }

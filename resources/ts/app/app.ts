@@ -5,12 +5,11 @@
  */
 
 require('./bootstrap');
+import pangu from 'pangu'
 
 import Vue from 'vue'
 
-// require('@fortawesome/fontawesome-free');
-// require('./plugins/pjax');
-require('./plugins/pangu');
+require('./plugins/pjax');
 require('./plugins/highlight');
 require('./plugins/backtop');
 
@@ -33,8 +32,14 @@ require('./plugins/backtop');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+document.addEventListener('DOMContentLoaded', () => {
+    pangu.spacingPage();
+});
+
 const app = new Vue({
     el: '#app',
+    mounted() {
+    }
 });
 
 export default app;

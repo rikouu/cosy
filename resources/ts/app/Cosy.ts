@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import axios from 'axios'
-import NProgress from 'nprogress'
 
 export default class Cosy {
 
@@ -49,7 +48,6 @@ export default class Cosy {
       mounted: function () {
         // this.$loading = this.$refs.loading;
         // NProgress.start();
-        NProgress.done();
         that.$on('error', (message: string) => {
           // this.$toasted.show(message, {type: 'error'})
         });

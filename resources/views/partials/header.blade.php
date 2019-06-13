@@ -16,7 +16,7 @@
 <header class="header">
     <nav class="{{ $navClass }}">
         <div class="container">
-            <a href="http://blog.loyep.com/" rel="home" class="navbar-brand m-0 order-1">
+            <a href="{{ url('/') }}" rel="home" class="navbar-brand m-0 order-1">
                 @if (!empty($logo))
                     <img src="{{ $logo }}" alt="{{ $name }}">
                 @else

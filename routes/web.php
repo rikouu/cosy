@@ -39,6 +39,7 @@ Route::match(['get', 'post'], 'topic', 'App\TopicController@index')->name('topic
 
 // 文章页
 Route::get('{slug}.html', 'App\ArticleController@show')->name('article.show');
+Route::get('random-article', 'App\ArticleController@randomArticle')->name('article.random');
 
 Route::group(['prefix' => Cosy::path(),], function () {
     Route::get('/', 'Admin\DashboardController@dashboard')->name('dashboard');

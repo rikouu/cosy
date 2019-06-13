@@ -7,6 +7,9 @@ use Faker\Generator as Faker;
 
 $factory->define(ArticleContent::class, function (Faker $faker) {
     return [
-        //
+        'markdown' => '2',
+        'is_html'  => false,
+        'title'    => '',
+        'keywords' => '',
     ];
 });

@@ -1,8 +1,7 @@
-import Cosy from './Cosy'
+// import Cosy from './Cosy'
 
 import jQuery from 'jquery'
 import axios from 'axios'
-import Popper from 'popper.js'
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -12,8 +11,8 @@ import Popper from 'popper.js'
 
 try {
   // (<any>window).Popper = Popper;
-  // (<any>window).$ = (<any>window).jQuery = jQuery;
-  (<any>window).Cosy = Cosy;
+  (<any>window).$ = (<any>window).jQuery = jQuery;
+  // (<any>window).Cosy = Cosy;
   // require('bootstrap');
 } catch (e) {
 }
@@ -39,6 +38,6 @@ if (token) {
 }
 
 (function () {
-  const config = (<any>window).config;
-  const cosy = new Cosy(config);
+  // const config = (<any>window).config;
+  // const cosy = new Cosy(config);
 }.call(window));

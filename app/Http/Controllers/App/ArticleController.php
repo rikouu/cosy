@@ -40,4 +40,13 @@ class ArticleController extends Controller
             abort(404);
         }
     }
+
+    /**
+     * @return Response
+     */
+    public function randomArticle()
+    {
+        $article = Article::inRandomOrder()->first();
+        return redirect($article->getLink());
+    }
 }

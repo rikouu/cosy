@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Handlers\SlugTranslateHandler;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Slide;
@@ -21,7 +22,9 @@ class HomeController extends Controller
         $slides = Slide::take(5)->get();
         $count = $slides->count();
         while ($count < 5) {
-            $slides->push(new Slide());
+            $slide = new Slide();
+            $slide->title = '音乐推荐：融合东方韵味的梦幻摇滚《Sigh》The Bilinda Butchers';
+            $slides->push($slide);
             $count++;
         }
 

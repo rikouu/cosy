@@ -1,12 +1,15 @@
 import $ from 'jquery'
 import NProgress from 'nprogress'
 
+require('jquery-pjax');
+
 $(() => {
-  (<any>$(document)).pjax('a:not(a[target="_blank"])', '#app', {timeout: 1600, maxCacheLength: 500});
-  $(document).on('pjax:start', function () {
+  const container = $(document);
+  (<any>container).pjax('a:not(a[target="_blank"])', '#app', {timeout: 1600, maxCacheLength: 500});
+  container.on('pjax:start', function () {
     NProgress.start();
   });
-  $(document).on('pjax:end', function () {
+  container.on('pjax:complete', function () {
     NProgress.done();
   });
 });

@@ -1,30 +1,12 @@
 import $ from 'jquery'
 
-export class BackTop {
-
-  public container: JQuery<HTMLElement>;
-  private window: JQuery<Window>;
-
-  constructor() {
-    this.window = $(window);
-    this.container = $("#back-to-top");
-  }
-
-  public start() {
-    const that = this;
-    this.window.on('scroll', function () {
-      that.backTop();
-    });
-
-    this.container.on('click', function () {
-      $('html, body').stop().animate({scrollTop: 0}, 600);
-    });
-  }
-
-  public backTop() {
-    const windowW = <number>(this.window.width());
-    const windowH = <number>(this.window.height());
-    const scroll = <number>(this.window.scrollTop());
+$(() => {
+  const onScroll = () => {
+    const thisWindow = $(window);
+    const container = $("#back-to-top");
+    const windowW = <number>(thisWindow.width());
+    const windowH = <number>(thisWindow.height());
+    const scroll = <number>(thisWindow.scrollTop());
     const startPoint = windowH / 2;
 
     if (scroll > 72) {
@@ -34,15 +16,12 @@ export class BackTop {
     }
 
     if (scroll >= startPoint && windowW >= 1024) {
-      this.container.addClass('active');
+      container.addClass('active');
     } else {
-      this.container.removeClass('active');
+      container.removeClass('active');
     }
-  }
-}
+  };
 
-$(() => {
-  const backTop = new BackTop();
-  backTop.start();
+  $(window).on('scroll', onScroll);
 });
 

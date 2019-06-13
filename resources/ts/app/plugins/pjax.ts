@@ -9,7 +9,10 @@ $(() => {
   container.on('pjax:start', function () {
     NProgress.start();
   });
-  container.on('pjax:complete', function () {
+  container.on('pjax:end', function () {
     NProgress.done();
+    $('#back-to-top').on('click', function () {
+      $('html, body').stop().animate({scrollTop: 0}, 600);
+    });
   });
 });

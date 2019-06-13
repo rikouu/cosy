@@ -37,5 +37,4 @@
         </div>
     </main>
     @include('articles.partials.related', compact('article'))
-    @include('partials.footer')
 @endsection

@@ -13,7 +13,13 @@
                             <a href="{{ $relatedArticle->getLink() }}" class="media-content custom-hover-img" style="background-image:url('{{ $relatedArticle->image }}')">
                                 <span class="overlay"></span>
                             </a>
-                            @include('components.card.media-icon', ['type' => $relatedArticle->type])
+                            @if ('image' === $relatedArticle->type)
+                                <div class="media-action"><i class="far fa-image"></i></div>
+                            @elseif ('video' === $relatedArticle->type)
+                                <div class="media-action"><i class="far fa-video"></i></div>
+                            @elseif ('audio' === $relatedArticle->type)
+                                <div class="media-action"><i class="far fa-music"></i></div>
+                            @endif
                         </div>
                         <div class="list-content">
                             <div class="list-body">

@@ -5,7 +5,13 @@
                 <img src="{{ $article->image }}" alt="{{ $article->title }}">
                 <span class="overlay"></span>
             </a>
-            @include('components.card.media-icon', ['type' => $article->type])
+            @if ('image' === $article->type)
+                <div class="media-action"><i class="far fa-image"></i></div>
+            @elseif ('video' === $article->type)
+                <div class="media-action"><i class="far fa-video"></i></div>
+            @elseif ('audio' === $article->type)
+                <div class="media-action"><i class="far fa-music"></i></div>
+            @endif
         </div>
         <div class="list-content py-lg-2">
             <div class="list-body">

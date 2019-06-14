@@ -12,7 +12,7 @@
             </a>
             <span class="px-3 text-light"> &Iota;</span> -->
             <a class="btn-bigger-cover" id="btn-bigger-cover" href="javascript:">
-                <i class="text-lg iconfont icon-daochu"></i> 海报
+                <i class="text-lg fal fa-share-square"></i> 海报
             </a>
         </div>
         @include('articles.partials.share', compact('article'))

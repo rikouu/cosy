@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import axios from 'axios'
+import $ from 'jquery'
+import NProgress from 'nprogress'
 
-export default class Cosy {
+require('jquery-pjax');
+
+export class Cosy {
 
   public bus: Vue;
 
@@ -24,6 +28,7 @@ export default class Cosy {
   boot() {
     // this.bootingCallbacks.forEach(callback => callback(Vue, router, store));
     this.bootingCallbacks = [];
+    this.loadPjax();
   }
 
   registerStoreModules() {
@@ -32,13 +37,18 @@ export default class Cosy {
     })
   }
 
+  loaded() {
+    $('#back-to-top').on('click', function () {
+      $('html, body').stop().animate({scrollTop: 0}, 600);
+    });
+  }
+
   /**
    * Start the Cosy app by calling each of the tool's callbacks and then creating
    * the underlying Vue instance.
    */
   liftOff() {
     const that = this;
-
     this.boot();
     this.registerStoreModules();
 
@@ -99,6 +109,19 @@ export default class Cosy {
     this.bus.$off(event, callback);
   }
 
+  loadPjax() {
+    const that = this;
+    const container = $(document);
+    (<any>container).pjax('a:not(a[target="_blank"])', '#app', {timeout: 1600, maxCacheLength: 500});
+    container.on('pjax:start', function () {
+      NProgress.start();
+    });
+    container.on('pjax:end', function () {
+      NProgress.done();
+      that.loaded();
+    });
+  }
+
   /**
    * Emit an event on the event bus
    */
@@ -117,5 +140,11 @@ export default class Cosy {
   thirdShare(type: string, url: string, title: string, img: string, desc: string) {
     console.log(url, type, title, img, desc);
   }
-
 }
+
+export const app = new Cosy((<any>window).config);
+
+(function () {
+  app.boot();
+  app.loaded();
+})();

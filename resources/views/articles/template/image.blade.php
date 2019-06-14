@@ -18,7 +18,7 @@
             <div class="row justify-content-lg-center">
                 <div class="col-12 col-lg-10 px-lg-5">
                     <div class="post">
-                        @include('articles.partials.meta', compact('article'))
+                        @include('articles.partials.meta')
                         <div class="content-style content">
                             {!! $content->content() !!}
                         </div>
@@ -27,14 +27,14 @@
                                 <a href="{{ $tag->permLink }}" rel="tag">{{ $tag->name }}</a>
                             @endforeach
                         </div>
-                        @include('articles.partials.copyright', compact('article'))
-                        @include('articles.partials.footer', compact('article'))
-                        @include('articles.partials.nav-link', compact('article'))
+                        @include('articles.partials.copyright')
+                        @include('articles.partials.footer')
+                        @include('articles.partials.nav-link')
                     </div>
-                    @include('partials.comments', compact('article'))
+                    @include('partials.comments')
                 </div>
             </div>
         </div>
     </main>
-    @include('articles.partials.related', compact('article'))
+    @include('articles.partials.related')
 @endsection

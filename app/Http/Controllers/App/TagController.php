@@ -35,9 +35,9 @@ class TagController extends Controller
             $query->where('id', $tag->id);
         })->paginate();
 
-        if ($request->ajax()) {
-            return view('components.card.article-list', compact('articles'));
-        }
+//        if ($request->ajax()) {
+//            return view('components.card.article-list', compact('articles'));
+//        }
 
         $topArticles = Article::whereHas('tags', function ($query) use ($tag) {
             $query->where('id', $tag->id);

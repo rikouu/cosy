@@ -20,7 +20,7 @@
                             @if (is_array($value))
                                 <a href="javascript:" class="single-popup {{ $social }} px-2"
                                    data-img="{{ $value['img'] }}" data-title="{{ $value['title'] }}"
-                                   data-desc="{{ $value['desc'] }}"><i class="fab fa-{{ $social }}"></i></a>
+                                   data-desc="{{ $value['desc'] }}"><i class="fa fa-{{ $social }}"></i></a>
                             @else
                                 <a href="{{ $value }}" target="_blank" class="px-2" rel="nofollow">
                                     <span><i class="fab fa-{{ $social }}"></i></span>

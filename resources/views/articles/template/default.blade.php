@@ -4,7 +4,7 @@
     @include('partials.header')
     <main class="py-4 py-md-5">
         <div class="container">
-            @include('articles.partials.breadcrumbs', compact('article'))
+            @include('articles.partials.breadcrumbs')
             <div class="row no-gutters">
                 <div class="col-12 col-lg-9 pr-lg-5">
                     <div class="post">
@@ -16,7 +16,7 @@
                             </div>
                         @endif
                         <h1 class="post-title h3">{{ $article->title }}</h1>
-                        @include('articles.partials.meta', compact('article'))
+                        @include('articles.partials.meta')
                         <div class="content-style content">
                             {!! $content->content() !!}
                         </div>
@@ -26,18 +26,18 @@
                                 <a href="{{ $tag->permLink }}" rel="tag">{{ $tag->name }}</a>
                             @endforeach
                         </div>
-                        @include('articles.partials.copyright', compact('article'))
-                        @include('articles.partials.footer', compact('article'))
-                        @include('articles.partials.nav-link', compact('article'))
+                        @include('articles.partials.copyright')
+                        @include('articles.partials.footer')
+                        @include('articles.partials.nav-link')
                     </div>
-                    @include('partials.comments', compact('article'))
+                    @include('partials.comments')
                 </div>
                 <div class="sidebar col-lg-3 d-none d-lg-block">
                     <?php //get_template_part('template-parts/toc')?>
-                    @include('partials.sidebar', compact('article'))
+                    @include('partials.sidebar')
                 </div>
             </div>
         </div>
     </main>
-    @include('articles.partials.related', compact('article'))
+    @include('articles.partials.related')
 @endsection

@@ -36,11 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
     pangu.spacingPage();
 });
 
-const app = new Vue({
-    el: '#app',
-    mounted() {
-    }
-});
-
-export default app;
 

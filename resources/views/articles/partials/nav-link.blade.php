@@ -18,7 +18,7 @@
                 <a href="{{ $prevArticle->getLink() }}" class=" list-content">
                     <div class="list-body ">
                         <div class="list-title">
-                            <div class="text-xs text-muted mb-2">{{ __('Previous') }}</div>
+                            <div class="text-xs text-muted mb-2">{{ __('cosy.article.previous') }}</div>
                             <div class="h-md-1x h-2x h6 text-white">
                                 {{ $prevArticle->title }}
                             </div>
@@ -40,7 +40,7 @@
                 <a href="{{ $nextArticle->getLink() }}" class="list-content">
                     <div class="list-body ">
                         <div class="list-title">
-                            <div class="text-xs text-muted mb-2">{{ __('Next') }}</div>
+                            <div class="text-xs text-muted mb-2">{{ __('cosy.article.next') }}</div>
                             <div class="h-md-1x h-2x h6 text-white">
                                 {{ $nextArticle->title }}
                             </div>

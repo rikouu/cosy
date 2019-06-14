@@ -42,9 +42,9 @@ class CategoryController extends Controller
             ->whereNotIn('id', $topArticles->pluck('id'))
             ->paginate();
 
-        if ($request->ajax()) {
-            return view('components.card.article-list', compact('articles'));
-        }
+//        if ($request->ajax()) {
+//            return view('components.card.article-list', compact('articles'));
+//        }
 
         return view('categories.show', compact('articles', 'category', 'topArticles'));
     }

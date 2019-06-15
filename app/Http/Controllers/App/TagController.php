@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Facades\Theme;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Tag;
@@ -39,6 +40,7 @@ class TagController extends Controller
 //            return view('components.card.article-list', compact('articles'));
 //        }
 
+        Theme::title($tag->name);
         $topArticles = Article::whereHas('tags', function ($query) use ($tag) {
             $query->where('id', $tag->id);
         })->orderByDesc('published_at')->take(4)->get();

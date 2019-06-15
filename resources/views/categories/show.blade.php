@@ -10,7 +10,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('partials.header')
     @include('components.top.article')
     <main class="py-4 py-md-5">
         <div class="container">

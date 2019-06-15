@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Facades\Theme;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\User;
@@ -41,6 +42,7 @@ class UserController extends Controller
 //            return view('components.card.article-list', compact('articles'));
 //        }
 
+        Theme::title($user->display_name);
         return view('users.show', compact('articles', 'user'));
     }
 }

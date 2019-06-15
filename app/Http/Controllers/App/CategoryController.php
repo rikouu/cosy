@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Facades\Theme;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
@@ -46,6 +47,7 @@ class CategoryController extends Controller
 //            return view('components.card.article-list', compact('articles'));
 //        }
 
+        Theme::title($category->name);
         return view('categories.show', compact('articles', 'category', 'topArticles'));
     }
 }

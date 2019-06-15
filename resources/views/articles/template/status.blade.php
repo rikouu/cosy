@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('partials.header')
     <main class="py-4 py-md-5">
         <div class="container">
             <div class="row justify-content-md-center">
@@ -15,7 +14,7 @@
                             </div>
                         @endif
                         <h1 class="post-title h3">{{ $article->title }}</h1>
-                        @include('articles.partials.meta')
+                        @include('articles.partials._meta')
                         <div class="content-style content">
                             {!! $content->content() !!}
                         </div>
@@ -25,14 +24,14 @@
                                 <a href="{{ $tag->permLink }}" rel="tag">{{ $tag->name }}</a>
                             @endforeach
                         </div>
-                        @include('articles.partials.copyright')
-                        @include('articles.partials.footer')
-                        @include('articles.partials.nav-link')
+                        @include('articles.partials._copyright')
+                        @include('articles.partials._footer')
+                        @include('articles.partials._nav-link')
                     </div>
-                    @include('partials.comments')
+                    @include('commons.comments')
                 </div>
             </div>
         </div>
     </main>
-    @include('articles.partials.related')
+    @include('articles.partials._related')
 @endsection

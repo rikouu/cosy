@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Facades\Theme;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -35,6 +36,7 @@ class ArticleController extends Controller
                 abort(404);
             }
 
+            Theme::title($article->title);
             return view('articles.' . $article->getTemplate(), compact('article', 'content', 'isLiked'));
         } catch (ModelNotFoundException $e) {
             abort(404);

@@ -5,16 +5,17 @@
     {!!  Cosy::seo()->generate() !!}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('page_title', Theme::title())</title>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body class="cosy-style-shadow">
-    <div id="app">
+<div id="app">
+    @include('commons.header')
         @yield('content')
-        @include('partials.footer')
-    </div>
+    @include('commons.footer')
+</div>
 <script src="{{ mix('js/app.js') }}"></script>
-    @stack('scripts')
+@stack('scripts')
 </body>
 </html>

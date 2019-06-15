@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app', ['fixed' => $slides->isNotEmpty() ])
 
 @section('content')
-    @include('partials.header', ['fixed' => $slides->isNotEmpty() ])
-    @include('partials.slide')
+    @include('commons.slide')
     <main class="py-3 py-md-5">
         <div class="container">
             {{--            @include('partials.notice')--}}

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Handlers\SlugTranslateHandler;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Slide;
@@ -31,5 +30,13 @@ class HomeController extends Controller
         $articles = Article::with(['category'])->paginate();
         $slideBg = Storage::disk('qiniu')->getUrl('images/bg.jpg');
         return view('home', compact('slides', 'articles', 'slideBg'));
+    }
+
+    /**
+     *
+     */
+    public function history()
+    {
+
     }
 }

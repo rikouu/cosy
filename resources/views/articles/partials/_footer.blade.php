@@ -15,6 +15,6 @@
                 <i class="text-lg fal fa-share-square"></i> 海报
             </a>
         </div>
-        @include('articles.partials.share', compact('article'))
+        @include('articles.partials._share', compact('article'))
     </div>
 </div>

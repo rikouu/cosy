@@ -31,6 +31,7 @@
         "popper.js": "^1.15.0",
         "prismjs": "^1.16.0",
         "sticky-sidebar": "^3.3.1",
+        "theia-sticky-sidebar": "^1.7.0",
         "vue": "^2.6.10",
         "vue-class-component": "^7.1.0",
         "vue-i18n": "^8.11.2",

@@ -6,8 +6,10 @@ use App\Facades\Cosy;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Link;
+use App\Models\Navigation;
 use App\Models\SearchHistory;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Cache;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Theme
@@ -36,11 +38,29 @@ class Theme
         return !empty($this->title) ? ($this->title.' - '.$name) : $name;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
     public function navigation($name = '')
     {
-        return collect([]);
+        return Cache::remember('navigation' . $name, -1, function () use ($name) {
+            $navigation = Navigation::with(['menus' => function ($query) {
+                $query->where('parent_id', '=', 0)->orderBy('order', 'asc');
+            }])->whereName($name)->first();
+            if (!empty($navigation)) {
+                return $navigation->render();
+            }
+            return null;
+        });
     }
 
+    /**
+     * @param int $limit
+     *
+     * @return mixed
+     */
     public function searchTop($limit = 8)
     {
         $limit = max($limit, 3);
@@ -48,6 +68,9 @@ class Theme
         return $searches;
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function socials()
     {
         $socials = collect([
@@ -69,6 +92,9 @@ class Theme
         });
     }
 
+    /**
+     * @return array
+     */
     public function info()
     {
         return ['year' => null];
@@ -92,6 +118,11 @@ class Theme
         return Tag::take(16)->get();
     }
 
+    /**
+     * @param $article
+     *
+     * @return mixed
+     */
     public function convergence($article)
     {
         $articles = Article::where('category_id', $article->category_id)->take(4)->get();

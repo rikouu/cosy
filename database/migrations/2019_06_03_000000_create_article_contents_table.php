@@ -22,7 +22,6 @@ class CreateArticleContentsTable extends Migration
             $table->string('title');
             $table->text('keywords')->nullable();
             $table->text('description')->nullable();
-            $table->text('excerpt')->nullable();
             $table->string('source')->nullable();
             $table->string('image')->nullable();
             $table->text('scripts')->nullable();

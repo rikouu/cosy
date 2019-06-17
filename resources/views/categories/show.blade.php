@@ -24,7 +24,7 @@
                         </div>
                         @if($articles->count() > 0)
                             <div class="{{ $gridClass }}" id="articles">
-                                @include('components.articles.' . $style ?? 'small')
+                                @include('components.articles.' . $style ?? 'small', ['showCat' => false])
                             </div>
                         @else
                             <div class="content-error h-v-66">

@@ -20,6 +20,7 @@ class CreateNavigationsTable extends Migration
             $table->string('position')->nullable();
             $table->softDeletes();
             $table->timestamps();
+            $table->index(['name', 'position']);
         });
     }
 

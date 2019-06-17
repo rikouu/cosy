@@ -19,10 +19,7 @@ class CreateArticlesTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('keywords')->nullable();
-            $table->text('description')->nullable();
             $table->text('excerpt')->nullable();
-            $table->string('source')->nullable();
             $table->string('image')->nullable();
             $table->string('cover_image')->nullable();
             $table->string('type')->default('default');

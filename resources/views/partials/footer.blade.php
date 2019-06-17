@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="col-lg-3 py-3">
-                @if(route_is('home'))
+                @if(routeIs('home'))
                     <div class="footer-widget">
                         <div class="footer-widget-header">{{ __('prism.footer.links') }}</div>
                         <div class="footer-widget-content">
@@ -75,7 +75,7 @@
         <div class="footer-copyright border-top py-4 mt-4">
             Copyright © {{ $year }} <a href="{{ url('/') }}" title="{{ $name }}" rel="home">{{ $name }}</a>.
             Designed by <a href="https://loyep.com" title="Prism" target="_blank">Loyep</a>.
-            @if(route_is('home') && !empty(config('prism.app.miitbeian')))
+            @if(routeIs('home') && !empty(config('prism.app.miitbeian')))
                 <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow"
                    class="d-none d-lg-inline-block">{{ config('prism.app.miitbeian') }}
                 </a>

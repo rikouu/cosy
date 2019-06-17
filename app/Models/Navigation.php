@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Menu
@@ -29,10 +30,19 @@ class Navigation extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function navigation(): BelongsTo
+    public function menus(): HasMany
     {
-        return $this->belongsTo(Navigation::class);
+        return $this->hasMany(Menu::class);
     }
+
+    /**
+     *
+     */
+    public function render()
+    {
+        return view('components.menu-items', ['items' => $this->menus]);
+    }
+
 }

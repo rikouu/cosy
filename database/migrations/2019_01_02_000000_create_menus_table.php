@@ -15,7 +15,7 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('menu_id')->nullable();
+            $table->unsignedBigInteger('navigation_id')->nullable();
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('url')->nullable();
@@ -29,7 +29,7 @@ class CreateMenusTable extends Migration
             $table->boolean('status')->default(true);
             $table->softDeletes();
             $table->timestamps();
-            $table->index(['menu_id', 'parent_id']);
+            $table->index(['navigation_id', 'parent_id']);
         });
     }
 

@@ -32,19 +32,17 @@ class TagController extends Controller
     public function show(Request $request, $slug)
     {
         $tag = Tag::withCount('articles')->where('slug', $slug)->first();
-        $articles = Article::whereHas('tags', function ($query) use ($tag) {
-            $query->where('id', $tag->id);
-        })->paginate();
 
-//        if ($request->ajax()) {
-//            return view('components.card.article-list', compact('articles'));
-//        }
-
-        Theme::title($tag->name);
         $topArticles = Article::whereHas('tags', function ($query) use ($tag) {
             $query->where('id', $tag->id);
         })->orderByDesc('published_at')->take(4)->get();
 
+        $articles = Article::whereHas('tags', function ($query) use ($tag) {
+            $query->where('id', $tag->id);
+        })->whereNotIn('id', $topArticles->pluck('id'))
+            ->paginate();
+
+        Theme::title($tag->name);
         return view('tags.show', compact('articles', 'tag', 'topArticles'));
     }
 }

@@ -1,7 +1,7 @@
 <div class="post-action pt-5">
     <div class="post-like text-center">
         <a href="javascript:;" class="btn btn-lg btn-primary post-like{{ $isLiked ? ' current' : '' }}" data-id="{{ $article->id }}">
-            <i class="iconfont icon-yishoucang"></i> {{ __('Like') }}
+            <i class="fal fa-heart"></i> {{ __('Like') }}
             <small class="like-count">{{ number_format($article->likes_count) }}</small>
         </a>
     </div>

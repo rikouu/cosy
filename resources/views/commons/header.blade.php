@@ -10,7 +10,8 @@
         $logo = asset('images/logo-dark.png');
     }
     $name = $name ?? Cosy::name();
-    $menu = Theme::navigation('top');
+    $mainMenu = Theme::navigation('main');
+    $mobileMenu = Theme::navigation('mobile');
 @endphp
 
 <header class="header">
@@ -42,18 +43,20 @@
             </ul>
             <div class="collapse navbar-collapse show navbar-scroll order-3 order-md-2 mx-md-4">
                 <ul class="navbar-nav main-menu d-none d-lg-flex mx-auto px-4">
-                    @if (!empty($menu) && $menu->isNotEmpty())
-                        @foreach($menu->items as $item)
-                            @include('components.menu-item', ['menu' => $item])
-                        @endforeach
-                    @endif
+                    {!! $mainMenu !!}
+{{--                    @if (!empty($menu) && $menu->isNotEmpty())--}}
+{{--                        @foreach($menu->items as $item)--}}
+{{--                            @include('components.menu-item', ['menu' => $item])--}}
+{{--                        @endforeach--}}
+{{--                    @endif--}}
                 </ul>
                 <ul class="navbar-nav mobile-menu flex-row d-lg-none">
-                    @if (!empty($menu) && $menu->isNotEmpty())
-                        @foreach($menu->items as $item)
-                            @include('components.menu-item', ['menu' => $item])
-                        @endforeach
-                    @endif
+                    {!! $mobileMenu !!}
+{{--                @if (!empty($menu) && $menu->isNotEmpty())--}}
+{{--                        @foreach($menu->items as $item)--}}
+{{--                            @include('components.menu-item', ['menu' => $item])--}}
+{{--                        @endforeach--}}
+{{--                    @endif--}}
                 </ul>
             </div>
         </div>

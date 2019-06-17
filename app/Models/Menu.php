@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Menu
@@ -21,6 +21,10 @@ class Menu extends Model
         'status', 'menu_id',
     ];
 
+    protected $with = [
+        'menus'
+    ];
+
     /**
      * @return BelongsTo|null
      */
@@ -32,8 +36,34 @@ class Menu extends Model
     /**
      * @return BelongsTo
      */
-    protected function navigation(): BelongsTo
+    public function navigation(): BelongsTo
     {
         return $this->belongsTo(Navigation::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function menus(): HasMany
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function hasChildren()
+    {
+        return $this->menus && $this->menus->isNotEmpty();
+    }
+
+    /**
+     * @param array $param
+     *
+     * @return mixed
+     */
+    public function getLink($param = [])
+    {
+        return $this->url;
     }
 }

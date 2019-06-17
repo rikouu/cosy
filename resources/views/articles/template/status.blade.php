@@ -21,7 +21,7 @@
                         @include('components.ad.article')
                         <div class="post-tags mt-3 mt-md-4">
                             @foreach($article->tags as $tag)
-                                <a href="{{ $tag->permLink }}" rel="tag">{{ $tag->name }}</a>
+                                <a href="{{ $tag->getLink() }}" rel="tag">{{ $tag->name }}</a>
                             @endforeach
                         </div>
                         @include('articles.partials._copyright')

@@ -42,7 +42,7 @@ class Navigation extends Model
      */
     public function render()
     {
-        return view('components.menu-items', ['items' => $this->menus]);
+        return view('components.menus.items', ['items' => $this->menus]);
     }
 
 }

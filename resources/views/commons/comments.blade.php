@@ -43,7 +43,6 @@
                                    class="btn btn-light text-sm mr-2" href="javascript:;">{{ __( 'Back') }}</a>
                                 <input name="submit" type="submit" id="submit" class="btn btn-primary text-sm"
                                        value="提交评论">
-                                <?php //comment_id_fields(); ?>
                             </div>
                         </div>
                     </div>
@@ -51,29 +50,8 @@
             </form>
         </div>
         <ul class="comment-list">
-            <?php
-            //wp_list_comments('type=comment&callback=cosy19_comment&end-callback=cosy19_end_comment&max_depth=2');
-            ?>
-        </ul><!-- .comment-list -->
-        <?php if (false) { ?>
-        <div class="text-center pt-3 pt-md-4">
-            <button
-                    id="comments-next-button"
-                    <?php if (is_page()): ?>
-                    data-type="page"
-                    <?php endif; ?>
-                    <?php if (is_single()): ?>
-                    data-type="post"
-                    <?php endif; ?>
-                    data-query="<?php the_ID(); ?>"
-                    data-action="ajax_load_comments"
-                    data-paged="<?php echo get_next_page_number(); ?>"
-                    data-commentcount="<?php echo get_comment_pages_count(); ?>"
-                    data-commentspage="<?php echo get_option('default_comments_page'); ?>"
-                    data-append="comment-list"
-                    class="btn btn-light text-sm"><?php esc_html_e('Load more...', 'cosy19'); ?></button>
-        </div>
-        <?php } ?>
+            //
+        </ul>
     @else
         <p class="no-comments">{{ __('Comments are closed.') }}</p>
     @endif

@@ -21,13 +21,13 @@
     </div>
     <div class="post-data text-nowrap align-items-center">
         <span class="d-none d-md-inline-block">
-            <i class="text-md fal fa-eye"></i>
+            <i class="text-md iconfont icon-view"></i>
             <small>{{ number_format($article->views_count) }}</small>
         </span>
         @if ($article->allow_comment)
             <span class="d-none d-md-inline-block">
             <a href="#comments" title="评论数">
-                <i class="text-md fal fa-comment"></i>
+                <i class="text-md iconfont icon-comment"></i>
                 <small>{{ number_format($article->comments_count) }}</small>
             </a>
         </span>
@@ -35,7 +35,7 @@
         <span class="d-inline-block">
             <a href="javascript:" class="post-like{{ $isLiked ? ' current' : '' }}"
                data-id="{{ $article->id }}">
-                <i class="text-md fal fa-heart"></i>
+                <i class="text-md iconfont icon-like"></i>
                 <small class="like-count">{{ number_format($article->likes_count) }}</small>
             </a>
         </span>

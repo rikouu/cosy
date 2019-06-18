@@ -6,12 +6,10 @@ use App\Facades\Theme;
 use App\Http\Controllers\Controller;
 use App\Jobs\GenerateArticleSeo;
 use App\Models\Article;
-use Fukuball\Jieba\Finalseg;
-use Fukuball\Jieba\Jieba;
-use Fukuball\Jieba\JiebaAnalyse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Parsedown;
+use Illuminate\Support\Facades\Cache;
 
 class ArticleController extends Controller
 {
@@ -28,15 +26,17 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param string $slug
+     * @param Request $request
+     * @param         $slug
      *
      * @return Response
      */
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
         try {
             $article = Article::with('content', 'category', 'tags', 'user')->where('slug', $slug)->firstOrFail();
-            $isLiked = false;
+            $likes = Cache::get($request->ip().'(liked list)', []);
+            $isLiked = in_array($article->id, $likes);
             $content = $article->content;
             if (empty($content)) {
                 abort(404);
@@ -44,9 +44,17 @@ class ArticleController extends Controller
 
             Theme::title($article->title);
             if (empty($content->keywords)) {
-                GenerateArticleSeo::delay(now()->addMinutes(10))->di;
+                GenerateArticleSeo::delay(now()->addMinutes(10))->dispatch();
             }
-            return view('articles.' . $article->getTemplate(), compact('article', 'content', 'isLiked'));
+
+            $readKey = $request->ip().' read '.$article->id;
+            $hasRead = Cache::get($readKey, false);
+            if (!$hasRead) {
+                $article->increment('views_count');
+                Cache::put($readKey, true, 60 * 60);
+            }
+
+            return view('articles.'.$article->getTemplate(), compact('article', 'content', 'isLiked'));
         } catch (ModelNotFoundException $e) {
             abort(404);
         }

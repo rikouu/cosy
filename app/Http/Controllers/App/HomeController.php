@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Facades\Theme;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Slide;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -32,7 +30,7 @@ class HomeController extends Controller
             return $slides;
         });
         $articles = Article::with(['category'])->paginate();
-        $slideBg = cdnPath('images/bg.jpg');
+        $slideBg = cdnImage('images/bg.jpg');
         return view('home', compact('slides', 'articles', 'slideBg'));
     }
 

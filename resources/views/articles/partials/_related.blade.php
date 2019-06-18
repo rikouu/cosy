@@ -14,11 +14,11 @@
                                 <span class="overlay"></span>
                             </a>
                             @if ('image' === $relatedArticle->type)
-                                <div class="media-action"><i class="far fa-image"></i></div>
+                                <div class="media-action"><i class="iconfont icon-image"></i></div>
                             @elseif ('video' === $relatedArticle->type)
-                                <div class="media-action"><i class="far fa-video"></i></div>
+                                <div class="media-action"><i class="iconfont icon-video"></i></div>
                             @elseif ('audio' === $relatedArticle->type)
-                                <div class="media-action"><i class="far fa-music"></i></div>
+                                <div class="media-action"><i class="iconfont icon-music"></i></div>
                             @endif
                         </div>
                         <div class="list-content">

@@ -10,11 +10,11 @@
                 <span class="overlay"></span>
             </a>
             @if ('image' === $article->type)
-                <div class="media-action"><i class="far fa-image"></i></div>
+                <div class="media-action"><i class="iconfont icon-image"></i></div>
             @elseif ('video' === $article->type)
-                <div class="media-action"><i class="far fa-video"></i></div>
+                <div class="media-action"><i class="iconfont icon-video"></i></div>
             @elseif ('audio' === $article->type)
-                <div class="media-action"><i class="far fa-music"></i></div>
+                <div class="media-action"><i class="iconfont icon-music"></i></div>
             @endif
         </div>
         <div class="list-content py-lg-2">
@@ -36,11 +36,11 @@
                 <div class="flex-fill"></div>
                 <div class="text-nowrap">
                     <span class="d-none d-lg-inline-block pr-2 px-md-2">
-                        <i class="text-sm fal fa-comment"></i>
+                        <i class="iconfont icon-comment"></i>
                         {{ $article->comments_count }}
                     </span>
                     <span class="d-none d-lg-inline-block">
-                        <i class="text-sm fal fa-heart"></i>
+                        <i class="iconfont icon-like"></i>
                         {{ $article->likes_count }}
                     </span>
                 </div>

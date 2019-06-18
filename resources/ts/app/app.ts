@@ -7,8 +7,6 @@
 require('./bootstrap');
 import pangu from 'pangu'
 
-import Vue from 'vue'
-
 require('./plugins/pjax');
 require('./plugins/highlight');
 require('./plugins/backtop');

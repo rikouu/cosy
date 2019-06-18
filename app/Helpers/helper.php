@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Foundation\Mix;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 if (!function_exists('getAvatar')) {
@@ -21,6 +23,45 @@ if (!function_exists('getAvatar')) {
         $query = http_build_query($config, '', '&', PHP_QUERY_RFC3986);
 
         return $url . '/' . $hash . ($query ? '?' . $query : '');
+    }
+}
+
+if (!function_exists('cdnMix')) {
+    /**
+     * @param        $path
+     * @param string $manifestDirectory
+     *
+     * @return mixed
+     */
+    function cdnMix($path, $manifestDirectory = '')
+    {
+        $cdnPath = app(Mix::class)(...func_get_args());
+        return cdnPath($cdnPath);
+    }
+}
+
+if (!function_exists('cdnPath')) {
+
+    /**
+     * @param string $path
+     *
+     * @return mixed
+     */
+    function cdnPath($path)
+    {
+        if (!empty(config('filesystems.disks.qiniu.access_key'))) {
+            $storage = Storage::disk('qiniu');
+            $filePath = explode('?', $path)[0];
+            if (config('app.debug', false) && !$storage->has($filePath)) {
+                try {
+                    $storage->writeStream($filePath, fopen(public_path($filePath), 'r'));
+                } catch (Exception $e) {
+                    return $path;
+                }
+            }
+            return $storage->getUrl($path);
+        }
+        return $path;
     }
 }
 

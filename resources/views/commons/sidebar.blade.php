@@ -20,11 +20,11 @@
                     <a href="{{ $convergenceArticle->getLink() }}" target="_blank" class="media-content"
                        style="background-image:url('{{ $convergenceArticle->image }}')"></a>
                     @if ('image' === $convergenceArticle->type)
-                        <div class="media-action"><i class="far fa-image"></i></div>
+                        <div class="media-action"><i class="iconfont icon-image"></i></div>
                     @elseif ('video' === $convergenceArticle->type)
-                        <div class="media-action"><i class="far fa-video"></i></div>
+                        <div class="media-action"><i class="iconfont icon-video"></i></div>
                     @elseif ('audio' === $convergenceArticle->type)
-                        <div class="media-action"><i class="far fa-music"></i></div>
+                        <div class="media-action"><i class="iconfont icon-music"></i></div>
                     @endif
                 </div>
                 <div class="list-content pl-3">

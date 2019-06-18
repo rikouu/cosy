@@ -74,13 +74,13 @@ class Theme
     public function socials()
     {
         $socials = collect([
-            'github'        => 'https://github.com/loyep',
-            'weibo'         => 'https://github.com/loyep',
-            'qq'            => 'https://github.com/loyep',
-            'weixin'        => 'https://github.com/loyep',
-            'google-plus-g' => 'https://github.com/loyep',
-            'twitter'       => 'https://github.com/loyep',
-            'facebook-f'    => 'https://github.com/loyep',
+            'github'   => 'https://github.com/loyep',
+            'weibo'    => 'https://github.com/loyep',
+            'qq'       => 'https://github.com/loyep',
+            'wechat'   => 'https://github.com/loyep',
+            'google'   => 'https://github.com/loyep',
+            'twitter'  => 'https://github.com/loyep',
+            'facebook' => 'https://github.com/loyep',
         ]);
 
         return $socials->map(function ($item) {

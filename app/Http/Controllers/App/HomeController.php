@@ -32,7 +32,7 @@ class HomeController extends Controller
             return $slides;
         });
         $articles = Article::with(['category'])->paginate();
-        $slideBg = Storage::disk('qiniu')->getUrl('images/bg.jpg');
+        $slideBg = cdnPath('images/bg.jpg');
         return view('home', compact('slides', 'articles', 'slideBg'));
     }
 

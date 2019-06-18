@@ -20,10 +20,10 @@
                             @if (is_array($value))
                                 <a href="javascript:" class="single-popup {{ $social }} px-2"
                                    data-img="{{ $value['img'] }}" data-title="{{ $value['title'] }}"
-                                   data-desc="{{ $value['desc'] }}"><i class="fa fa-{{ $social }}"></i></a>
+                                   data-desc="{{ $value['desc'] }}"><i class="iconfont icon-{{ $social }}"></i></a>
                             @else
                                 <a href="{{ $value }}" target="_blank" class="px-2" rel="nofollow">
-                                    <span><i class="fab fa-{{ $social }}"></i></span>
+                                    <span><i class="iconfont icon-{{ $social }}"></i></span>
                                 </a>
                             @endif
                         @endforeach
@@ -86,7 +86,7 @@
 
 <div class="back-to-top" id="back-to-top">
     <span class="icon-stack">
-        <i class="text-xs far fa-chevron-up"></i>
+        <i class="text-sm iconfont icon-backtop"></i>
         <span class="back-to-top-text">{{ __('Top') }}</span>
     </span>
 </div>

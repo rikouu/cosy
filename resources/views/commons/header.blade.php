@@ -27,12 +27,12 @@
             <ul class="nav nav-pills nav-submenu align-items-center flex-row flex-shrink-0 order-2 order-md-3">
                 <li class="nav-item">
                     <a href="#" class="nav-link search-popup">
-                        <i class="fal fa-search"></i>
+                        <i class="text-lg iconfont icon-search"></i>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('history') }}" class="nav-link">
-                        <i class="fal fa-calendar-alt"></i>
+                        <i class="iconfont icon-time"></i>
                     </a>
                 </li>
                 <li class="nav-item d-lg-none">

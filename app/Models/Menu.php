@@ -4,9 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * Class Menu
+ *
+ * @property Collection menus
+ * @property string     url
+ * @property string     route
+ * @property array      parameters
  */
 class Menu extends Model
 {
@@ -64,6 +70,12 @@ class Menu extends Model
      */
     public function getLink($param = [])
     {
-        return $this->url;
+        if (!empty($this->route)) {
+            try {
+                return route($this->route, json_decode($this->parameters, true));
+            } catch (\Exception $exception) {
+            }
+        }
+        return $this->url ?? 'javascript:;';
     }
 }

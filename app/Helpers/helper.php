@@ -65,18 +65,9 @@ if (!function_exists('cdnPath')) {
      */
     function cdnPath($path)
     {
-        if (!empty(config('filesystems.disks.qiniu.access_key'))) {
-            $storage = Storage::disk('qiniu');
-            $filePath = explode('?', $path)[0];
-            if (config('app.debug', false) && !$storage->has($filePath)) {
-                try {
-                    $storage->writeStream($filePath, fopen(public_path($filePath), 'r'));
-                } catch (Exception $e) {
-                    return $path;
-                }
-            }
-            return $storage->getUrl($path);
-        }
+        // if (!empty(config('filesystems.disks.qiniu.access_key'))) {
+        //     return Storage::disk('qiniu')->getUrl($path);
+        // }
         return $path;
     }
 }

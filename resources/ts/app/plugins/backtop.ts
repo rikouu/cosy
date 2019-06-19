@@ -4,9 +4,9 @@ $(function () {
   const onScroll = () => {
     const thisWindow = $(window);
     const container = $("#back-to-top");
-    const windowW = <number>(thisWindow.width());
-    const windowH = <number>(thisWindow.height());
-    const offset = <number>(thisWindow.scrollTop());
+    const windowW = <number>thisWindow.width();
+    const windowH = <number>thisWindow.height();
+    const offset = <number>thisWindow.scrollTop();
     const startPoint = windowH / 2;
 
     if (offset > 72) {

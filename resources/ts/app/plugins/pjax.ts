@@ -1,12 +1,18 @@
 import $ from 'jquery'
 import NProgress from 'nprogress'
 import { app } from '../Cosy'
+import 'jquery-pjax'
+// require('jquery-pjax');
 
-require('jquery-pjax');
+declare global {
+  interface JQuery<TElement = HTMLElement> {
+    pjax(target: string, container?: string, config?: Object): this;
+  }
+}
 
 (function () {
-  const container = $(document);
-  (<any>container).pjax('a:not(a[target="_blank"])', '#app', {timeout: 1600, maxCacheLength: 500});
+  const container: JQuery<Document> = $(document);
+  container.pjax('a:not(a[target="_blank"])', '#app', { timeout: 1600, maxCacheLength: 500 });
   container.on('pjax:start', function () {
     NProgress.start();
   });

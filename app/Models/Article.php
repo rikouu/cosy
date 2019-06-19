@@ -126,6 +126,14 @@ class Article extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return cdnPath($this->attributes['image']);
+    }
+
+    /**
      * @return HasMany
      */
     public function comments(): HasMany

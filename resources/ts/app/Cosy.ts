@@ -7,17 +7,37 @@ require('theia-sticky-sidebar');
 
 require('jquery-pjax');
 
-export class Cosy {
+declare global {
+    interface Window {
+        jQuery: JQueryStatic,
+        $: JQueryStatic,
+    }
+}
+
+interface CosyInterface {
+    config: Object;
+}
+
+class CosyConfig extends Object {
+    public resources: Array<any>;
+
+    constructor() {
+        super();
+        this.resources = [];
+    }
+}
+
+export class Cosy implements CosyInterface {
 
     public bus: Vue;
 
-    public config: any;
+    public config: CosyConfig;
 
     public bootingCallbacks: any[];
 
     public app: Vue | null = null;
 
-    constructor(config: any) {
+    constructor(config: CosyConfig) {
         this.bus = new Vue();
         this.bootingCallbacks = [];
         this.config = config;
@@ -41,7 +61,7 @@ export class Cosy {
 
     loaded() {
         $('#back-to-top').on('click', function () {
-            $('html, body').stop().animate({scrollTop: 0}, 600);
+            $('html, body').stop().animate({ scrollTop: 0 }, 600);
         });
 
         const sidebar = $(".sidebar");
@@ -91,10 +111,7 @@ export class Cosy {
      * Return an axios instance configured to make requests to Cosy's API
      * and handle certain response codes.
      */
-    request(options
-                :
-                object
-    ) {
+    request(options: object) {
         if (options !== undefined) {
             return axios(options)
         }
@@ -105,43 +122,28 @@ export class Cosy {
     /**
      * Register a listener on Cosy's built-in event bus
      */
-    $on(event
-            :
-            string | string[], callback
-            :
-            Function
-    ) {
+    $on(event: string | string[], callback: Function) {
         this.bus.$on(event, callback);
     }
 
     /**
      * Register a one-time listener on the event bus
      */
-    $once(event
-              :
-              string | string[], callback
-              :
-              Function
-    ) {
+    $once(event: string | string[], callback: Function) {
         this.bus.$once(event, callback);
     }
 
     /**
      * Unregister an listener on the event bus
      */
-    $off(event
-             :
-             string | string[], callback
-             :
-             Function
-    ) {
+    $off(event: string | string[], callback: Function) {
         this.bus.$off(event, callback);
     }
 
     loadPjax() {
         const that = this;
         const container = $(document);
-        (<any>container).pjax('a:not(a[target="_blank"])', '#app', {timeout: 1600, maxCacheLength: 500});
+        (<any>container).pjax('a:not(a[target="_blank"])', '#app', { timeout: 1600, maxCacheLength: 500 });
         container.on('pjax:start', function () {
             NProgress.start();
         });
@@ -154,38 +156,19 @@ export class Cosy {
     /**
      * Emit an event on the event bus
      */
-    $emit(event
-              :
-              string,
-          ...
-              args: any[]
-    ) {
+    $emit(event: string, ...args: any[]) {
         this.bus.$emit(event, args);
     }
 
     /**
      * Determine if Cosy is missing the requested resource with the given uri key
      */
-    missingResource(uriKey
-                        :
-                        string
-    ) {
+    missingResource(uriKey: string) {
         return true;
         // return _.find(this.config.resources, (r: any) => (r.uriKey === uriKey)) === undefined
     }
 
-    thirdShare(type
-                   :
-                   string, url
-                   :
-                   string, title
-                   :
-                   string, img
-                   :
-                   string, desc
-                   :
-                   string
-    ) {
+    thirdShare(type: string, url: string, title: string, img: string, desc: string) {
         console.log(url, type, title, img, desc);
     }
 }

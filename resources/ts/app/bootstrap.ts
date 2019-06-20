@@ -4,11 +4,12 @@ import jQuery from 'jquery'
 import axios from 'axios'
 
 declare global {
-  interface Window {
-    jQuery: JQueryStatic,
-    $: JQueryStatic,
-  }
+    interface Window {
+        jQuery: JQueryStatic,
+        $: JQueryStatic,
+    }
 }
+
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -17,7 +18,7 @@ declare global {
  */
 
 try {
-  window.$ = window.jQuery = jQuery;
+    window.$ = window.jQuery = jQuery;
 } catch (e) {
 }
 
@@ -32,16 +33,16 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 let token: HTMLMetaElement | null = document.head.querySelector('meta[name="csrf-token"]');
 
 if (document && document.head && document.head.querySelector('meta[name="csrf-token"]')) {
-  token = document.head.querySelector('meta[name="csrf-token"]');
+    token = document.head.querySelector('meta[name="csrf-token"]');
 }
 
 if (token) {
-  axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 (function () {
-  // const config = (<any>window).config;
-  // const cosy = new Cosy(config);
+    // const config = (<any>window).config;
+    // const cosy = new Cosy(config);
 }.call(window));

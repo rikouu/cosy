@@ -45,6 +45,9 @@ Route::get('random-article', 'App\ArticleController@randomArticle')->name('artic
 Route::get('sitemap', 'App\HomeController@siteMap')->name('sitemap');
 Route::get('sitemap.xml', 'App\HomeController@siteMap');
 
+// 搜索页
+Route::match(['get', 'post'], 'search', 'App\HomeController@search')->name('search');
+
 // RSS Feed
 Route::get('feed.xml', 'App\HomeController@feed')->name('feed');
 

@@ -126,11 +126,14 @@ class Article extends Model
     }
 
     /**
+     *
+     * @param string $image
+     *
      * @return string
      */
-    public function getImageAttribute()
+    public function getImageAttribute($image)
     {
-        return cdnPath($this->attributes['image']);
+        return cdnPath($image);
     }
 
     /**
@@ -166,7 +169,7 @@ class Article extends Model
     {
         $template = $this->template;
         if (empty($template)) {
-            $template = 'template.' . $this->type;
+            $template = 'template.'.$this->type;
         }
 
         return $template;

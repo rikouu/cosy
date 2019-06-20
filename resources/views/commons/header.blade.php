@@ -26,7 +26,7 @@
             </a>
             <ul class="nav nav-pills nav-submenu align-items-center flex-row flex-shrink-0 order-2 order-md-3">
                 <li class="nav-item">
-                    <a href="#" class="nav-link search-popup">
+                    <a href="javascript:" class="nav-link search-popup">
                         <i class="text-lg iconfont icon-search"></i>
                     </a>
                 </li>

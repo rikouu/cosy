@@ -90,3 +90,5 @@
         <span class="back-to-top-text">{{ __('Top') }}</span>
     </span>
 </div>
+
+@include('components.popup.search')

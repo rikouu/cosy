@@ -5,8 +5,8 @@
  */
 
 require('./bootstrap');
-import pangu from 'pangu'
 
+import pangu from 'pangu'
 require('./plugins/pjax');
 require('./plugins/highlight');
 require('./plugins/backtop');

@@ -65,9 +65,9 @@ if (!function_exists('cdnPath')) {
      */
     function cdnPath($path)
     {
-        // if (!empty(config('filesystems.disks.qiniu.access_key'))) {
-        //     return Storage::disk('qiniu')->getUrl($path);
-        // }
+        if (!empty(config('cosy.cdn'))) {
+            return Storage::disk('qiniu')->getUrl($path);
+        }
         return $path;
     }
 }

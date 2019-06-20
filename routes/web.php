@@ -41,6 +41,13 @@ Route::match(['get', 'post'], 'topic', 'App\TopicController@index')->name('topic
 Route::get('{slug}.html', 'App\ArticleController@show')->name('article.show');
 Route::get('random-article', 'App\ArticleController@randomArticle')->name('article.random');
 
+// Site Map
+Route::get('sitemap', 'App\HomeController@siteMap')->name('sitemap');
+Route::get('sitemap.xml', 'App\HomeController@siteMap');
+
+// RSS Feed
+Route::get('feed.xml', 'App\HomeController@feed')->name('feed');
+
 Route::group(['prefix' => Cosy::path(),], function () {
     Route::get('/', 'Admin\DashboardController@dashboard')->name('dashboard');
     Route::get('/{any}', 'Admin\DashboardController@dashboard')->where('any', '.*');

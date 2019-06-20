@@ -34,7 +34,7 @@ class TagController extends Controller
         $tag = Tag::withCount('articles')->where('slug', $slug)->first();
 
         $topArticles = Article::whereHas('tags', function ($query) use ($tag) {
-            $query->where('id', $tag->id);
+            $query->where('tag_id', $tag->id);
         })->orderByDesc('published_at')->take(4)->get();
 
         $articles = Article::whereHas('tags', function ($query) use ($tag) {

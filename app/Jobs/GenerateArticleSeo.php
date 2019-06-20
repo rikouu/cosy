@@ -3,17 +3,21 @@
 namespace App\Jobs;
 
 use App\Models\Article;
+use App\Models\ArticleContent;
 use Fukuball\Jieba\Finalseg;
 use Fukuball\Jieba\Jieba;
 use Fukuball\Jieba\JiebaAnalyse;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Parsedown;
 
-class GenerateArticleSeo extends Job
+class GenerateArticleSeo implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, SerializesModels;
+    use Dispatchable, InteractsWithQueue, SerializesModels, Queueable;
 
     /**
      * @var Article
@@ -23,9 +27,9 @@ class GenerateArticleSeo extends Job
     /**
      * GenerateArticleSeo constructor.
      *
-     * @param Article $article
+     * @param ArticleContent $article
      */
-    public function __construct(Article $article)
+    public function __construct(ArticleContent $article)
     {
         $this->article = $article;
     }
@@ -37,9 +41,7 @@ class GenerateArticleSeo extends Job
      */
     public function handle()
     {
-        $this->article->load(['content']);
-        $content = $this->article->content;
-        $text = (new Parsedown())->setBreaksEnabled(false)->text($content->markdown);
+        $text = (new Parsedown())->setBreaksEnabled(false)->text($this->article->markdown);
         $text = preg_replace("/<pre[^>]*>(.*?)<\/pre>/is", "", $text);
         $text = strip_tags($text);
         ini_set('memory_limit', '1024M');
@@ -51,7 +53,7 @@ class GenerateArticleSeo extends Job
         JiebaAnalyse::init();
         JiebaAnalyse::setStopWords(storage_path('jieba/stopWords.txt'));
         $keywords = JiebaAnalyse::extractTags($text, 20);
-        $content->keywords = implode(array_keys($keywords), ',');
-        $content->save();
+        $this->article->keywords = implode(array_keys($keywords), ',');
+        $this->article->save();
     }
 }

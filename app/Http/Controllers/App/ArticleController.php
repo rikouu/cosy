@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -44,7 +45,7 @@ class ArticleController extends Controller
 
             Theme::title($article->title);
             if (empty($content->keywords)) {
-                GenerateArticleSeo::delay(now()->addMinutes(10))->dispatch();
+                GenerateArticleSeo::dispatch($content)->delay(now()->addSeconds(10));
             }
 
             $readKey = $request->ip().' read '.$article->id;

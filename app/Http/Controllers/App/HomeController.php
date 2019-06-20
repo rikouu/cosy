@@ -52,4 +52,28 @@ class HomeController extends Controller
     {
 
     }
+
+    /**
+     * @return Response
+     */
+    public function feed()
+    {
+        $view = Cache::remember('feed', -1, function () {
+            $articles = Article::all();
+            return view('pages.feed', compact('articles'))->render();
+        });
+        return response($view)->header('Content-Type', 'text/xml');
+    }
+
+    /**
+     * @return Response
+     */
+    public function siteMap()
+    {
+        $view = Cache::remember('sitemap', -1, function () {
+            $articles = Article::all();
+            return view('pages.sitemap', compact('articles'))->render();
+        });
+        return response($view)->header('Content-Type', 'text/xml');
+    }
 }

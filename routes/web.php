@@ -48,6 +48,9 @@ Route::get('sitemap.xml', 'App\HomeController@siteMap');
 // 搜索页
 Route::match(['get', 'post'], 'search', 'App\HomeController@search')->name('search');
 
+// 幻灯片
+Route::get('slide/{id}', 'App\SlideController@show')->name('slide.show');
+
 // RSS Feed
 Route::get('feed.xml', 'App\HomeController@feed')->name('feed');
 

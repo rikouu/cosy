@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\ArticleContent as Content;
 use App\Models\Scopes\PublishOrderScope;
+use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,15 +15,16 @@ use Illuminate\Support\Carbon;
 /**
  * Class Article
  *
- * @property string         slug
- * @property ArticleContent content
- * @property Carbon         published_at
- * @property string         template
- * @property string         type
+ * @property string  slug
+ * @property Content content
+ * @property Carbon  published_at
+ * @property string  template
+ * @property string  type
+ * @property string  title
  */
 class Article extends Model
 {
-    use Sluggable;
+    use Sluggable, Menuable;
 
     /**
      * The attributes that are mass assignable.
@@ -155,11 +158,19 @@ class Article extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->title;
+    }
+
+    /**
      * @return HasOne
      */
     public function content(): HasOne
     {
-        return $this->hasOne(ArticleContent::class);
+        return $this->hasOne(Content::class);
     }
 
     /**

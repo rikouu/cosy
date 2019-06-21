@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Menuable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Collection;
 
 /**
@@ -13,9 +15,13 @@ use Illuminate\Support\Collection;
  * @property string     url
  * @property string     route
  * @property array      parameters
+ * @property Menuable   menuable
+ * @property string     title
  */
 class Menu extends Model
 {
+    use Menuable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -28,15 +34,23 @@ class Menu extends Model
     ];
 
     protected $with = [
-        'menus'
+        'menus', 'menuable'
     ];
 
     /**
      * @return BelongsTo|null
      */
-    protected function parent(): ?BelongsTo
+    public function parent(): ?BelongsTo
     {
         return $this->belongsTo(self::class);
+    }
+
+    /**
+     * @return MorphTo|null
+     */
+    public function menuable(): ?MorphTo
+    {
+        return $this->morphTo();
     }
 
     /**
@@ -63,18 +77,30 @@ class Menu extends Model
         return $this->menus && $this->menus->isNotEmpty();
     }
 
+    public function getName()
+    {
+        if (isset($this->menuable)) {
+            return $this->menuable->getName();
+        }
+        return $this->title;
+    }
+
     /**
      * @param array $param
      *
-     * @return mixed
+     * @return string
      */
     public function getLink($param = [])
     {
-        if (!empty($this->route)) {
-            try {
-                return route($this->route, json_decode($this->parameters, true));
-            } catch (\Exception $exception) {
+        try {
+            if (!empty($this->menuable)) {
+                return $this->menuable->getLink();
             }
+
+            if (!empty($this->route)) {
+                return route($this->route, json_decode($this->parameters, true));
+            }
+        } catch (\Exception $exception) {
         }
         return $this->url ?? 'javascript:;';
     }

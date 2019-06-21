@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\Builders\CategoryBuilder;
+use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Query\Builder;
 
 /**
  * Class Category
+ *
+ * @property string name
+ * @property string slug
  */
 class Category extends Model
 {
-    use Sluggable;
+    use Sluggable, Menuable;
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +41,14 @@ class Category extends Model
     public function getLink($params = [])
     {
         return route('category.show', array_merge($params, ['slug' => $this->slug]));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
 }

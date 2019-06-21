@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -9,10 +10,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * Class Topic
  *
  * @property string slug
+ * @property string name
  */
 class Topic extends Model
 {
-    use Sluggable;
+    use Sluggable, Menuable;
 
     /**
      * The attributes that are mass assignable.
@@ -39,5 +41,10 @@ class Topic extends Model
     public function getLink($params = [])
     {
         return route('topic.show', array_merge($params, ['id' => $this->slug]));
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

@@ -51,7 +51,7 @@
 {{--                    @endif--}}
                 </ul>
                 <ul class="navbar-nav mobile-menu flex-row d-lg-none">
-{{--                    {!! $mobileMenu !!}--}}
+                    {!! $mobileMenu !!}
 {{--                @if (!empty($menu) && $menu->isNotEmpty())--}}
 {{--                        @foreach($menu->items as $item)--}}
 {{--                            @include('components.menu-item', ['menu' => $item])--}}

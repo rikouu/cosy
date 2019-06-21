@@ -1,8 +1,7 @@
 import $ from 'jquery'
 import NProgress from 'nprogress'
 import { app } from '../Cosy'
-import 'jquery-pjax'
-// require('jquery-pjax');
+require('jquery-pjax');
 
 declare global {
   interface JQuery<TElement = HTMLElement> {

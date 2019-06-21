@@ -45,12 +45,13 @@ class Theme
      */
     public function navigation($name = '')
     {
-        return Cache::remember('navigation' . $name, -1, function () use ($name) {
+        return Cache::remember('navigation' . $name, 1, function () use ($name) {
             $navigation = Navigation::with(['menus' => function ($query) {
-                $query->where('parent_id', '=', 0)->orderBy('order', 'asc');
+                $query->with('menuable')->where('parent_id', '=', 0)->orderBy('order', 'asc');
             }])->whereName($name)->first();
+
             if (!empty($navigation)) {
-                return $navigation->render();
+                return view('components.menus.items', ['items' => $navigation->menus])->render();
             }
             return null;
         });

@@ -19,17 +19,16 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $slides = Cache::remember('slides', '120', function () {
-            $slides = Slide::take(5)->get();
-            $count = $slides->count();
-            while ($count < 5) {
-                $slide = new Slide();
-                $slide->title = '音乐推荐：融合东方韵味的梦幻摇滚《Sigh》The Bilinda Butchers';
-                $slides->push($slide);
-                $count++;
-            }
-            return $slides;
-        });
+//        $slides = Cache::remember('slides', '120', function () {
+        $slides = Slide::take(5)->get();
+        $count = $slides->count();
+        while ($count < 5) {
+            $slide = new Slide();
+            $slides->push($slide);
+            $count++;
+        }
+//            return $slides;
+//        });
         $articles = Article::with(['category'])->paginate();
         $slideBg = cdnPath('images/bg.jpg');
         return view('home', compact('slides', 'articles', 'slideBg'));

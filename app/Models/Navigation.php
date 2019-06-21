@@ -38,12 +38,4 @@ class Navigation extends Model
         return $this->hasMany(Menu::class);
     }
 
-    /**
-     *
-     */
-    public function render()
-    {
-        return view('components.menus.items', ['items' => $this->menus]);
-    }
-
 }

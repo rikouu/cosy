@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Tag
  *
- * @package App\Models
+ * @property string name
+ * @property string slug
  */
 class Tag extends Model
 {
-    use Sluggable;
+    use Sluggable, Menuable;
 
     /**
      * The attributes that are mass assignable.
@@ -39,5 +41,10 @@ class Tag extends Model
     public function getLink($params = [])
     {
         return route('tag.show', array_merge($params, ['id' => $this->slug]));
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

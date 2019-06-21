@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
@@ -17,11 +18,12 @@ use Illuminate\Notifications\Notifiable;
  * Class User
  *
  * @property string name
+ * @property string display_name
  * @property string email
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, Notifiable, Sluggable;
+    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, Notifiable, Sluggable, Menuable;
 
     /**
      * The attributes that are mass assignable.
@@ -76,5 +78,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function getAvatarAttribute($avatar)
     {
         return !empty($avatar) ? $avatar : getAvatar($this->email);
+    }
+
+    public function getName(): string
+    {
+        return $this->display_name;
     }
 }

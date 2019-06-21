@@ -26,6 +26,7 @@ class CreateMenusTable extends Migration
             $table->integer('order')->default(0);
             $table->string('route')->nullable();
             $table->text('parameters')->nullable();
+            $table->nullableMorphs('menuable');
             $table->boolean('status')->default(true);
             $table->softDeletes();
             $table->timestamps();

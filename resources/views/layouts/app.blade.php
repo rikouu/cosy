@@ -8,7 +8,7 @@
     <title>@yield('page_title', Theme::title())</title>
     <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}">
-    <link href="{{ cdnMix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ cdnMix('css/app.css') }}" rel="stylesheet" type="text/css" media="all">
     @stack('styles')
 </head>
 <body class="cosy-style-shadow">
@@ -17,7 +17,7 @@
         @yield('content')
     @include('commons.footer')
 </div>
-<script src="{{ cdnMix('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ cdnMix('js/app.js') }}"></script>
 @stack('scripts')
 </body>
 </html>

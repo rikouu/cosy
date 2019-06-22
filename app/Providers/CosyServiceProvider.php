@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Cosy\Cosy;
 use App\Cosy\SEO\SEO;
+use App\Facades\Blog;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -35,5 +36,8 @@ class CosyServiceProvider extends ServiceProvider
         $this->app->singleton('cosy', function () {
             return new Cosy();
         });
+
+        $this->app->alias('Blog', Blog::class);
+        $this->app->register(BlogServiceProvider::class);
     }
 }

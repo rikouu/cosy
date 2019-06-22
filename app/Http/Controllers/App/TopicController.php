@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Facades\Theme;
+use App\Facades\Blog;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Topic;
@@ -42,7 +42,7 @@ class TopicController extends Controller
         })->whereNotIn('id', $topArticles->pluck('id'))
             ->paginate();
 
-        Theme::title($topic->name);
+        Blog::title($topic->name);
         return view('topics.show', compact('articles', 'topic', 'topArticles'));
     }
 }

@@ -6,7 +6,7 @@
             @include('articles.partials._breadcrumbs')
             <div class="row no-gutters">
                 <div class="col-12 col-lg-9 pr-lg-5">
-                    <div class="post">
+                    <div class="post" id="post">
                         @if (!empty($article->image))
                             <div class="post-cover mb-4">
                                 <div class="media media-3x1">
@@ -32,7 +32,6 @@
                     @include('commons.comments')
                 </div>
                 <div class="sidebar col-lg-3 d-none d-lg-block">
-                    <?php //get_template_part('template-parts/toc')?>
                     @include('commons.sidebar')
                 </div>
             </div>

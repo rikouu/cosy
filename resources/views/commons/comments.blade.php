@@ -50,7 +50,7 @@
             </form>
         </div>
         <ul class="comment-list">
-            //
+
         </ul>
     @else
         <p class="no-comments">{{ __('Comments are closed.') }}</p>

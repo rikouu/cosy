@@ -68,7 +68,7 @@ if (!function_exists('cdnPath')) {
         if (!empty(config('cosy.cdn'))) {
             return Storage::disk('qiniu')->getUrl($path);
         }
-        return $path;
+        return asset($path);
     }
 }
 

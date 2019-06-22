@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Facades\Theme;
+use App\Facades\Blog;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Tag;
@@ -42,7 +42,7 @@ class TagController extends Controller
         })->whereNotIn('id', $topArticles->pluck('id'))
             ->paginate();
 
-        Theme::title($tag->name);
+        Blog::title($tag->name);
         return view('tags.show', compact('articles', 'tag', 'topArticles'));
     }
 }

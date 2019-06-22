@@ -5,7 +5,7 @@
     {!!  Cosy::seo()->generate() !!}
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('page_title', Theme::title())</title>
+    <title>@yield('page_title', Blog::title())</title>
     <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <link href="{{ cdnMix('css/app.css') }}" rel="stylesheet" type="text/css" media="all">

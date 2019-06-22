@@ -1,6 +1,6 @@
 @php
-    $socials = Theme::socials();
-    $info = Theme::info();
+    $socials = Blog::socials();
+    $info = Blog::info();
     $description = $info['description'] ?? '';
     $name = Cosy::name();
     $year = implode('-', array_flip(array_flip([$info['year'] ?? date('Y'), date('Y')])));
@@ -35,7 +35,7 @@
                     <div class="footer-widget-header">{{ __('Tag') }}</div>
                     <div class="footer-widget-content">
                         <div class="footer-widget-links">
-                            @foreach(Theme::footerTags() as $tag)
+                            @foreach(Blog::footerTags() as $tag)
                                 <a href="{{ $tag->getLink() }}" target="_self">{{ $tag->name }}</a>
                             @endforeach
                         </div>
@@ -48,7 +48,7 @@
                         <div class="footer-widget-header">{{ __('prism.footer.links') }}</div>
                         <div class="footer-widget-content">
                             <div class="footer-widget-links">
-                                @foreach(Theme::links() as $link)
+                                @foreach(Blog::links() as $link)
                                     <a href="{{ $link->url }}" target="{{ $link->target }}">
                                         {{ $link->name }}
                                     </a>
@@ -61,7 +61,7 @@
                         <div class="footer-widget-header">{{ __('Category') }}</div>
                         <div class="footer-widget-content">
                             <div class="footer-widget-links m-n1">
-                                @foreach(Theme::footerCategories() as $category)
+                                @foreach(Blog::footerCategories() as $category)
                                     <a href="{{ $category->getLink() }}" target="_self">
                                         {{ $category->name }}
                                     </a>

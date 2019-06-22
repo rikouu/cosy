@@ -10,7 +10,7 @@
         $logo = asset('images/logo-dark.png');
     }
     $name = $name ?? Cosy::name();
-    $menu = Theme::navigation('top');
+    $menu = Blog::navigation('top');
 @endphp
 
 <header class="header">

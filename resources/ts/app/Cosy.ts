@@ -2,6 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import $ from 'jquery'
 import NProgress from 'nprogress'
+import {Highlight} from "./plugins/highlight";
 
 require('theia-sticky-sidebar');
 
@@ -141,6 +142,11 @@ export class Cosy implements CosyInterface {
                 additionalMarginTop: 20,
                 additionalMarginBottom: 100,
             });
+        }
+
+        const postContainer = $("#post");
+        if (postContainer !== undefined) {
+            Highlight.highlight();
         }
     }
 

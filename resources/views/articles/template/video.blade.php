@@ -6,7 +6,7 @@
             @include('articles.partials._breadcrumbs')
             <div class="row no-gutters">
                 <div class="col-12 col-lg-9 pr-lg-5">
-                    <div class="post">
+                    <div class="post" id="post">
                         <h1 class="post-title h3">{{ $article->title }}</h1>
                         @include('articles.partials._meta')
                         <?php //get_template_part('template-parts/list-video-nav') ?>

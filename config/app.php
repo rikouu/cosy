@@ -176,7 +176,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        App\Providers\ThemeServiceProvider::class,
         Overtrue\LaravelFilesystem\Qiniu\QiniuStorageServiceProvider::class,
     ],
 
@@ -230,6 +229,7 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
         'Cosy'         => App\Facades\Cosy::class,
         'Theme'        => App\Facades\Theme::class,
+        'Blog'         => App\Facades\Blog::class,
     ],
 
 ];

@@ -1,5 +1,5 @@
 @php
-    $articles = Theme::convergence($article);
+    $articles = Blog::convergence($article);
 @endphp
 <aside id="secondary" class="widget-area pt-5 pt-lg-0">
     <section id="search-2" class="widget widget_search">

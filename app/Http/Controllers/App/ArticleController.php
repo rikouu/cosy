@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Facades\Theme;
+use App\Facades\Blog;
 use App\Http\Controllers\Controller;
 use App\Jobs\GenerateArticleSeo;
 use App\Models\Article;
@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -43,7 +42,7 @@ class ArticleController extends Controller
                 abort(404);
             }
 
-            Theme::title($article->title);
+            Blog::title($article->title);
             if (empty($content->keywords)) {
                 GenerateArticleSeo::dispatch($content)->delay(now()->addSeconds(10));
             }

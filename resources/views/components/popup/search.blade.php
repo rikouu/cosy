@@ -1,5 +1,5 @@
 @php
-    $searchTop = Theme::searchTop();
+    $searchTop = Blog::searchTop();
 @endphp
 
 <div id="search-popup-wrap">

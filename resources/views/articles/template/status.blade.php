@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-12 col-lg-10 p-lg-5">
-                    <div class="post">
+                    <div class="post" id="post">
                         @if (!empty($content->image))
                             <div class="post-cover mb-3 mb-md-5">
                                 <div class="media media-2x1">

@@ -16,7 +16,7 @@
             @endif
             <div class="row justify-content-lg-center">
                 <div class="col-12 col-lg-10 px-lg-5">
-                    <div class="post">
+                    <div class="post" id="post">
                         @include('articles.partials._meta')
                         <div class="content-style content">
                             {!! $content->content() !!}

@@ -117,7 +117,7 @@ class Article extends Model
      */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'article_tag');
+        return $this->morphedByMany(Tag::class, 'article_relate');
     }
 
     /**
@@ -125,7 +125,7 @@ class Article extends Model
      */
     public function topics(): BelongsToMany
     {
-        return $this->belongsToMany(Topic::class, 'article_topic');
+        return $this->morphedByMany(Topic::class, 'article_relate');
     }
 
     /**

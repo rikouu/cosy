@@ -20,7 +20,8 @@ Auth::routes();
 Route::get('/', 'App\HomeController@home');
 
 Route::get('history', 'App\HomeController@history')->name('history');
-Route::get('search', 'App\HomeController@history')->name('search');
+
+Route::get('search/{q?}', 'App\HomeController@search')->name('search');
 
 // 作者页
 Route::match(['get', 'post'], 'author/{slug}', 'App\UserController@show')->name('user.show');

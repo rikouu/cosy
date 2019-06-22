@@ -49,9 +49,14 @@
                 </div>
             </form>
         </div>
-        <ul class="comment-list">
-
-        </ul>
+        @php
+            $comments = $article->comments;
+        @endphp
+        @if ($comments->isNotEmpty())
+            <ul class="comment-list">
+                @include('components.comments.items', ['comments' => $comments, 'level' => 0])
+            </ul>
+        @endif
     @else
         <p class="no-comments">{{ __('Comments are closed.') }}</p>
     @endif

@@ -24,12 +24,6 @@ class CreateTopicsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Schema::create('article_topic', function (Blueprint $table) {
-            $table->unsignedBigInteger('article_id');
-            $table->unsignedBigInteger('topic_id');
-            $table->index(['article_id', 'topic_id']);
-        });
     }
 
     /**

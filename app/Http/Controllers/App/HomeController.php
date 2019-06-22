@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Facades\Blog;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 use App\Models\Article;
+use App\Models\Search;
+use App\Models\SearchHistory;
 use App\Models\Slide;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
@@ -54,9 +58,30 @@ class HomeController extends Controller
         return response($view)->header('Content-Type', 'text/xml');
     }
 
-    public function search(Request $request)
+    /**
+     * @param SearchRequest $request
+     *
+     * @return Response
+     */
+    public function search(SearchRequest $request)
     {
-        view('pages.search');
+        $query = trim($request->q);
+
+        $articles = Article::where('title', 'like', '%' . $query . '%')->paginate();
+
+        $cacheKey = $request->ip() . $query;
+        $hasSearch = Cache::get($cacheKey, false);
+        if (!$hasSearch) {
+            SearchHistory::firstOrCreate([
+                'query'       => $query,
+                'search_date' => Carbon::today()->toDateString()
+            ])
+                ->increment('search_count');
+            Cache::put($cacheKey, true, 600);
+        }
+
+        Blog::title(__('cosy.search.title', ['search' => $query]));
+        return view('pages.search', compact('articles'));
     }
 
     /**

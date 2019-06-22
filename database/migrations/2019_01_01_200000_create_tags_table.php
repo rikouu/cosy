@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTagsTable extends Migration
 {
@@ -23,12 +23,6 @@ class CreateTagsTable extends Migration
             $table->text('parameters')->nullable();
             $table->softDeletes();
             $table->timestamps();
-        });
-
-        Schema::create('article_tag', function (Blueprint $table) {
-            $table->unsignedBigInteger('article_id');
-            $table->unsignedBigInteger('tag_id');
-            $table->index(['article_id', 'tag_id']);
         });
     }
 

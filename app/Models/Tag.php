@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * Class Tag
@@ -26,11 +26,11 @@ class Tag extends Model
     ];
 
     /**
-     * @return BelongsToMany
+     * @return MorphToMany
      */
-    public function articles(): BelongsToMany
+    public function articles(): MorphToMany
     {
-        return $this->belongsToMany(Article::class, 'article_tag');
+        return $this->morphToMany(Article::class, 'article_relate');
     }
 
     /**

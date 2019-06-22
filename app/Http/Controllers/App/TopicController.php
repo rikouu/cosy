@@ -39,7 +39,8 @@ class TopicController extends Controller
 
         $articles = Article::whereHas('topics', function ($query) use ($topic) {
             $query->where('id', $topic->id);
-        })->whereNotIn('id', $topArticles->pluck('id'))
+        })
+            ->whereNotIn('id', $topArticles->pluck('id'))
             ->paginate();
 
         Blog::title($topic->name);

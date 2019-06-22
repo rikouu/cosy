@@ -34,7 +34,11 @@ class ArticleController extends Controller
     public function show(Request $request, $slug)
     {
         try {
-            $article = Article::with('content', 'category', 'tags', 'user')->where('slug', $slug)->firstOrFail();
+            $article = Article::with('content', 'category', 'tags', 'user')
+                ->with(['comments' => function ($query) {
+                    $query->with('comments')->where('parent_id', '=', 0);
+                }])
+                ->where('slug', $slug)->firstOrFail();
             $likes = Cache::get($request->ip().'(liked list)', []);
             $isLiked = in_array($article->id, $likes);
             $content = $article->content;

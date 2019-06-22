@@ -31,16 +31,13 @@ class UserController extends Controller
      */
     public function show(string $name, Request $request)
     {
-        //
-        $user = User::withCount('articles')->whereName($name)->firstOrFail();
+        $user = User::withCount('articles')
+            ->whereName($name
+            )->firstOrFail();
 
         $articles = Article::with('category')
             ->whereUserId($user->id)
             ->paginate();
-
-//        if ($request->ajax()) {
-//            return view('components.card.article-list', compact('articles'));
-//        }
 
         Blog::title($user->display_name);
         return view('users.show', compact('articles', 'user'));

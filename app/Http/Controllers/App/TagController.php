@@ -34,12 +34,16 @@ class TagController extends Controller
         $tag = Tag::withCount('articles')->where('slug', $slug)->first();
 
         $topArticles = Article::whereHas('tags', function ($query) use ($tag) {
-            $query->where('tag_id', $tag->id);
-        })->orderByDesc('published_at')->take(4)->get();
+            $query->whereTagId($tag->id)->whereTop(true);
+        })
+            ->orderByDesc('published_at')->take(4)->get();
 
         $articles = Article::whereHas('tags', function ($query) use ($tag) {
-            $query->where('id', $tag->id);
-        })->whereNotIn('id', $topArticles->pluck('id'))
+            $query->whereTagId($tag->id);
+        })
+            ->when($topArticles->isNotEmpty(), function ($query) use ($topArticles) {
+                $query->whereNotIn('id', $topArticles->pluck('id'));
+            })
             ->paginate();
 
         Blog::title($tag->name);

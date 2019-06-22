@@ -35,12 +35,15 @@ class CategoryController extends Controller
         $category = Category::withCount('articles')->whereSlug($slug)->firstOrFail();
         $topCount = in_array($category->style, ['plain', 'medium']) ? 3 : 4;
         $topArticles = Article::whereCategoryId($category->id)
+            ->whereTop(true)
             ->take($topCount)
             ->get();
 
         $articles = Article::with('category')
             ->whereCategoryId($category->id)
-            ->whereNotIn('id', $topArticles->pluck('id'))
+            ->when($topArticles->isNotEmpty(), function ($query) use ($topArticles) {
+                $query->whereNotIn('id', $topArticles->pluck('id'));
+            })
             ->paginate();
 
         Blog::title($category->name);

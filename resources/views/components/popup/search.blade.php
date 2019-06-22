@@ -16,7 +16,7 @@
         <div class="search-key-push px-3 px-lg-5 py-3 py-lg-4">
             <div class="h6 mb-3">{{ __('Top Keywords') }}</div>
             <ul class="nav nav-pills m-n1">
-                @foreach($$searchTop as $search)
+                @foreach($searchTop as $search)
                     <li class="nav-item p-1">
                         <a href="{{ route('search', ['q' => $search->query]) }}" target="_blank"
                            class="btn btn-light btn-sm" title="{{ $search->query }}">{{ $search->query }}</a>

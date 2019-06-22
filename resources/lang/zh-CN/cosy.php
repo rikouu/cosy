@@ -3,7 +3,9 @@
 return [
 
     'search'  => [
+
         'placeholder' => '请输入搜索关键词',
+        'title'       => '“:search”的搜索结果',
     ],
     'article' => [
         'previous' => '上一篇',

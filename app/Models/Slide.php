@@ -51,6 +51,9 @@ class Slide extends Model
         return $this->title;
     }
 
+    /**
+     * @return string
+     */
     public function getImage()
     {
         if (isset($this->slideable)) {

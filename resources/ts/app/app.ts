@@ -4,12 +4,18 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vue from 'vue'
+
 require('./bootstrap');
 
 import pangu from 'pangu'
-require('./utils/pjax');
-require('./utils/highlight');
-require('./utils/backtop');
+import highlight from './directives/highlight'
+
+// require('./utils/pjax');
+// require('./utils/highlight');
+// require('./utils/backtop');
+
+import BackTop from './components/BackTop/index.vue'
 
 /**
  * The following block of code may be used to automatically register your
@@ -34,4 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
     pangu.spacingPage();
 });
 
+const app = new Vue({
+    el: "#app",
+    directives: {
+        highlight: highlight
+    },
+    components: {
+        BackTop: BackTop
+    }
+}).$mount('#app')
 
+export default app

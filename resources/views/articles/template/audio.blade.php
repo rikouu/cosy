@@ -9,7 +9,7 @@
                     <div class="post" id="post">
                         <h1 class="post-title h3">{{ $article->title }}</h1>
                         @include('articles.partials._meta')
-                        <div class="content-style content">
+                        <div v-highlight class="content-style content">
                             {!! $content->content() !!}
                         </div>
                         <div class="post-tags mt-3 mt-md-4">

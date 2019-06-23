@@ -2,7 +2,6 @@ import Vue from 'vue'
 import axios from 'axios'
 import $ from 'jquery'
 import NProgress from 'nprogress'
-import {Highlight} from "./utils/highlight";
 
 require('theia-sticky-sidebar');
 
@@ -116,7 +115,7 @@ export class Cosy implements CosyInterface {
     boot() {
         // this.bootingCallbacks.forEach(callback => callback(Vue, router, store));
         this.bootingCallbacks = [];
-        this.loadPjax();
+        // this.loadPjax();
     }
 
     registerStoreModules() {
@@ -126,15 +125,10 @@ export class Cosy implements CosyInterface {
     }
 
     loaded() {
-        $('.back-to-top').off('click').on('click', function (e) {
-            e.preventDefault();
-            $('html, body').stop().animate({scrollTop: 0}, 600);
-        });
-
-        $('.search-popup').off('click').on('click', function (e) {
-            e.preventDefault();
-            popup('full', $('#search-popup-wrap').html());
-        });
+        // $('.search-popup').off('click').on('click', function (e) {
+        //     e.preventDefault();
+        //     popup('full', $('#search-popup-wrap').html());
+        // });
 
         const sidebar = $(".sidebar");
         if (sidebar !== undefined) {
@@ -142,11 +136,6 @@ export class Cosy implements CosyInterface {
                 additionalMarginTop: 20,
                 additionalMarginBottom: 100,
             });
-        }
-
-        const postContainer = $("#post");
-        if (postContainer !== undefined) {
-            Highlight.highlight();
         }
     }
 

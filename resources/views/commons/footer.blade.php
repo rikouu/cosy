@@ -84,11 +84,18 @@
     </div>
 </footer>
 
-<div class="back-to-top" id="back-to-top">
+{{-- <div class="back-to-top" id="back-to-top">
     <span class="icon-stack">
         <i class="text-sm iconfont icon-backtop"></i>
         <span class="back-to-top-text">{{ __('Top') }}</span>
     </span>
-</div>
+</div> --}}
+
+<back-top class="back-to-top" id="back-to-top">
+    <span class="icon-stack">
+        <i class="text-sm iconfont icon-backtop"></i>
+        <span class="back-to-top-text">{{ __('Top') }}</span>
+    </span>
+</back-top>
 
 @include('components.popup.search')

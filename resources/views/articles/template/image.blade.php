@@ -18,7 +18,7 @@
                 <div class="col-12 col-lg-10 px-lg-5">
                     <div class="post" id="post">
                         @include('articles.partials._meta')
-                        <div class="content-style content">
+                        <div v-highlight class="content-style content">
                             {!! $content->content() !!}
                         </div>
                         <div class="post-tags mt-3 mt-md-4">

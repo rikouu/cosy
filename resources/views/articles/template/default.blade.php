@@ -16,7 +16,7 @@
                         @endif
                         <h1 class="post-title h3">{{ $article->title }}</h1>
                         @include('articles.partials._meta')
-                        <div class="content-style content">
+                        <div v-highlight class="content-style content">
                             {!! $content->content() !!}
                         </div>
                         @include('components.ad.article')

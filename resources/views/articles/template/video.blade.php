@@ -14,7 +14,7 @@
                             {!! $content->content() !!}
                         </div>
                         <?php //get_template_part('template-parts/ad/single-ad'); ?>
-                        <div class="post-tags mt-3 mt-md-4">
+                        <div v-highlight class="post-tags mt-3 mt-md-4">
                             @foreach($article->tags as $tag)
                                 <a href="{{ $tag->getLink() }}" rel="tag">{{ $tag->name }}</a>
                             @endforeach

@@ -23,7 +23,7 @@ mix.webpackConfig({
   resolve: {
     extensions: ['.ts', '.tsx'],
     alias: {
-      '@': path.resolve(__dirname, 'resources/ts/admin'),
+      '@': path.resolve(__dirname, 'resources/ts'),
     }
   },
   module: {

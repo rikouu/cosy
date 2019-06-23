@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import $ from 'jquery'
 import NProgress from 'nprogress'
-import {Highlight} from "./plugins/highlight";
+import {Highlight} from "./utils/highlight";
 
 require('theia-sticky-sidebar');
 

@@ -7,9 +7,9 @@
 require('./bootstrap');
 
 import pangu from 'pangu'
-require('./plugins/pjax');
-require('./plugins/highlight');
-require('./plugins/backtop');
+require('./utils/pjax');
+require('./utils/highlight');
+require('./utils/backtop');
 
 /**
  * The following block of code may be used to automatically register your

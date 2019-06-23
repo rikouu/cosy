@@ -1,23 +1,26 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <BasicLayout>
+      <router-view/>
+    </BasicLayout>
   </div>
 </template>
 
-<script lang="ts">
-
+<script lang="tsx">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import BasicLayout from './components/BasicLayout/index.vue'
 
+@Component({
+  components: {
+    BasicLayout
+  }
+})
 export default class App extends Vue {
 
 }
 
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 
 </style>

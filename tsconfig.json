@@ -32,7 +32,7 @@
   "include": [
     "resources/ts/**/*.ts",
     "resources/ts/**/*.tsx",
-    "resources/ts/**/*.vue"
+    "resources/ts/**/*.vue", "resources/ts/app/utils/vue-pjax.js"
   ],
   "exclude": [
     "node_modules"

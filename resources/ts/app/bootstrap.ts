@@ -1,14 +1,14 @@
 // import Cosy from './Cosy'
 
-import jQuery from 'jquery'
+// import jQuery from 'jquery'
 import axios from 'axios'
 
-declare global {
-    interface Window {
-        jQuery: JQueryStatic,
-        $: JQueryStatic,
-    }
-}
+// declare global {
+//     interface Window {
+//         jQuery: JQueryStatic,
+//         $: JQueryStatic,
+//     }
+// }
 
 
 /**
@@ -17,10 +17,10 @@ declare global {
  * code may be modified to fit the specific needs of your application.
  */
 
-try {
-    window.$ = window.jQuery = jQuery;
-} catch (e) {
-}
+// try {
+//     window.$ = window.jQuery = jQuery;
+// } catch (e) {
+// }
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -41,8 +41,3 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
-
-(function () {
-    // const config = (<any>window).config;
-    // const cosy = new Cosy(config);
-}.call(window));

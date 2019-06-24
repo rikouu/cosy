@@ -47,9 +47,13 @@ export default class BackTop extends Vue {
     this.active = scrollTop >= startPoint && windowW >= 1024;
   }
 
-  public mounted() {
+  public created() {
     window.addEventListener("scroll", this.handleScroll);
     this.handleScroll();
+  }
+
+  public destroyed() {
+    window.removeEventListener("scroll", this.handleScroll)
   }
 }
 </script>

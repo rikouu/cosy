@@ -12,7 +12,6 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({})
 export default class SideBar extends Vue {
   public mounted() {
-    console.log(1);
     const sidebar = this.$el;
     console.log(sidebar);
     if (sidebar !== undefined) {

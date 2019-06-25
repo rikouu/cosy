@@ -17,10 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+// 首页
 Route::get('/', 'App\HomeController@home');
 
+// 历史页
 Route::get('history', 'App\HomeController@history')->name('history');
 
+// 搜索页
 Route::get('search/{q?}', 'App\HomeController@search')->name('search');
 
 // 作者页

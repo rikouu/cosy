@@ -18,3 +18,5 @@
         @include('articles.partials._share', compact('article'))
     </div>
 </div>
+
+@include('components.popup.author', ['author' => $article->user])

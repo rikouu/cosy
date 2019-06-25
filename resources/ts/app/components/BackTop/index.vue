@@ -14,27 +14,24 @@ export default class BackTop extends Vue {
 
   protected scrollToTop() {
     let el = document.documentElement;
+    const scrollTop = el.scrollTop;
     let step = 0;
+    const stepLength = Math.max(scrollTop / 512, 10)
     let interval = setInterval(() => {
       if (el.scrollTop <= 0) {
         clearInterval(interval);
-        return;
+      } else {
+        step += stepLength;
+        el.scrollTop -= step;
       }
-      step += 10;
-      el.scrollTop -= step;
     }, 20);
   }
 
   protected handleScroll() {
-    const windowW =
-      document.documentElement.clientWidth || document.body.clientWidth;
-    const windowH =
-      document.documentElement.clientHeight || document.body.clientHeight;
-    const scrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop;
-    const startPoint = windowH / 2;
+    const windowW = document.documentElement.clientWidth || document.body.clientWidth;
+    const windowH = document.documentElement.clientHeight || document.body.clientHeight;
+    const scrollTop = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
+    const startPoint = windowH / 3;
 
     const el = document.getElementsByClassName("fixed-top");
     if (el && el.length > 0) {

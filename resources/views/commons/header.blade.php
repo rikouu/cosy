@@ -26,7 +26,7 @@
             </a>
             <ul class="nav nav-pills nav-submenu align-items-center flex-row flex-shrink-0 order-2 order-md-3">
                 <li class="nav-item">
-                    <a href="javascript:" class="nav-link search-popup">
+                    <a href="javascript:;" @click="showSearchModal = true" class="nav-link search-popup">
                         <i class="text-lg iconfont icon-search"></i>
                     </a>
                 </li>
@@ -37,7 +37,7 @@
                 </li>
                 <li class="nav-item d-lg-none">
                     <a href="#" id="sidebar-mobile-trigger" class="nav-link pr-0">
-                        <i class="fal fa-bars"></i>
+                        <i class="iconfont icon-bars"></i>
                     </a>
                 </li>
             </ul>

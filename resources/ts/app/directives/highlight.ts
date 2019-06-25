@@ -1,5 +1,5 @@
 
-import { DirectiveFunction, VNode } from "vue";
+import { VNode } from "vue";
 import { DirectiveBinding, DirectiveOptions } from "vue/types/options";
 import Prism from 'prismjs'
 

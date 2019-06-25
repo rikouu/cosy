@@ -9,9 +9,9 @@
                     <div class="post" id="post">
                         <h1 class="post-title h3">{{ $article->title }}</h1>
                         @include('articles.partials._meta')
-                        <div v-highlight class="content-style content">
+                        <article-content class="content-style content">
                             {!! $content->content() !!}
-                        </div>
+                        </article-content>
                         <div class="post-tags mt-3 mt-md-4">
                             @foreach($article->tags as $tag)
                                 <a href="{{ $tag->getLink() }}" rel="tag">{{ $tag->name }}</a>

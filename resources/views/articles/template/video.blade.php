@@ -10,11 +10,11 @@
                         <h1 class="post-title h3">{{ $article->title }}</h1>
                         @include('articles.partials._meta')
                         <?php //get_template_part('template-parts/list-video-nav') ?>
-                        <div class="content-style content">
+                        <article-content class="content-style content">
                             {!! $content->content() !!}
-                        </div>
+                        </article-content>
                         <?php //get_template_part('template-parts/ad/single-ad'); ?>
-                        <div v-highlight class="post-tags mt-3 mt-md-4">
+                        <div class="post-tags mt-3 mt-md-4">
                             @foreach($article->tags as $tag)
                                 <a href="{{ $tag->getLink() }}" rel="tag">{{ $tag->name }}</a>
                             @endforeach

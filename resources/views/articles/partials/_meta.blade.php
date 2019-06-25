@@ -1,7 +1,7 @@
 <div class="post-meta d-flex align-items-center flex-row text-sm text-muted my-4">
     <div class="flex-fill d-flex align-items-center">
         <div class="author-avatar">
-            <a href="{{ $article->user->getLink() }}" class="author-popup">
+            <a href="javascript:;" class="author-popup" @click="showAuthorModal = true">
                 <img alt='{{ $article->user->display_name }}' src='{{ $article->user->avatar }}' class='avatar w-40' height='40' width='40'/>
             </a>
         </div>

@@ -18,9 +18,9 @@
                 <div class="col-12 col-lg-10 px-lg-5">
                     <div class="post" id="post">
                         @include('articles.partials._meta')
-                        <div v-highlight class="content-style content">
+                        <article-content class="content-style content">
                             {!! $content->content() !!}
-                        </div>
+                        </article-content>
                         <div class="post-tags mt-3 mt-md-4">
                             @foreach($article->tags as $tag)
                                 <a href="{{ $tag->getLink() }}" rel="tag">{{ $tag->name }}</a>

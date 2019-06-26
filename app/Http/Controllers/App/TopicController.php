@@ -18,7 +18,8 @@ class TopicController extends Controller
      */
     public function index()
     {
-        //
+        $topics = Topic::withCount('articles')->paginate();
+        return view('topics.index', compact('topics'));
     }
 
     /**
@@ -33,17 +34,12 @@ class TopicController extends Controller
     {
         $topic = Topic::withCount('articles')->where('slug', $slug)->first();
 
-        $topArticles = Article::whereHas('topics', function ($query) use ($topic) {
-            $query->where('id', $topic->id);
-        })->orderByDesc('published_at')->take(4)->get();
-
         $articles = Article::whereHas('topics', function ($query) use ($topic) {
-            $query->where('id', $topic->id);
+            $query->where('article_relate_id', $topic->id);
         })
-            ->whereNotIn('id', $topArticles->pluck('id'))
             ->paginate();
 
         Blog::title($topic->name);
-        return view('topics.show', compact('articles', 'topic', 'topArticles'));
+        return view('topics.show', compact('articles', 'topic'));
     }
 }

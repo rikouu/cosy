@@ -62,3 +62,7 @@ Route::group(['prefix' => Cosy::path(),], function () {
     Route::get('/', 'Admin\DashboardController@dashboard')->name('dashboard');
     Route::get('/{any}', 'Admin\DashboardController@dashboard')->where('any', '.*');
 });
+
+Route::group(['middleware' => 'throttle:5,1'], function () {
+    Route::post('article/{id}/like', 'App\ArticleController@like')->name('article.like');
+});

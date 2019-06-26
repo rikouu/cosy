@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\ArticleContent as Content;
 use App\Models\Scopes\PublishOrderScope;
+use App\Models\Traits\Likable;
 use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,7 +25,7 @@ use Illuminate\Support\Carbon;
  */
 class Article extends Model
 {
-    use Sluggable, Menuable;
+    use Sluggable, Menuable, Likable;
 
     /**
      * The attributes that are mass assignable.
@@ -126,17 +127,6 @@ class Article extends Model
     public function topics(): BelongsToMany
     {
         return $this->morphedByMany(Topic::class, 'article_relate');
-    }
-
-    /**
-     *
-     * @param string $image
-     *
-     * @return string
-     */
-    public function getImageAttribute($image)
-    {
-        return cdnPath($image);
     }
 
     /**

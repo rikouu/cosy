@@ -6,7 +6,7 @@
     <div class="list-item custom-hover">
         <div class="media media-3x2 col-5 col-md-4">
             <a class="media-content" href="{{ $article->getLink() }}" >
-                <img src="{{ $article->image }}" alt="{{ $article->title }}">
+                <img src="@image($article->image)" alt="{{ $article->title }}">
                 <span class="overlay"></span>
             </a>
             @if ('image' === $article->type)

@@ -4,17 +4,22 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import Vue from 'vue'
+import Vue, { ComponentOptions } from 'vue'
 
 require('./bootstrap');
 
+// Components
 import BackTop from './components/BackTop/index.vue'
 import SideBar from './components/SideBar/index.vue'
 import ArticleContent from './components/ArticleContent/index.vue'
 import Modal from './components/Modal/index.vue'
 
+// Directives
+import like from './directives/like'
+
 const app = new Vue({
     directives: {
+        like: like
         // highlight: highlight
     },
     components: {
@@ -23,19 +28,14 @@ const app = new Vue({
         SideBar: SideBar,
         ArticleContent: ArticleContent
     },
-    data () {
+    data() {
         return {
             showSearchModal: false,
-            showAuthorModal: false
+            showAuthorModal: false,
         }
-    },
-    mounted() {
-        // pangu.spacingPage()
     },
     methods: {
-        footerClick() {
-            console.log(1)
-        }
+       
     }
 }).$mount('#app')
 

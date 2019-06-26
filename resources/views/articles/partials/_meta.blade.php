@@ -1,4 +1,4 @@
-<div class="post-meta d-flex align-items-center flex-row text-sm text-muted my-4">
+<div class="post-meta d-flex align-items-center flex-row text-sm text-muted">
     <div class="flex-fill d-flex align-items-center">
         <div class="author-avatar">
             <a href="javascript:;" class="author-popup" @click="showAuthorModal = true">
@@ -7,7 +7,7 @@
         </div>
         <div class="author-name d-flex flex-wrap flex-column mx-2 mx-md-3">
             <div class="text-md">
-                <a href="{{ $article->user->getLink() }}" class="author-popup">
+                <a href="{{ $article->user->getLink() }}">
                     {{ $article->user->display_name }}
                 </a>
             </div>
@@ -33,8 +33,7 @@
         </span>
         @endif
         <span class="d-inline-block">
-            <a href="javascript:" class="post-like{{ $isLiked ? ' current' : '' }}"
-               data-id="{{ $article->id }}">
+            <a href="javascript:" v-like="{{ $article->id }}" class="post-like">
                 <i class="text-md iconfont icon-like"></i>
                 <small class="like-count">{{ number_format($article->likes_count) }}</small>
             </a>

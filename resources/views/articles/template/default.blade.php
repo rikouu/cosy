@@ -10,12 +10,14 @@
                         @if (!empty($article->image))
                             <div class="post-cover mb-4">
                                 <div class="media media-3x1">
-                                    <div class="media-content" style="background-image:url('{{ $article->image }}')"></div>
+                                    <div class="media-content" style="background-image:url('@image($article->image)')"></div>
                                 </div>
                             </div>
                         @endif
                         <h1 class="post-title h3">{{ $article->title }}</h1>
-                        @include('articles.partials._meta')
+                        <div class="my-4">
+                            @include('articles.partials._meta')
+                        </div>
                         <article-content class="content-style content">
                             {!! $content->content() !!}
                         </article-content>

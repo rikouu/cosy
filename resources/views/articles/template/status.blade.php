@@ -14,7 +14,9 @@
                             </div>
                         @endif
                         <h1 class="post-title h3">{{ $article->title }}</h1>
-                        @include('articles.partials._meta')
+                        <div class="my-4">
+                            @include('articles.partials._meta')
+                        </div>
                         <article-content class="content-style content">
                             {!! $content->content() !!}
                         </article-content>

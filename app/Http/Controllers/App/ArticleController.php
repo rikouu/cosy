@@ -72,4 +72,19 @@ class ArticleController extends Controller
         $article = Article::inRandomOrder()->first();
         return redirect($article->getLink());
     }
+
+    public function showLike($id)
+    {
+
+    }
+
+    public function like(Request $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        $article->like();
+        return response([
+            'likesCount' => number_format($article->likes_count),
+            'isLike'     => $article->isLiked(),
+        ]);
+    }
 }

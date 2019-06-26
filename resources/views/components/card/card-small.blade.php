@@ -2,7 +2,7 @@
     <div class="list-item block custom-hover">
         <div class="media media-3x2">
             <a class="media-content" href="{{ $article->getLink() }}" target="_blank">
-                <img src="{{ $article->image }}" alt="{{ $article->title }}">
+                <img src="@image($article->image)" alt="{{ $article->title }}">
                 <span class="overlay"></span>
             </a>
             @include('components.card.media-icon', ['type' => $article->type])

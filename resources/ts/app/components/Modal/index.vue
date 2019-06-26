@@ -67,7 +67,6 @@ export default class Modal extends Vue {
       'full': 'cosy-tips-xl',
       'small': 'cosy-tips-sm',
     }
-    console.log(classMap)
 
     if (this.size && classMap[this.size!] !== undefined) {
       classList.push(classMap[this.size!]);

@@ -34,7 +34,7 @@ class Menu extends Model
     ];
 
     protected $with = [
-        'menus', 'menuable'
+        'menus',
     ];
 
     /**

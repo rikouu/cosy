@@ -11,7 +11,7 @@
         <div class="row my-n3">
             <div class="col py-3">
                 <div class="footer-widget pr-lg-5">
-                    <div class="footer-widget-header" @click="footerClick">{{ $name }}</div>
+                    <div class="footer-widget-header">{{ $name }}</div>
                     <div class="footer-widget-content">
                         <p>{{ $description }}</p>
                     </div>

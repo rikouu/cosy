@@ -43,17 +43,18 @@ class Blog
      *
      * @return mixed
      */
-    public function navigation($name = '')
+    public function navigation($name = '', $showChild = true)
     {
-        return Cache::remember('navigation'.$name, 1, function () use ($name) {
-            $navigation = Navigation::with(['menus' => function ($query) {
-                $query->with('menuable')->where('parent_id', '=', 0)->orderBy('order', 'asc');
+        return Cache::remember('navigation'.$name, 1, function () use ($name, $showChild) {
+            $navigation = Navigation::with(['menus' => function ($query) use ($showChild) {
+                if ($showChild) {
+                    $query->with('menuable')->where('parent_id', '=', 0)->orderBy('order', 'asc');
+                } else {
+                    $query->where('parent_id', '=', 0)->orderBy('order', 'asc');
+                }
             }])->whereName($name)->first();
 
-            if (!empty($navigation)) {
-                return view('components.menus.items', ['items' => $navigation->menus])->render();
-            }
-            return null;
+            return !empty($navigation) ? $navigation->menus : null;
         });
     }
 

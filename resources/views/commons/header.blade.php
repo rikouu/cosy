@@ -11,7 +11,7 @@
     }
     $name = $name ?? Cosy::name();
     $mainMenu = Blog::navigation('main');
-    $mobileMenu = Blog::navigation('mobile');
+    $mobileMenu = Blog::navigation('mobile', false);
 @endphp
 
 <header class="header">
@@ -37,26 +37,20 @@
                 </li>
                 <li class="nav-item d-lg-none">
                     <a href="#" id="sidebar-mobile-trigger" class="nav-link pr-0">
-                        <i class="iconfont icon-bars"></i>
+                        <i class="iconfont icon-menu"></i>
                     </a>
                 </li>
             </ul>
             <div class="collapse navbar-collapse show navbar-scroll order-3 order-md-2 mx-md-4">
                 <ul class="navbar-nav main-menu d-none d-lg-flex mx-auto px-4">
-                    {!! $mainMenu !!}
-{{--                    @if (!empty($menu) && $menu->isNotEmpty())--}}
-{{--                        @foreach($menu->items as $item)--}}
-{{--                            @include('components.menu-item', ['menu' => $item])--}}
-{{--                        @endforeach--}}
-{{--                    @endif--}}
+                    @if (!empty($mainMenu)) 
+                        @include('components.menus.items', ['items' => $mainMenu, 'showChild' => true])
+                    @endif
                 </ul>
                 <ul class="navbar-nav mobile-menu flex-row d-lg-none">
-                    {!! $mobileMenu !!}
-{{--                @if (!empty($menu) && $menu->isNotEmpty())--}}
-{{--                        @foreach($menu->items as $item)--}}
-{{--                            @include('components.menu-item', ['menu' => $item])--}}
-{{--                        @endforeach--}}
-{{--                    @endif--}}
+                    @if (!empty($mobileMenu)) 
+                        @include('components.menus.items', ['items' => $mobileMenu, 'showChild' => true])
+                    @endif
                 </ul>
             </div>
         </div>

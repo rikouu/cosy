@@ -40,7 +40,7 @@ class Topic extends Model
      */
     public function getLink($params = [])
     {
-        return route('topic.show', array_merge($params, ['id' => $this->slug]));
+        return route('topic.show', array_merge($params, ['slug' => $this->slug]));
     }
 
     public function getName(): string

@@ -18,8 +18,7 @@
             <ul class="nav nav-pills m-n1">
                 @foreach($searchTop as $search)
                     <li class="nav-item p-1">
-                        <a href="{{ route('search', ['q' => $search->query]) }}" target="_blank"
-                        class="btn btn-light btn-sm" title="{{ $search->query }}">{{ $search->query }}</a>
+                        <a href="{{ route('search', ['q' => $search->query]) }}" class="btn btn-light btn-sm" title="{{ $search->query }}">{{ $search->query }}</a>
                     </li>
                 @endforeach
             </ul>

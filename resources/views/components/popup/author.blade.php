@@ -7,8 +7,7 @@
         <div class="author-popup-meta mt-n5">
             <div class="px-4">
                 <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{ $author->getLink() }}"
-                       class="avatar mx-2 w-96" target="_blank">
+                    <a href="{{ $author->getLink() }}" class="avatar mx-2 w-96" target="_blank">
                         <img alt="{{ $author->display_name }}" src="{{ $author->avatar }}" class="avatar w-96" height="96" width="96"/>
                     </a>
                 </div>

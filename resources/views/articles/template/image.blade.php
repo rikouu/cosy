@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-    $showSideBar = true
+    $showSideBar = false
 @endphp
 
 @section('content')
@@ -41,11 +41,9 @@
             @endif
 
             @if ($showSideBar)
-
                 <div class="row no-gutters">
                     <div class="col-12 col-lg-9 pr-lg-5">
             @else
-
                 <div class="row justify-content-lg-center">
                     <div class="col-12 col-lg-10 px-lg-5">
             @endif

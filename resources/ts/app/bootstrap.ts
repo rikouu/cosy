@@ -1,15 +1,4 @@
-// import Cosy from './Cosy'
-
-// import jQuery from 'jquery'
 import axios from 'axios'
-
-// declare global {
-//     interface Window {
-//         jQuery: JQueryStatic,
-//         $: JQueryStatic,
-//     }
-// }
-
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

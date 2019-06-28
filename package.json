@@ -21,6 +21,7 @@
         "color-thief": "^2.2.5",
         "core-js": "^3.1.4",
         "enquire.js": "^2.1.6",
+        "jquery": "^3.4.1",
         "js-cookie": "^2.2.0",
         "nprogress": "^0.2.0",
         "pangu": "^4.0.7",
@@ -34,10 +35,12 @@
         "vue-meta": "^1.6.0",
         "vue-property-decorator": "^8.2.1",
         "vue-router": "^3.0.6",
+        "vue-sticky": "^3.3.4",
         "vuex": "^3.1.1",
         "vuex-class": "^0.3.2"
     },
     "devDependencies": {
+        "@types/jquery": "^3.3.30",
         "@types/node": "^12.0.10",
         "@types/pangu": "^3.3.0",
         "@types/prismjs": "^1.16.0",

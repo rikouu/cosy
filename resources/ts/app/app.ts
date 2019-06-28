@@ -17,13 +17,11 @@ import AjaxLoader from './components/AjaxLoader/index.vue'
 
 // Directives
 import like from './directives/Like'
-import ajaxload from './directives/AjaxLoad'
 
 const app = new Vue({
     directives: {
         like: like,
-        ajaxload: ajaxload
-        // highlight: highlight
+        // sticky: sticky,
     },
     components: {
         BackTop: BackTop,

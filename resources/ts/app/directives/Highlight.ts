@@ -15,9 +15,9 @@ require('prismjs/components/prism-bash');
 
 const highlightDirective: DirectiveOptions = {
   bind: (el: HTMLElement, binding: DirectiveBinding, vnode: VNode, oldVnode: VNode) => {
-    let blocks = el.querySelectorAll('pre code')
+    let blocks = el.querySelectorAll('pre code');
     blocks.forEach((block) => {
-      Prism.highlightElement(block)
+      Prism.highlightElement(block);
     })
   },
 };

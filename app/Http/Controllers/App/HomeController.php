@@ -19,11 +19,13 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param Request $request
+     *
      * @return Response
      */
     public function home(Request $request)
     {
-        $articles = Article::with(['category'])->paginate();
+        $articles = Article::with(['category'])->paginate(12);
         if ($request->query('isAjax')) {
             return view('components.articles.small', compact('articles'));
         }
@@ -36,7 +38,7 @@ class HomeController extends Controller
             $count++;
         }
         $slideBg = cdnPath('images/bg.jpg');
-        return view('home', compact('slides', 'articles', 'slideBg'));
+        return view('pages.home', compact('slides', 'articles', 'slideBg'));
     }
 
     /**
@@ -68,19 +70,19 @@ class HomeController extends Controller
     {
         $search = trim($request->q);
 
-        $articles = Article::where('title', 'like', '%' . $search . '%')
+        $articles = Article::where('title', 'like', '%'.$search.'%')
             ->orWhereHas('tags', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })
             ->orWhereHas('category', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })
             ->orWhereHas('topics', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })
             ->paginate();
 
-        $cacheKey = $request->ip() . $search;
+        $cacheKey = $request->ip().$search;
         $hasSearch = Cache::get($cacheKey, false);
         if (!$hasSearch) {
             SearchHistory::firstOrCreate([

@@ -13,20 +13,24 @@ import BackTop from './components/BackTop/index.vue'
 import SideBar from './components/SideBar/index.vue'
 import ArticleContent from './components/ArticleContent/index.vue'
 import Modal from './components/Modal/index.vue'
+import AjaxLoader from './components/AjaxLoader/index.vue'
 
 // Directives
-import like from './directives/like'
+import like from './directives/Like'
+import ajaxload from './directives/AjaxLoad'
 
 const app = new Vue({
     directives: {
-        like: like
+        like: like,
+        ajaxload: ajaxload
         // highlight: highlight
     },
     components: {
         BackTop: BackTop,
         Modal: Modal,
         SideBar: SideBar,
-        ArticleContent: ArticleContent
+        ArticleContent: ArticleContent,
+        AjaxLoader: AjaxLoader
     },
     data() {
         return {
@@ -35,7 +39,7 @@ const app = new Vue({
         }
     },
     methods: {
-       
+
     }
 }).$mount('#app')
 

@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
-use Laravel\Scout\Searchable;
 
 /**
  * Class Article
@@ -26,7 +25,7 @@ use Laravel\Scout\Searchable;
  */
 class Article extends Model
 {
-    use Sluggable, Menuable, Likable, Searchable;
+    use Sluggable, Menuable, Likable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,19 +42,6 @@ class Article extends Model
     protected $dates = [
         'published_at',
     ];
-
-    /**
-     * @return mixed
-     */
-    public function getScoutKey()
-    {
-        return $this->slug;
-    }
-
-    public function shouldBeSearchable()
-    {
-        return $this->where('status', 'published');
-    }
 
     /**
      * @return void

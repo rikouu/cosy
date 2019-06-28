@@ -6,7 +6,6 @@ use App\Facades\Blog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use App\Models\Article;
-use App\Models\Search;
 use App\Models\SearchHistory;
 use App\Models\Slide;
 use Illuminate\Http\Response;
@@ -67,9 +66,10 @@ class HomeController extends Controller
     {
         $query = trim($request->q);
 
-        $articles = Article::where('title', 'like', '%' . $query . '%')->paginate();
+        $articles = Article::search($query)->paginate();
 
-        $cacheKey = $request->ip() . $query;
+        dd($articles);
+        $cacheKey = $request->ip().$query;
         $hasSearch = Cache::get($cacheKey, false);
         if (!$hasSearch) {
             SearchHistory::firstOrCreate([

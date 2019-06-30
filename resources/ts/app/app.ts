@@ -4,13 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import Vue, { ComponentOptions } from 'vue'
-
-require('./bootstrap');
+import Vue from 'vue'
+import axios from 'axios'
 
 // Components
 import BackTop from './components/BackTop/index.vue'
-import SideBar from './components/SideBar/index.vue'
 import ArticleContent from './components/ArticleContent/index.vue'
 import Modal from './components/Modal/index.vue'
 import AjaxLoader from './components/AjaxLoader/index.vue'
@@ -18,27 +16,49 @@ import AjaxLoader from './components/AjaxLoader/index.vue'
 // Directives
 import like from './directives/Like'
 
-const app = new Vue({
-    directives: {
-        like: like,
-        // sticky: sticky,
-    },
-    components: {
-        BackTop: BackTop,
-        Modal: Modal,
-        SideBar: SideBar,
-        ArticleContent: ArticleContent,
-        AjaxLoader: AjaxLoader
-    },
-    data() {
-        return {
-            showSearchModal: false,
-            showAuthorModal: false,
-        }
-    },
-    methods: {
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+let token: HTMLMetaElement | null = document.head.querySelector('meta[name="csrf-token"]')
 
+if (document && document.head && document.head.querySelector('meta[name="csrf-token"]')) {
+  token = document.head.querySelector('meta[name="csrf-token"]')
+}
+
+if (token) {
+  axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token')
+}
+
+const app = new Vue({
+  directives: {
+    like: like
+    // sticky: sticky,
+  },
+  components: {
+    BackTop: BackTop,
+    Modal: Modal,
+    ArticleContent: ArticleContent,
+    AjaxLoader: AjaxLoader
+  },
+  data () {
+    return {
+      showSearchModal: false,
+      showAuthorModal: false
     }
+  },
+  created () {
+    addEventListener('DOMContentLoaded', function () {
+      if (window.pageYOffset > 0) {
+        setTimeout(() => {
+          window.scrollTo(0, 0)
+          document.body.scrollTop = 0
+        }, 100)
+      }
+    }, false)
+  },
+  methods: {
+
+  }
 }).$mount('#app')
 
 export default app

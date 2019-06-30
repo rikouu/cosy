@@ -1,6 +1,6 @@
 
-import Vue, { VNode } from "vue";
-import { DirectiveBinding, DirectiveOptions } from "vue/types/options";
+import Vue, { VNode } from 'vue'
+import { DirectiveBinding, DirectiveOptions } from 'vue/types/options'
 import axios from 'axios'
 
 import { Toast } from '../components/Toast/Toast'
@@ -26,16 +26,16 @@ const likeDirective: DirectiveOptions = {
           })
 
           if (isLike) {
-            Toast('谢谢点赞', 'success');
+            Toast('谢谢点赞', 'success')
           } else {
-            Toast('取消点赞', 'error');
+            Toast('取消点赞', 'error')
           }
         })
         .catch(error => {
           Toast(error.message, 'error')
-        });
+        })
     }, false)
-  },
-};
+  }
+}
 
-export default likeDirective;
+export default likeDirective

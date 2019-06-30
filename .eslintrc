@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "plugin:vue/essential",
+    "@vue/standard",
+    "@vue/typescript"
+  ],
+  "rules": {
+    "no-console": "off",
+    "no-debugger": "off",
+    "properties": "never",
+    "interface-name": false
+  },
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  }
+}

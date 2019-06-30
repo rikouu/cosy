@@ -1,6 +1,6 @@
 <template>
-  <div v-if="show">
-    <div class="cosy-tips" :class="tipClass.concat(sizeClass)">
+  <div>
+    <div v-if="show" class="cosy-tips" :class="tipClass.concat(sizeClass)">
       <div class="cosy-tips-overlay" :style="maskStyle" @click="handleClose"></div>
       <div class="cosy-tips-body">
         <div class="cosy-tips-content">
@@ -31,60 +31,64 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 
 @Component({})
 export default class Modal extends Vue {
   @Prop({
     type: String,
     default: () => {
-      return "full";
+      return 'full'
     }
   })
   public size?: string;
 
   protected maskStyle: object = {};
 
-  protected tipClass: Array<string> = [""];
+  protected tipClass: Array<string> = [''];
 
   @Prop({ type: Boolean, default: false })
   public show: Boolean = false;
 
-  @Watch("show")
-  onShowChanged(val: Boolean, oldVal: Boolean) {
+  @Watch('show')
+  onShowChanged (val: Boolean, oldVal: Boolean) {
     if (val === true) {
-      document.body.classList.add("modal-open");
-      this.tipClass.push("cosy-tips-open");
+      document.body.classList.add('modal-open')
+      this.tipClass.push('cosy-tips-open')
     }
   }
 
-  protected get sizeClass() {
-    const classList: Array<string> = [];
-    const classMap: { [index: string]: any; } = {
-      'big': 'cosy-tips-lg',
+  protected get sizeClass () {
+    const classList: Array<string> = []
+    const classMap: { [index: string]: any } = {
+      big: 'cosy-tips-lg',
       'no-padding': 'cosy-tips-nopd',
-      'cover': 'cosy-tips-cover cosy-tips-nopd',
-      'full': 'cosy-tips-xl',
-      'small': 'cosy-tips-sm',
+      cover: 'cosy-tips-cover cosy-tips-nopd',
+      full: 'cosy-tips-xl',
+      small: 'cosy-tips-sm'
     }
 
     if (this.size && classMap[this.size!] !== undefined) {
-      classList.push(classMap[this.size!]);
-    } 
-    return classList;
+      classList.push(classMap[this.size!])
+    }
+    return classList
   }
 
-  public handleClose() {
-    document.body.classList.remove("modal-open");
+  public mounted () {
+    console.log(this.$el.classList.remove('d-none'))
+  }
+
+  public handleClose () {
+    document.body.classList.remove('modal-open')
     this.tipClass.splice(
-      this.tipClass.indexOf("cosy-tips-open"),
+      this.tipClass.indexOf('cosy-tips-open'),
       1,
-      "cosy-tips-close"
-    );
+      'cosy-tips-close'
+    )
     setTimeout(() => {
-      this.tipClass.splice(this.tipClass.indexOf("cosy-tips-close"), 1);
-      this.$emit("update:show", false);
-    }, 120);
+      this.tipClass.splice(this.tipClass.indexOf('cosy-tips-close'), 1)
+      this.$emit('update:show', false)
+    }, 120)
   }
 }
 </script>

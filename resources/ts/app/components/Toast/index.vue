@@ -59,37 +59,36 @@
   </section>
 </template>
 
-
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 
 @Component({})
 export default class Toast extends Vue {
-  public message = "";
+  public message = '';
 
-  public type = "success";
+  public type = 'success';
 
   public time = 2000;
 
-  protected tipClass: String = "cosy-tips-open";
+  protected tipClass: String = 'cosy-tips-open';
 
-  public created() {
-    this.tipClass = "cosy-tips-open";
+  public created () {
+    this.tipClass = 'cosy-tips-open'
   }
 
-  public mounted() {
-    document.body.classList.add("modal-open");
+  public mounted () {
+    document.body.classList.add('modal-open')
 
     setTimeout(() => {
-      document.body.classList.remove("modal-open");
-      this.tipClass = "cosy-tips-close";
+      document.body.classList.remove('modal-open')
+      this.tipClass = 'cosy-tips-close'
       setTimeout(() => {
-        this.tipClass = '';
+        this.tipClass = ''
         setTimeout(() => {
-          this.$el.remove();
-        }, 200);
-      }, 400);
-    }, this.time);
+          this.$el.remove()
+        }, 200)
+      }, 400)
+    }, this.time)
   }
 }
 </script>

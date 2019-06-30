@@ -18,9 +18,15 @@
       "types"
     ],
     "paths": {
+      "app/*": [
+        "resources/ts/app/*"
+      ],
+      "admin/*": [
+        "resources/ts/admin/*"
+      ],
       "@/*": [
-        "resources/ts/*"
-      ]
+        "resources/ts/admin/*"
+      ],
     },
     "lib": [
       "esnext",
@@ -32,7 +38,7 @@
   "include": [
     "resources/ts/**/*.ts",
     "resources/ts/**/*.tsx",
-    "resources/ts/**/*.vue", "resources/ts/app/utils/vue-pjax.js"
+    "resources/ts/**/*.vue",
   ],
   "exclude": [
     "node_modules"

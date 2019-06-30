@@ -1,7 +1,6 @@
-const mix = require('laravel-mix');
-const webpack = require('webpack');
-const liveReloadPlugin = require('webpack-livereload-plugin');
-const path = require('path');
+const mix = require('laravel-mix')
+const webpack = require('webpack')
+const path = require('path')
 
 /*
  |--------------------------------------------------------------------------
@@ -14,16 +13,14 @@ const path = require('path');
  |
  */
 
-
 mix.webpackConfig({
   plugins: [
-    new liveReloadPlugin(),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   resolve: {
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.ts', '.tsx', '.vue'],
     alias: {
-      '@': path.resolve(__dirname, 'resources/ts'),
+      '@': path.resolve(__dirname, 'resources/ts/admin')
     }
   },
   module: {
@@ -32,9 +29,9 @@ mix.webpackConfig({
         test: /\.tsx?$/,
         loader: 'ts-loader',
         options: {
-          appendTsSuffixTo: [/\.vue$/],
+          appendTsSuffixTo: [/\.vue$/]
         },
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.less$/,
@@ -43,20 +40,18 @@ mix.webpackConfig({
           javascriptEnabled: true
         }
       }
-    ],
+    ]
   }
-});
+})
 
 mix
   .options({
     extractVueStyle: true,
-    autoprefixer: {},
+    autoprefixer: {}
   })
   .less('resources/less/app/app.less', 'public/css/app.css')
-  .less('resources/less/app/auth.less', 'public/css/auth.css')
   .less('resources/less/admin/admin.less', 'public/css/admin.css')
-  .ts('resources/ts/admin/admin.ts', 'public/js/admin.js')
   .ts('resources/ts/app/app.ts', 'public/js/app.js')
+  .ts('resources/ts/admin/admin.ts', 'public/js/admin.js')
   .version()
-  .disableSuccessNotifications();
-
+  .disableSuccessNotifications()

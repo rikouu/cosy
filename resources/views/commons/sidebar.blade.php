@@ -1,7 +1,7 @@
 @php
     $articles = Blog::convergence($article);
 @endphp
-<aside v-sticky id="sidebar" class="widget-area pt-5 pt-lg-0">
+<aside id="sidebar" class="widget-area pt-5 pt-lg-0">
     <section id="search-2" class="widget widget_search">
         <form role="search" method="get" class="searchform" action="{{ route('search') }}">
             <div class="search-input form-group m-0">

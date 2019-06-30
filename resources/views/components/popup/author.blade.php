@@ -1,4 +1,4 @@
-<modal :show.sync="showAuthorModal" size="no-padding">
+<modal class="d-none"  :show.sync="showAuthorModal" size="no-padding">
     <div class="author-popup-cover">
         <div class="media media-16x9 bg-dark-gradient">
             <div class="bg-effect bg-dark-gradient bg-author"></div>

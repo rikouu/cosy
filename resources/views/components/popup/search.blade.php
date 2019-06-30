@@ -2,7 +2,7 @@
     $searchTop = Blog::searchTop();
 @endphp
 
-<modal :show.sync="showSearchModal">
+<modal class="d-none" :show.sync="showSearchModal">
     <div class="search-popup-cover bg-light px-3 px-lg-5 py-5">
         <div class="bg-effect bg-cover nc-no-lazy" style="background-image: url('{{ cdnImage('images/bg-2.jpg') }}')">
             <span class="overlay"></span>

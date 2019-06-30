@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
-
 // 首页
 Route::get('/', 'App\HomeController@home');
 
@@ -27,19 +25,19 @@ Route::get('history', 'App\HomeController@history')->name('history');
 Route::get('search/{q?}', 'App\HomeController@search')->name('search');
 
 // 作者页
-Route::match(['get', 'post'], 'author/{slug}', 'App\UserController@show')->name('user.show');
+Route::get('author/{slug}', 'App\UserController@show')->name('user.show');
 
 // 分类页
-Route::match(['get', 'post'], 'category/{slug}', 'App\CategoryController@show')->name('category.show');
-Route::match(['get', 'post'], 'category', 'App\CategoryController@index')->name('category.index');
+Route::get('category/{slug}', 'App\CategoryController@show')->name('category.show');
+Route::get('category', 'App\CategoryController@index')->name('category.index');
 
 // 标签页
-Route::match(['get', 'post'], 'tag/{slug}', 'App\TagController@show')->name('tag.show');
-Route::match(['get', 'post'], 'tag', 'App\TagController@index')->name('tag.index');
+Route::get('tag/{slug}', 'App\TagController@show')->name('tag.show');
+Route::get('tag', 'App\TagController@index')->name('tag.index');
 
 // 专题页
-Route::match(['get', 'post'], 'topic/{slug}', 'App\TopicController@show')->name('topic.show');
-Route::match(['get', 'post'], 'topic', 'App\TopicController@index')->name('topic.index');
+Route::get('topic/{slug}', 'App\TopicController@show')->name('topic.show');
+Route::get('topic', 'App\TopicController@index')->name('topic.index');
 
 // 文章页
 Route::get('{slug}.html', 'App\ArticleController@show')->name('article.show');
@@ -47,10 +45,6 @@ Route::get('random-article', 'App\ArticleController@randomArticle')->name('artic
 
 // Site Map
 Route::get('sitemap', 'App\HomeController@siteMap')->name('sitemap');
-Route::get('sitemap.xml', 'App\HomeController@siteMap');
-
-// 搜索页
-Route::match(['get', 'post'], 'search', 'App\HomeController@search')->name('search');
 
 // 幻灯片
 Route::get('slide/{id}', 'App\SlideController@show')->name('slide.show');

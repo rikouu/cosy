@@ -5,63 +5,65 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
 export default class BackTop extends Vue {
   protected active: Boolean = false;
 
-  protected scrollToTop() {
-    let el = document.documentElement;
-    const scrollTop = el.scrollTop;
-    let step = 0;
-    const stepLength = Math.max(scrollTop / 512, 10);
+  protected scrollToTop () {
+    let el = document.documentElement
+    const scrollTop = el.scrollTop
+    let step = 0
+    const stepLength = Math.max(scrollTop / 512, 10)
     let interval = setInterval(() => {
       if (el.scrollTop <= 0) {
-        clearInterval(interval);
+        clearInterval(interval)
       } else {
-        step += stepLength;
-        el.scrollTop -= step;
+        step += stepLength
+        el.scrollTop -= step
       }
-    }, 20);
+    }, 20)
   }
 
-  protected handleScroll() {
+  protected handleScroll () {
     const windowW =
-      document.documentElement.clientWidth || document.body.clientWidth;
+      document.documentElement.clientWidth || document.body.clientWidth
     const windowH =
-      document.documentElement.clientHeight || document.body.clientHeight;
+      document.documentElement.clientHeight || document.body.clientHeight
     const scrollTop =
       window.pageYOffset ||
       document.body.scrollTop ||
-      document.documentElement.scrollTop;
+      document.documentElement.scrollTop
 
-    const startPoint = windowH / 3;
+    const startPoint = windowH / 3
 
-    const el = document.querySelector(".fixed-top");
+    const el = document.querySelector('.fixed-top')
     if (el !== null) {
       if (scrollTop > 72) {
-        el.classList.add("scroll");
+        el.classList.add('scroll')
       } else {
-        el.classList.remove("scroll");
+        el.classList.remove('scroll')
       }
     }
-    this.active = scrollTop >= startPoint && windowW >= 1024;
+    this.active = scrollTop >= startPoint && windowW >= 1024
   }
 
-  public created() {
-    window.addEventListener("scroll", this.handleScroll);
-    this.handleScroll();
+  public mounted () {
+    this.handleScroll()
   }
 
-  public destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
+  public created () {
+    window.addEventListener('scroll', this.handleScroll)
+  }
+
+  public destroyed () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
 
 <style lang="less" scoped>
-
 .back-to-top {
   position: fixed;
   width: 48px;

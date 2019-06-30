@@ -2,15 +2,21 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import i18n from './locales'
 
-Vue.config.productionTip = false;
+import bootstrap from './bootstrap'
 
-Vue.config.devtools = false;
+Vue.config.productionTip = false
+
+bootstrap()
 
 const app = new Vue({
   router,
+  i18n,
   store,
+  created () {
+  },
   render: h => h(App)
-}).$mount('#app');
+}).$mount('#app')
 
- export default app;
+export default app

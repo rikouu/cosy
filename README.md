@@ -1,4 +1,4 @@
-# cosy
+# Cosy
 
 [![Build Status](https://travis-ci.com/loyep/cosy.svg?token=YhCvPgf5uspm18kxdLkJ&branch=master)](https://travis-ci.com/loyep/cosy)
 [![StyleCI](https://github.styleci.io/repos/175727773/shield?branch=master)](https://github.styleci.io/repos/175727773)

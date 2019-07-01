@@ -18,21 +18,13 @@ mix.webpackConfig({
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   resolve: {
-    extensions: ['.ts', '.tsx', '.vue'],
+    extensions: ['.js', '.jsx', '.vue'],
     alias: {
-      '@': path.resolve(__dirname, 'resources/ts/admin')
+      '@': path.resolve(__dirname, 'resources/js/admin')
     }
   },
   module: {
     rules: [
-      {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
-        options: {
-          appendTsSuffixTo: [/\.vue$/]
-        },
-        exclude: /node_modules/
-      },
       {
         test: /\.less$/,
         loader: require.resolve('less-loader'), // compiles Less to CSS
@@ -51,7 +43,7 @@ mix
   })
   .less('resources/less/app/app.less', 'public/css/app.css')
   .less('resources/less/admin/admin.less', 'public/css/admin.css')
-  .ts('resources/ts/app/app.ts', 'public/js/app.js')
-  .ts('resources/ts/admin/admin.ts', 'public/js/admin.js')
+  .js('resources/js/app/app.js', 'public/js/app.js')
+  .js('resources/js/admin/admin.js', 'public/js/admin.js')
   .version()
   .disableSuccessNotifications()

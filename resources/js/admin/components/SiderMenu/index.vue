@@ -9,8 +9,8 @@ export default {
     ADrawer: Drawer
   },
   render (createElement) {
-    const isMobile = true
-    const collapsed = false
+    const isMobile = false
+    const collapsed = true
     return isMobile ? (
       <ADrawer
         {...{

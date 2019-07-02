@@ -1,18 +1,37 @@
 <template>
   <div class="global-header">
-    <a class="global-header-logo" key="logo"><img :src="logo" alt="logo" /></a>
-    {this.renderCollapsedButton()}
-    {rightContentRender && rightContentRender(this.props)}
+    <a v-if="isMobile" class="global-header-logo" alt="logo">
+      <img :src="logo" alt="logo">
+    </a>
+
+    <span class="global-header-trigger" @click="toggle">
+      <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'"/>
+    </span>
+    <!-- {rightContentRender && rightContentRender(this.props)} -->
   </div>
 </template>
 
 <script>
 import logo from '@/assets/images/logo.png'
+import { Icon } from 'ant-design-vue'
 export default {
+  components: {
+    AIcon: Icon
+  },
+  props: {
+    collapsed: {
+      type: Boolean,
+      default: true
+    }
+  },
   data () {
     return {
-      logo: logo
+      logo: logo,
+      isMobile: false
     }
+  },
+  methods: {
+    toggle () {}
   }
 }
 </script>

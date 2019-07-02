@@ -1,8 +1,12 @@
 <template >
   <a-layout>
-    <SiderMenu />
+    <SiderMenu/>
     <a-layout :style="{ minHeight: '100vh' }">
-      <base-header ></base-header>
+      <base-header>
+        <template v-slot:right>
+          <p>Here's some contact info</p>
+        </template>
+      </base-header>
       <!-- <router-view></router-view> -->
     </a-layout>
   </a-layout>

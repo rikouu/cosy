@@ -1,5 +1,9 @@
 <template>
-  <a-layout-header v-if="visible">
+  <a-layout-header
+    v-if="visible"
+    :class="{ 'fixedHeader': fixedHeader  }"
+    :style="{ padding: 0, width: getHeadWidth(), zIndex: 2 }"
+  >
     <global-header></global-header>
   </a-layout-header>
 </template>
@@ -17,37 +21,40 @@ export default {
     visible: {
       type: Boolean,
       default: true
+    },
+    collapsed: {
+      type: Boolean,
+      default: true
+    },
+    fixedHeader: {
+      type: Boolean,
+      default: true
+    },
+    layout: {
+      type: String,
+      default: function () {
+        return 'topmenu'
+      }
+    },
+    siderWidth: {
+      type: Number,
+      default: 256
     }
   },
-  computed: {
-    headWidth () {
-      const {
-        isMobile,
-        collapsed,
-        fixedHeader,
-        layout,
-        siderWidth = 256
-      } = this.props
-      if (isMobile || !fixedHeader || layout === 'topmenu') {
+  data () {
+    return {
+      isMobile: false
+
+    }
+  },
+  computed: {},
+  methods: {
+    getHeadWidth () {
+      if (this.isMobile || !this.fixedHeader || this.layout === 'topmenu') {
         return '100%'
       }
-      return collapsed ? 'calc(100% - 80px)' : `calc(100% - ${siderWidth}px)`
+      return this.collapsed ? 'calc(100% - 80px)' : `calc(100% - ${this.siderWidth}px)`
     }
-  },
-  render (createElement) {
-    const width = this.headWidth
-    const fixedHeader = true
-    const visible = true
-    return visible ? (
-      <Header
-        {...{
-          style: { padding: 0, width, zIndex: 2 },
-          class: fixedHeader ? 'fixedHeader' : ''
-        }}
-      >
-        s
-      </Header>
-    ) : null
   }
 }
 </script>

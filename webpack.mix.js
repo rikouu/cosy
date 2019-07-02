@@ -36,14 +36,23 @@ mix.webpackConfig({
   }
 })
 
+mix.webpackConfig({
+  output: {
+    chunkFilename: `js/[name]${
+      mix.inProduction() ? '.[chunkhash].js' : '.chunk.js'
+    }`,
+    publicPath: '/'
+  }
+})
+
 mix
   .options({
     extractVueStyle: true,
     autoprefixer: {}
   })
-  .less('resources/less/app/app.less', 'public/css/app.css')
   .less('resources/less/admin/admin.less', 'public/css/admin.css')
-  .js('resources/js/app/app.js', 'public/js/app.js')
   .js('resources/js/admin/admin.js', 'public/js/admin.js')
+  .less('resources/less/app/app.less', 'public/css/app.css')
+  .js('resources/js/app/app.js', 'public/js/app.js')
   .version()
   .disableSuccessNotifications()

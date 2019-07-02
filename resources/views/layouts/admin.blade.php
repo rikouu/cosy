@@ -6,6 +6,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Cosy') }}</title>
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <script>
+        window.config = { base: '/admin'}
+    </script>
 </head>
 <body>
 <div id="app"></div>

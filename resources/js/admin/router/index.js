@@ -1,21 +1,25 @@
-import store from '@/store'
+// import store from '@/store'
 import Router from 'vue-router'
 import routes from './routes'
 import NProgress from 'nprogress'
 
-const router = createRouter({ base: window.config.base })
+import Vue from 'vue'
 
-router.beforeResolve(beforeResolve)
+Vue.use(Router)
+
+const router = createRouter(window.config.base)
+
+router.beforeEach(beforeEach)
 router.afterEach(afterEach)
 
 export default router
 
-async function beforeResolve (to, from, next) {
+async function beforeEach (to, from, next) {
+  next()
   NProgress.start()
 }
 
-async function afterEach (to, from, next) {
-  await router.app.$nextTick()
+async function afterEach (to, from) {
   NProgress.done()
 }
 
@@ -42,9 +46,9 @@ function scrollBehavior (to, from, savedPosition) {
  */
 function createRouter (base) {
   const router = new Router({
-    base,
+    base: base,
     scrollBehavior,
-    mode: 'history',
+    // mode: 'history',
     routes
   })
 

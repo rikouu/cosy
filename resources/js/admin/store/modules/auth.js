@@ -3,7 +3,7 @@ import { getToken, removeToken, setToken } from '@/utils/auth'
 
 // state
 export const state = {
-  user: undefined,
+  user: null,
   token: getToken(),
   roles: []
 }
@@ -14,11 +14,11 @@ export const mutations = {
     state.token = token
   },
   LOGOUT: (state) => {
-    state.token = undefined
+    state.token = null
     state.roles = []
     /// 防止个人头像退出的瞬间获取不到
     setTimeout(() => {
-      state.user = undefined
+      state.user = {}
     }, 100)
     removeToken()
   },
@@ -33,19 +33,20 @@ export const mutations = {
 export const actions = {
   // 将刷新的 token 保存至本地
   RefreshToken ({ commit }, token) {
-    commit('SET_TOKEN', token)
+    return new Promise((resolve, reject) => {
+      commit('SET_TOKEN', token)
+    })
   },
   // 注册
   Register ({ commit }, userInfo) {
     return new Promise((resolve, reject) => {
-      register(userInfo).then(res => {
-        const { data } = res.data
-
+      register(userInfo).then(response => {
+        const data = response.data
         if (data.token) {
           commit('SET_TOKEN', data.token)
-          resolve(res)
+          resolve(response)
         } else {
-          reject(res.data.errors)
+          reject(new Error())
         }
       }).catch(error => {
         reject(error)
@@ -55,14 +56,13 @@ export const actions = {
   // 登录
   Login ({ commit }, userInfo) {
     return new Promise((resolve, reject) => {
-      login(userInfo).then(res => {
-        const { data, errors } = res.data
-
-        if (data && data.token) {
+      login(userInfo).then(response => {
+        const data = response.data
+        if (data.token) {
           commit('SET_TOKEN', data.token)
-          resolve(res)
+          resolve(response)
         } else {
-          reject(errors)
+          reject(new Error())
         }
       }).catch(error => {
         reject(error)
@@ -72,28 +72,25 @@ export const actions = {
   // 获取用户信息
   GetInfo ({ commit }) {
     return new Promise((resolve, reject) => {
-      getInfo().then(res => {
-        const { data } = res.data
+      getInfo().then(response => {
+        const data = response.data
 
-        // 验证返回的roles是否是一个非空数组
-        if (data && data.roles && data.roles.length > 0) {
+        if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
           commit('SET_ROLES', data.roles)
         } else {
-          reject(new Error(data.errors))
+          reject(new Error('getInfo: roles must be a non-null array !'))
         }
-
         commit('UPDATE_USER', data)
-
-        resolve(res.data)
+        resolve(response)
       }).catch(error => {
         reject(error)
       })
     })
   },
   // 登出
-  Logout ({ commit }) {
+  Logout ({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout().then(() => {
+      logout(state.token).then(() => {
         commit('LOGOUT')
         resolve()
       }).catch(() => {
@@ -110,13 +107,3 @@ export const getters = {
   token: state => state.token,
   roles: state => state.roles
 }
-
-const auth = {
-  namespaced: true,
-  state: state,
-  actions: actions,
-  mutations: mutations,
-  getters: getters
-}
-
-export default auth

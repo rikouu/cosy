@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{yJtv:function(n,e,t){"use strict";t.r(e);var s={name:"Index"},i=t("KHd+"),c=Object(i.a)(s,function(){var n=this.$createElement;return(this._self._c||n)("div",[this._v("\n  Permission Index\n")])},[],!1,null,"673bc653",null);e.default=c.exports}}]);

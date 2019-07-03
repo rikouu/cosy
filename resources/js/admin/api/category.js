@@ -1,17 +1,10 @@
 import request from '@/utils/request'
 
-export function getList (params) {
+export function index (params) {
   return request({
     url: '/category',
     method: 'get',
     params
-  })
-}
-
-export function show (id) {
-  return request({
-    url: '/category/' + id,
-    method: 'get'
   })
 }
 
@@ -23,17 +16,19 @@ export function store (data) {
   })
 }
 
-export function update (id, data) {
+export function update (data) {
+  const id = data.id
   return request({
-    url: '/category/' + id,
-    method: 'put',
+    url: `/category/${id}`,
+    method: 'post',
     data
   })
 }
 
-export function destroy (id) {
+export function destroy (data) {
+  const id = data.id
   return request({
-    url: '/category/' + id,
+    url: `/category/${id}`,
     method: 'delete'
   })
 }

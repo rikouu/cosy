@@ -1,105 +1,129 @@
 <template>
-  <div class="global-header">
-    <a v-if="isMobile" class="global-header-logo" alt="logo">
-      <img :src="logo" alt="logo">
-    </a>
-
-    <span class="global-header-trigger" @click="toggle">
-      <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'"/>
+  <div class="header">
+    <router-link v-if="isMobile" class="logo" :to="{path:'/'}">
+      <img src="~@/assets/images/logo.svg" alt="logo" width="32">
+    </router-link>
+    <span class="trigger" @click="toggle">
+      <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
     </span>
-    <!-- {rightContentRender && rightContentRender(this.props)} -->
+    <right-content />
   </div>
 </template>
 
 <script>
-import logo from '@/assets/images/logo.png'
-import { Icon } from 'ant-design-vue'
+import RightContent from './RightContent'
+import { themeMixin } from '@/mixins'
+
 export default {
+  name: 'GlobalHeader',
   components: {
-    AIcon: Icon
+    RightContent
   },
+  mixins: [
+    themeMixin
+  ],
   props: {
     collapsed: {
       type: Boolean,
-      default: true
+      required: false,
+      default: false
     }
-  },
-  data () {
-    return {
-      logo: logo,
-      isMobile: false
-    }
+    // collapse: {
+    //   type: Function,
+    //   required: true
+    // }
   },
   methods: {
-    toggle () {}
+    toggle () {
+      this.$emit('collapse', !this.collapsed)
+      // this.collapse(!this.collapsed)
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
-@import "~ant-design-vue/es/style/themes/default";
+@import '~@/styles/variables.less';
 
-@pro-header-bg: @component-background;
-@pro-header-hover-bg: @component-background;
-@pro-header-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-
-.global-header {
+.header {
   position: relative;
   height: @layout-header-height;
   padding: 0;
-  background: @pro-header-bg;
-  box-shadow: @pro-header-box-shadow;
+  font-size: 0;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+}
 
-  &-logo {
+.logo {
+  display: inline-block;
+  height: @layout-header-height;
+  padding: 0 0 0 24px;
+  font-size: 20px;
+  line-height: @layout-header-height;
+  vertical-align: top;
+  cursor: pointer;
+  img {
     display: inline-block;
-    height: @layout-header-height;
-    padding: 0 0 0 24px;
-    font-size: 20px;
-    line-height: @layout-header-height;
-    vertical-align: top;
-    cursor: pointer;
-    img {
-      display: inline-block;
-      width: 32px;
-      vertical-align: middle;
-    }
+    vertical-align: middle;
+  }
+}
+
+.trigger {
+  height: @layout-header-height;
+  padding: ~'calc((@{layout-header-height} - 20px) / 2)' 24px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s, padding 0s;
+  &:hover {
+    background: @pro-header-hover-bg;
   }
 
-  &-menu {
-    .anticon {
-      margin-right: 8px;
-    }
-    .ant-dropdown-menu-item {
-      min-width: 160px;
-    }
+  @media only screen and (max-width: @screen-md) {
+    padding: 22px 24px;
   }
+}
 
-  &-trigger {
-    height: @layout-header-height;
-    padding: ~"calc((@{layout-header-height} - 26px) / 2)" 24px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.3s, padding 0s;
-    &:hover {
-      background: @pro-header-hover-bg;
-    }
-  }
-
-  .dark {
-    height: @layout-header-height;
-    .action {
+.dark {
+  height: @layout-header-height;
+  .action {
+    color: rgba(255, 255, 255, 0.85);
+    > i {
       color: rgba(255, 255, 255, 0.85);
-      > i {
-        color: rgba(255, 255, 255, 0.85);
-      }
-      &:hover,
-      &.opened {
-        background: @primary-color;
-      }
-      .ant-badge {
-        color: rgba(255, 255, 255, 0.85);
+    }
+    &:hover {
+      background: @primary-color;
+    }
+  }
+}
+
+@media only screen and (max-width: @screen-md) {
+  .header {
+    :global(.ant-divider-vertical) {
+      vertical-align: unset;
+    }
+    .name {
+      display: none;
+    }
+    i.trigger {
+      padding: 22px 12px;
+    }
+    .logo {
+      padding-left: 12px;
+      padding-right: 12px;
+      position: relative;
+    }
+    .right {
+      position: absolute;
+      right: 12px;
+      top: 0;
+      background: #fff;
+      .account {
+        .avatar {
+          margin-right: 0;
+        }
       }
     }
   }
 }
+
 </style>

@@ -2,7 +2,7 @@ import VueStorage from 'vue-ls'
 import Vue from 'vue'
 
 Vue.use(VueStorage, {
-  namespace: 'prism__', // key prefix
+  namespace: 'grace__', // key prefix
   name: 'ls', // name variable Vue.[ls] or this.[$ls],
   storage: 'local' // storage name session, local, memory
 })
@@ -13,45 +13,33 @@ Vue.use(VueStorage, {
  * @param content
  * @param expires 1 week
  */
-export function setStore (name, value, expire = 604800) {
-  const stringifyValue = JSON.stringify({
-    value,
-    expire: expire !== null ? new Date().getTime() + expire * 1000 : null
-  })
-
-  localStorage.setItem(name, stringifyValue)
+export const setStore = (key, content, expires = 604800) => {
+  if (typeof content !== 'string') {
+    content = JSON.stringify(content)
+  }
+  Vue.ls.set(key, content, expires * 1000)
 }
 
-export function getStore (name, def = null) {
-  const item = localStorage.getItem(name)
-
-  if (item !== null) {
+export const getStore = (key, def = null) => {
+  let content = Vue.ls.get(key)
+  if (content !== null && content !== undefined) {
     try {
-      const data = JSON.parse(item)
-
-      if (data.expire === null) {
-        return data.value
-      }
-
-      if (data.expire >= new Date().getTime()) {
-        return data.value
-      }
-
-      localStorage.remove(name)
-    } catch (err) {
-      return def
+      content = JSON.parse(content)
+    } catch (e) {
+      return content
     }
+    return content
   }
 
   return def
 }
 
-export function removeStore (name) {
-  localStorage.removeItem(name)
+export const removeStore = (key) => {
+  Vue.ls.remove(key)
 }
 
-export function clearStore () {
-  localStorage.clear()
+export const clearStore = () => {
+  Vue.ls.clear()
 }
 
 const Storage = {

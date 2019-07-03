@@ -18,13 +18,11 @@ export const actions = {
     return new Promise(resolve => {
       const { roles } = data
       let accessedRouters
-
       if (roles.includes('admin')) {
         accessedRouters = asyncRouterMap
       } else {
         accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
       }
-
       commit('SET_ROUTERS', accessedRouters)
       resolve()
     })
@@ -35,13 +33,3 @@ export const getters = {
   addRouters: state => state.addRouters,
   routers: state => state.routers
 }
-
-const permission = {
-  namespaced: true,
-  state: state,
-  actions: actions,
-  mutations: mutations,
-  getters: getters
-}
-
-export default permission

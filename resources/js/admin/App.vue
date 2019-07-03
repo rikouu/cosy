@@ -1,29 +1,40 @@
 <template>
-  <a-locale-provider :locale="locale">
+  <locale-provider :locale="locale">
     <div id="app">
-      <router-view />
+      <loading />
+      <router-view v-if="isRouterAlive" />
     </div>
-  </a-locale-provider>
+  </locale-provider>
 </template>
 
 <script>
-import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
-import { LocaleProvider } from 'ant-design-vue';
-import { deviceEnquire } from '@/utils/device';
+import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
+import { LocaleProvider } from 'ant-design-vue'
+import Loading from '@/components/Loading'
+import { deviceEnquire } from '@/utils/device'
 
 export default {
   name: 'App',
   components: {
-    ALocaleProvider: LocaleProvider
+    LocaleProvider,
+    Loading
+  },
+  provide () {
+    return {
+      reload: this.reload
+    }
   },
   data () {
     return {
-      isRouterAlive: true,
-      locale: zhCN
+      locale: zhCN,
+      isRouterAlive: true
     }
   },
   mounted () {
-    deviceEnquire(screenType => {
+    setTimeout(() => {
+      document.getElementById('grace-loader').style.display = 'none'
+    }, 200)
+    deviceEnquire((screenType) => {
       this.$store.dispatch('theme/SetScreen', screenType)
     })
   },

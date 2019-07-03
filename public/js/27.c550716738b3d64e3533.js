@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[27],{"7GZL":function(n,e,t){"use strict";t.r(e);var a={name:"Index",data:function(){return{headerInfo:{title:"角色列表"}}}},d=t("KHd+"),i=Object(d.a)(a,function(){var n=this.$createElement;return(this._self._c||n)("div",[this._v("\n  Role Index\n")])},[],!1,null,"bd4d5034",null);e.default=i.exports}}]);

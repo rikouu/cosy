@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[30],{S3Gn:function(n,t,e){"use strict";e.r(t);var i={name:"Detail"},a=e("KHd+"),s=Object(a.a)(i,function(){var n=this.$createElement;return(this._self._c||n)("div",[this._v("\n  Setting Detail\n")])},[],!1,null,"6f82b150",null);t.default=s.exports}}]);

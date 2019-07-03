@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[39],{xTTA:function(e,t,n){"use strict";n.r(t);var s={name:"Create"},a=n("KHd+"),r=Object(a.a)(s,function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("\n  Post Create\n")])},[],!1,null,"7306b743",null);t.default=r.exports}}]);

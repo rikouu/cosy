@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[37],{VELN:function(e,n,t){"use strict";t.r(n);var i={name:"Profile"},r=t("KHd+"),s=Object(r.a)(i,function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("\n  User Profile\n")])},[],!1,null,"a3b2e968",null);n.default=s.exports}}]);

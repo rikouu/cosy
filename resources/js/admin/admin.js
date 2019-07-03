@@ -1,14 +1,21 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './App'
 import router from './router'
 import store from './store'
+
 import i18n from './locales'
+import importDirective from '@/directive'
 
 import bootstrap from './bootstrap'
 
 Vue.config.productionTip = false
 
-const app = new Vue({
+/**
+ * 注册指令
+ */
+importDirective(Vue)
+
+new Vue({
   router,
   i18n,
   store,
@@ -17,5 +24,3 @@ const app = new Vue({
   },
   render: h => h(App)
 }).$mount('#app')
-
-export default app

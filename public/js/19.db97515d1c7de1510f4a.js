@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{DKUM:function(e,n,t){"use strict";t.r(n);var i={name:"Detail"},s=t("KHd+"),a=Object(s.a)(i,function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("\n  Permission Detail\n")])},[],!1,null,"651bf604",null);n.default=a.exports}}]);

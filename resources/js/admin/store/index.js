@@ -2,24 +2,30 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import getters from './getters'
 
-import app from './modules/app'
-import auth from './modules/auth'
-import permission from './modules/permission'
-import theme from './modules/theme'
+Vue.use(Vuex)
 
-Vue.use(Vuex);
+const requireContext = require.context('./modules', false, /.*\.js$/)
+
+const modules = requireContext
+  .keys()
+  .map(
+    file => [
+      file.replace(/(^.\/)|(\.js$)/g, ''), requireContext(file)
+    ]
+  )
+  .reduce((modules, [name, module]) => {
+    if (module.namespaced === undefined) {
+      module.namespaced = true
+    }
+    return { ...modules, [name]: module }
+  }, {})
 
 const store = new Vuex.Store({
-  modules: {
-    app,
-    auth,
-    permission,
-    theme
-  },
+  modules,
   state: {},
   mutations: {},
   actions: {},
   getters
-});
+})
 
-export default store;
+export default store

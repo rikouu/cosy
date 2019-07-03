@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{YxAS:function(e,n,t){"use strict";t.r(n);var s={name:"Update"},a=t("KHd+"),i=Object(a.a)(s,function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("\n  Permission Update\n")])},[],!1,null,"3a463c76",null);n.default=i.exports}}]);

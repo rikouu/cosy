@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[40],{XBEP:function(t,e,n){"use strict";n.r(e);var a={name:"Detail"},i=n("KHd+"),s=Object(i.a)(a,function(){var t=this.$createElement;return(this._self._c||t)("div",[this._v("\n  Post Detail\n")])},[],!1,null,"597a4878",null);e.default=s.exports}}]);

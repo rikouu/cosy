@@ -1,4 +1,4 @@
-import { any as Cookies } from 'js-cookie'
+import Cookies from 'js-cookie'
 
 export const setCookie = (key, content, expires = 7) => {
   if (typeof content !== 'string') {
@@ -7,7 +7,7 @@ export const setCookie = (key, content, expires = 7) => {
   Cookies.set(key, content, { expires })
 }
 
-export const getCookie = (key, def = undefined) => {
+export const getCookie = (key, def = null) => {
   let content = Cookies.get(key)
   if (content !== null && content !== undefined) {
     try {

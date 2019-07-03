@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function getList (params = {}) {
+export function index (params) {
   return request({
     url: '/role',
     method: 'get',
@@ -8,7 +8,7 @@ export function getList (params = {}) {
   })
 }
 
-export function store (data = {}) {
+export function store (data) {
   return request({
     url: '/role',
     method: 'post',
@@ -16,18 +16,19 @@ export function store (data = {}) {
   })
 }
 
-export function update (id, data = {}) {
-  delete data['id']
+export function update (data) {
+  const id = data.id
   return request({
-    url: '/role/' + id,
+    url: `/role/${id}`,
     method: 'post',
-    data: data
+    data
   })
 }
 
-export function destroy (id) {
+export function destroy (data) {
+  const id = data.id
   return request({
-    url: '/role/' + id,
+    url: `/role/${id}`,
     method: 'delete'
   })
 }

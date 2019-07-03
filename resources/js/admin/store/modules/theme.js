@@ -1,9 +1,6 @@
-import config from '@/config/index'
+import config from '@/config'
 import Storage from '@/utils/storage'
-import {
-  SCREEN_TYPE,
-  DEVICE_TYPE
-} from '@/utils/device'
+import { SCREEN_TYPE } from '@/utils/device'
 
 import {
   SIDEBAR_TYPE,
@@ -21,7 +18,7 @@ import {
 export const state = {
   sidebar: Storage.get(SIDEBAR_TYPE, true),
   device: 'desktop',
-  theme: Storage.get(DEFAULT_THEME, config.theme),
+  theme: Storage.get(DEFAULT_THEME, config.navTheme),
   layout: Storage.get(DEFAULT_LAYOUT_MODE, config.layout),
   contentWidth: Storage.get(DEFAULT_CONTENT_WIDTH_TYPE, config.contentWidth),
   fixedHeader: Storage.get(DEFAULT_FIXED_HEADER, config.fixedHeader),
@@ -69,7 +66,7 @@ export const mutations = {
     state.contentWidth = type
   },
   TOGGLE_COLOR: (state, color) => {
-    console.log('%c ' + color, 'color:' + color + ';')
+    console.log(`'%c ${color}`, `color:${color};`)
     Storage.set(DEFAULT_COLOR, color)
     state.color = color
   },
@@ -83,9 +80,7 @@ export const mutations = {
 }
 
 export const actions = {
-  SetScreen ({
-    commit
-  }, screen) {
+  SetScreen ({ commit, dispatch, state }, screen) {
     let device
     let sidebar = true
     switch (screen) {
@@ -108,32 +103,22 @@ export const actions = {
     }
 
     commit('TOGGLE_DEVICE', device)
-    commit('SET_SIDEBAR_TYPE', sidebar)
+    dispatch('SetSidebar', sidebar)
     commit('SET_SCREEN', screen)
   },
-  SetSidebar ({
-    commit
-  }, type) {
+  SetSidebar ({ commit }, type) {
     commit('SET_SIDEBAR_TYPE', type)
   },
-  CloseSidebar ({
-    commit
-  }) {
+  CloseSidebar ({ commit }) {
     commit('CLOSE_SIDEBAR')
   },
-  ToggleDevice ({
-    commit
-  }, device) {
+  ToggleDevice ({ commit }, device) {
     commit('TOGGLE_DEVICE', device)
   },
-  ToggleTheme ({
-    commit
-  }, theme) {
+  ToggleTheme ({ commit }, theme) {
     commit('TOGGLE_THEME', theme)
   },
-  ToggleLayoutMode ({
-    commit
-  }, mode) {
+  ToggleLayoutMode ({ commit }, mode) {
     if (mode === 'sidemenu') {
       commit('TOGGLE_CONTENT_WIDTH', CONTENT_WIDTH_TYPE.Fluid)
     } else {
@@ -141,37 +126,25 @@ export const actions = {
     }
     commit('TOGGLE_LAYOUT_MODE', mode)
   },
-  ToggleFixedHeader ({
-    commit
-  }, fixedHeader) {
+  ToggleFixedHeader ({ commit }, fixedHeader) {
     if (!fixedHeader) {
       commit('TOGGLE_FIXED_HEADER_HIDDEN', false)
     }
     commit('TOGGLE_FIXED_HEADER', fixedHeader)
   },
-  ToggleFixSidebar ({
-    commit
-  }, fixSidebar) {
+  ToggleFixSidebar ({ commit }, fixSidebar) {
     commit('TOGGLE_FIXED_SIDEBAR', fixSidebar)
   },
-  ToggleFixedHeaderHidden ({
-    commit
-  }, show) {
+  ToggleFixedHeaderHidden ({ commit }, show) {
     commit('TOGGLE_FIXED_HEADER_HIDDEN', show)
   },
-  ToggleContentWidth ({
-    commit
-  }, type) {
+  ToggleContentWidth ({ commit }, type) {
     commit('TOGGLE_CONTENT_WIDTH', type)
   },
-  ToggleColor ({
-    commit
-  }, color) {
+  ToggleColor ({ commit }, color) {
     commit('TOGGLE_COLOR', color)
   },
-  ToggleWeak ({
-    commit
-  }, weakFlag) {
+  ToggleWeak ({ commit }, weakFlag) {
     commit('TOGGLE_WEAK', weakFlag)
   }
 }
@@ -187,20 +160,5 @@ export const getters = {
   autoHideHeader: state => state.autoHideHeader,
   color: state => state.color,
   weak: state => state.weak,
-  screen: state => state.screen,
-  isTopMenu: state => state.layout === 'topmenu',
-  isSideMenu: state => state.layout === 'sidemenu',
-  isMobile: state => state.device === DEVICE_TYPE.MOBILE,
-  isDesktop: state => state.device === DEVICE_TYPE.DESKTOP,
-  isTablet: state => state.device === DEVICE_TYPE.TABLET
+  screen: state => state.screen
 }
-
-const theme = {
-  namespaced: true,
-  state: state,
-  actions: actions,
-  mutations: mutations,
-  getters: getters
-}
-
-export default theme

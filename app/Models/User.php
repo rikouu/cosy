@@ -13,6 +13,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class User
@@ -21,7 +22,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string display_name
  * @property string email
  */
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, JWTSubject
 {
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, Notifiable, Sluggable, Menuable;
 
@@ -80,8 +81,31 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return !empty($avatar) ? $avatar : getAvatar($this->email);
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return $this->display_name;
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

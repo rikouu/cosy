@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -39,6 +40,21 @@ class UserController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        $user = Auth::guard('jwt')->user();
+        $user->roles = ['admin'];
+
+        return response()->json([
+            'data' => $user,
+        ]);
     }
 
     /**

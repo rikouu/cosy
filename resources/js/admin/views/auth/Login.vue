@@ -104,7 +104,7 @@ export default {
           this.submitting = true
           this.$store.dispatch('auth/Login', values).then((res) => {
             this.submitting = false
-            this.$router.push({ path: this.$route.query.redirect || '/' })
+            this.$router.replace({ path: this.$route.query.redirect || '/' })
             if (res.data.welcome) {
               setTimeout(() => {
                 this.$notification.success({
@@ -122,7 +122,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style lang="less" scoped>

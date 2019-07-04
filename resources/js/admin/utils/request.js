@@ -1,18 +1,18 @@
 import axios from 'axios'
 import store from '@/store'
-import { getToken, removeToken } from './auth'
+import { getToken } from './auth'
 import { notification } from 'ant-design-vue'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: 'api', // api 的 base_url
+  baseURL: '/api', // api 的 base_url
   timeout: 5000 // 请求超时时间
 })
 
 // request拦截器
 service.interceptors.request.use(
   request => {
-    const token = `Bearer ${getToken()}`
+    const token = getToken()
     if (token) {
       request.headers.common['Authorization'] = token
     }
@@ -28,7 +28,7 @@ service.interceptors.response.use(
     if (token) {
       store.dispatch('auth/RefreshToken', token)
     }
-    return response
+    return response.data
   },
   error => {
     switch (error.response.status) {

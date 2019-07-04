@@ -4,14 +4,14 @@
       {
         key: 'github',
         icon: 'github',
-        path: 'https://github.com/loyep/grace',
+        path: 'https://github.com/loyep/cosy',
         blankTarget: true
       }
     ]"
     >
       <template v-slot:copyright>
-        Copyright <a-icon type="copyright" /> {{ year }} Power By <a href="https://github.com/loyep/grace">
-          Grace
+        Copyright <a-icon type="copyright" /> {{ year }} Power By <a href="https://github.com/loyep/cosy">
+          Cosy
         </a>
       </template>
     </global-footer>

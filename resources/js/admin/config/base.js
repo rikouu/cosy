@@ -1,4 +1,4 @@
 export default {
-  name: 'Prism',
-  description: '棱镜折射'
+  name: 'Cosy',
+  description: '简约是隐藏的精致'
 }

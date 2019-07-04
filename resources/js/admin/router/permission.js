@@ -45,7 +45,11 @@ export const beforeEach = (to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
     } else {
-      next({ path: '/login', query: { redirect: to.fullPath } })
+      if (to.fullPath === '/') {
+        next({ path: '/login' })
+      } else {
+        next({ path: '/login', query: { redirect: to.fullPath } })
+      }
       NProgress.done()
     }
   }

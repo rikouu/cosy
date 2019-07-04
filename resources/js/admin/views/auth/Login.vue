@@ -45,15 +45,15 @@
           </a-form-item>
           <div>
             <a-form-item style="margin-bottom: 0px; margin-top: -12px">
-              <a-checkbox v-decorator="[
+              <a-checkbox
+                v-decorator="[
                 'remember_me'
               ]"
-              >
-                {{ $t('messages.remember_me') }}
-              </a-checkbox>
-              <router-link :style="{ float: 'right' }" :to="{ name: 'forgot.password' }">
-                {{ $t('messages.forgot_password') }}
-              </router-link>
+              >{{ $t('messages.remember_me') }}</a-checkbox>
+              <router-link
+                :style="{ float: 'right' }"
+                :to="{ name: 'forgot.password' }"
+              >{{ $t('messages.forgot_password') }}</router-link>
             </a-form-item>
             <a-form-item>
               <a-button
@@ -62,17 +62,13 @@
                 type="primary"
                 htmlType="submit"
                 class="submit"
-              >
-                {{ $t('messages.login') }}
-              </a-button>
+              >{{ $t('messages.login') }}</a-button>
             </a-form-item>
             <div class="other">
               <span>{{ $t('messages.other_login') }}</span>
               <a-icon type="wechat" class="icon" theme="outlined" />
               <a-icon type="github" class="icon" theme="outlined" />
-              <router-link class="register" :to="{ name: 'register' }">
-                {{ $t('messages.sign_up') }}
-              </router-link>
+              <router-link class="register" :to="{ name: 'register' }">{{ $t('messages.sign_up') }}</router-link>
             </div>
           </div>
         </a-form>
@@ -82,7 +78,7 @@
 </template>
 
 <script >
-import AuthLayout from '@/layouts/AuthLayout'
+import AuthLayout from '@/layouts/AuthLayout';
 
 export default {
   name: 'Login',
@@ -97,26 +93,29 @@ export default {
     }
   },
   methods: {
-    handleSubmit  (e) {
+    handleSubmit (e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
           this.submitting = true
-          this.$store.dispatch('auth/Login', values).then((res) => {
-            this.submitting = false
-            this.$router.replace({ path: this.$route.query.redirect || '/' })
-            if (res.data.welcome) {
-              setTimeout(() => {
-                this.$notification.success({
-                  message: '欢迎',
-                  description: res.data.welcome
-                })
-              }, 1000)
-            }
-          }).catch(err => {
-            err.showMessages && err.showMessages(this.form)
-            this.submitting = false
-          })
+          this.$store
+            .dispatch('auth/Login', values)
+            .then(res => {
+              this.submitting = false
+              this.$router.replace({ path: this.$route.query.redirect || '/' })
+              if (res.data.welcome) {
+                setTimeout(() => {
+                  this.$notification.success({
+                    message: '欢迎',
+                    description: res.data.welcome
+                  })
+                }, 1000)
+              }
+            })
+            .catch(err => {
+              err.showMessages && err.showMessages(this.form)
+              this.submitting = false
+            })
         }
       })
     }
@@ -125,10 +124,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
+@import "~@/styles/variables.less";
 
 .login {
-
   .icon {
     font-size: 24px;
     color: rgba(0, 0, 0, 0.2);
@@ -199,5 +197,4 @@ export default {
     }
   }
 }
-
 </style>

@@ -17,7 +17,7 @@ class CreateArticleRelatesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('article_id');
             $table->morphs('article_relate');
-            $table->index(['article_relate_type', 'article_relate_id']);
+            $table->index(['article_relate_type', 'article_relate_id'], 'article_relates_index');
             $table->timestamps();
         });
     }

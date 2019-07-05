@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Models\Traits\Menuable;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
 
 /**
  * Class Menu.
@@ -94,11 +94,11 @@ class Menu extends Model
     public function getLink($param = [])
     {
         try {
-            if (! empty($this->menuable)) {
+            if (!empty($this->menuable)) {
                 return $this->menuable->getLink();
             }
 
-            if (! empty($this->route)) {
+            if (!empty($this->route)) {
                 return route($this->route, json_decode($this->parameters, true));
             }
         } catch (\Exception $exception) {

@@ -2,11 +2,11 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use App\Models\User;
 use App\Models\Article;
 use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Models\User;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 static $types = ['image', 'default', 'status', 'video', 'audio'];
 

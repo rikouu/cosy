@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Blade;
 use App\Cosy\Blog as BlogFactory;
+use Blade;
 use Illuminate\Support\ServiceProvider;
 
 /**

@@ -16,7 +16,7 @@ class SlugTranslateHandler
     public function translate($text)
     {
         // 实例化 HTTP 客户端
-        $http = new Client;
+        $http = new Client();
 
         // 初始化配置信息
         $api = 'http://api.fanyi.baidu.com/api/trans/vip/translate?';

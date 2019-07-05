@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
 use App\Cosy\Auth\AuthManager as Auth;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Validation\ValidationException;
+use App\Models\User;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -63,8 +63,9 @@ class LoginController extends Controller
      *
      * @param LoginRequest $request
      *
-     * @return JsonResponse
      * @throws ValidationException
+     *
+     * @return JsonResponse
      */
     public function login(LoginRequest $request)
     {

@@ -2,8 +2,8 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use Faker\Generator as Faker;
 use App\Models\ArticleContent;
+use Faker\Generator as Faker;
 
 $factory->define(ArticleContent::class, function (Faker $faker) {
     return [

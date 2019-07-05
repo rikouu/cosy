@@ -2,13 +2,13 @@
 
 namespace App\Cosy;
 
-use App\Models\Tag;
-use App\Models\Link;
 use App\Facades\Cosy;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Link;
 use App\Models\Navigation;
 use App\Models\SearchHistory;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Cache;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -31,11 +31,11 @@ class Blog
     public function title($title = null)
     {
         $name = Cosy::name();
-        if (! empty($title)) {
+        if (!empty($title)) {
             $this->title = $title;
         }
 
-        return ! empty($this->title) ? ($this->title.' - '.$name) : $name;
+        return !empty($this->title) ? ($this->title.' - '.$name) : $name;
     }
 
     /**
@@ -54,7 +54,7 @@ class Blog
                 }
             }])->whereName($name)->first();
 
-            return ! empty($navigation) ? $navigation->menus : null;
+            return !empty($navigation) ? $navigation->menus : null;
         });
     }
 
@@ -87,7 +87,7 @@ class Blog
         ]);
 
         return $socials->map(function ($item) {
-            if (is_array($item) && ! empty($item['link'])) {
+            if (is_array($item) && !empty($item['link'])) {
                 $item['img'] = 'data:image/png;base64,'.base64_encode(QrCode::format('png')->size(320)->generate($item['link']));
             }
 

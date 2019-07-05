@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Blog;
-use App\Models\Topic;
 use App\Models\Article;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 

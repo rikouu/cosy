@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Navigation;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class NavigationController extends Controller
 {
@@ -31,7 +31,8 @@ class NavigationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +43,8 @@ class NavigationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Navigation  $navigation
+     * @param \App\Models\Navigation $navigation
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Navigation $navigation)
@@ -53,7 +55,8 @@ class NavigationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Navigation  $navigation
+     * @param \App\Models\Navigation $navigation
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Navigation $navigation)
@@ -64,8 +67,9 @@ class NavigationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Navigation  $navigation
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Navigation   $navigation
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Navigation $navigation)
@@ -76,7 +80,8 @@ class NavigationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Navigation  $navigation
+     * @param \App\Models\Navigation $navigation
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Navigation $navigation)

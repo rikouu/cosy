@@ -3,9 +3,9 @@
 namespace App\Jobs;
 
 use App\Models\Model;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class TranslateSlug extends Job
 {

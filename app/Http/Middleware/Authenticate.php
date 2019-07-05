@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Cosy\Auth\AuthManager;
+use App\Exceptions\AuthenticationException;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Cosy\Auth\AuthManager;
-use App\Exceptions\AuthenticationException;
 
 class Authenticate
 {
@@ -32,8 +32,9 @@ class Authenticate
      * @param Request $request
      * @param Closure $next
      *
-     * @return mixed
      * @throws AuthenticationException
+     *
+     * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
@@ -73,8 +74,9 @@ class Authenticate
      * @param Response $response
      * @param string   $token
      *
-     * @return mixed
      * @throws mixed
+     *
+     * @return mixed
      */
     protected function setAuthenticationHeader(Response $response, string $token)
     {

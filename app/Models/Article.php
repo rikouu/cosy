@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\ArticleContent as Content;
+use App\Models\Scopes\PublishOrderScope;
 use App\Models\Traits\Likable;
-use Illuminate\Support\Carbon;
 use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
-use App\Models\Scopes\PublishOrderScope;
-use App\Models\ArticleContent as Content;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
 /**
  * Class Article.

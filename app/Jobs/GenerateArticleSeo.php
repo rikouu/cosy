@@ -2,17 +2,17 @@
 
 namespace App\Jobs;
 
-use Parsedown;
 use App\Models\Article;
-use Fukuball\Jieba\Jieba;
-use Fukuball\Jieba\Finalseg;
-use Illuminate\Bus\Queueable;
 use App\Models\ArticleContent;
+use Fukuball\Jieba\Finalseg;
+use Fukuball\Jieba\Jieba;
 use Fukuball\Jieba\JiebaAnalyse;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Parsedown;
 
 class GenerateArticleSeo implements ShouldQueue
 {

@@ -24,7 +24,7 @@ class Slide extends Model
     public function getLink($params = [])
     {
         try {
-            if (! empty($this->slideable)) {
+            if (!empty($this->slideable)) {
                 return $this->slideable->getLink();
             }
         } catch (\Exception $exception) {

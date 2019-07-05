@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Blog;
-use App\Models\Slide;
+use App\Http\Requests\SearchRequest;
 use App\Models\Article;
-use Illuminate\Http\Request;
 use App\Models\SearchHistory;
+use App\Models\Slide;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
-use App\Http\Requests\SearchRequest;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
@@ -81,7 +81,7 @@ class HomeController extends Controller
 
         $cacheKey = $request->ip().$search;
         $hasSearch = Cache::get($cacheKey, false);
-        if (! $hasSearch) {
+        if (!$hasSearch) {
             SearchHistory::firstOrCreate([
                 'query'       => $search,
                 'search_date' => Carbon::today()->toDateString(),

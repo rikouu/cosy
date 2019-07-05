@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class ArticleContent.
+ *
  * @property string  template
  * @property string  type
  * @property bool is_html

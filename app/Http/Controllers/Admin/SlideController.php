@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Slide;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class SlideController extends Controller
 {

@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Tag;
 use App\Models\Article;
 use App\Models\ArticleContent;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class ArticlesTableSeeder extends Seeder

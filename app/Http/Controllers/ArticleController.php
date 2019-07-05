@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Blog;
+use App\Jobs\GenerateArticleSeo;
 use App\Models\Article;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Jobs\GenerateArticleSeo;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ArticleController extends Controller
 {
@@ -52,7 +52,7 @@ class ArticleController extends Controller
 
             $readKey = $request->ip().' read '.$article->id;
             $hasRead = Cache::get($readKey, false);
-            if (! $hasRead) {
+            if (!$hasRead) {
                 $article->increment('views_count');
                 Cache::put($readKey, true, 60 * 60);
             }

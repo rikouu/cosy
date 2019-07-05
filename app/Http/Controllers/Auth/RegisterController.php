@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Cosy\Auth\AuthManager as Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -21,52 +23,74 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    /**
+     * @var Auth
+     */
+    protected $auth;
 
     /**
-     * Where to redirect users after registration.
+     * RegisterController constructor.
      *
-     * @var string
+     * @param Auth $auth
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct(Auth $auth)
     {
-        $this->middleware('guest');
+        $this->auth = $auth;
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Handle a registration request for the application.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param RegisterRequest $request
+     *
+     * @return JsonResponse
      */
-    protected function validator(array $data)
+    public function register(RegisterRequest $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $user = $this->create($request->all());
+
+        $this->auth->login($user);
+
+        return $this->registered($request, $user);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param array $data
+     *
+     * @return mixed
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $user = User::create([
+            'name'         => $data['name'],
+            'display_name' => $data['name'],
+            'email'        => $data['email'],
+            'avatar'       => getAvatar($data['email']),
+            'password'     => Hash::make($data['password']),
         ]);
+
+        return $user;
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param RegisterRequest $request
+     * @param mixed   $user
+     *
+     * @return JsonResponse
+     */
+    protected function registered(RegisterRequest $request, $user)
+    {
+        $token = $this->auth->getToken();
+
+        return response()
+            ->json([
+                'user'  => $user,
+                'token' => $token,
+            ])
+            ->header('authorization', $token);
     }
 }

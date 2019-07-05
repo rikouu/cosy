@@ -1,7 +1,7 @@
-# cosy
+# Cosy
 
-[![Build Status](https://travis-ci.org/loyep/cosy.svg?branch=master)](https://travis-ci.org/loyep/cosy)
-[![StyleCI](https://github.styleci.io/repos/175727773/shield?branch=master)](https://github.styleci.io/repos/175727773)
+[![Build Status](https://travis-ci.com/loyep/cosy.svg?token=YhCvPgf5uspm18kxdLkJ&branch=master)](https://travis-ci.com/loyep/cosy)
+[![StyleCI](https://github.styleci.io/repos/188055743/shield?branch=master)](https://github.styleci.io/repos/188055743)
 [![Latest Stable Version](https://poser.pugx.org/loyep/cosy/v/stable)](https://packagist.org/packages/loyep/cosy)
 [![Total Downloads](https://poser.pugx.org/loyep/cosy/downloads)](https://packagist.org/packages/loyep/cosy)
 [![Latest Unstable Version](https://poser.pugx.org/loyep/cosy/v/unstable)](https://packagist.org/packages/loyep/cosy)

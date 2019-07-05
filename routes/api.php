@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,28 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth:jwt'], 'name' => 'admin.'], function () {
+
+    // Auth
+    Route::get('profile', 'UserController@profile')->name('profile');
+
+    // Api resource
+//    Route::apiResource('user', 'UserController');
+//    Route::apiResource('tag', 'TagController');
+//    Route::apiResource('article', 'ArticleController');
+//    Route::apiResource('comment', 'CommentController');
+//    Route::apiResource('category', 'CategoryController');
+//    Route::apiResource('setting', 'SettingController');
+//    Route::apiResource('role', 'RoleController');
+
+    // Dashboard
+//    Route::get('statistics', 'PrismController@statistics');
+
+    // File
+//    Route::post('upload', 'MediaController@upload');
+});
+
+Route::group(['namespace' => 'Auth', 'middleware' => ['guest:jwt']], function () {
+    Route::post('register', 'RegisterController@register')->name('register');
+    Route::post('login', 'LoginController@login')->name('login');
 });

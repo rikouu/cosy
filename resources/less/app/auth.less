@@ -1,0 +1,103 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+
+//-----------------------------------------------------------------
+// Block centering
+//
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.bg-img {
+  position: relative;
+  border-bottom: none;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.px-50 {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.py-30 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.card {
+  .title {
+    font-size: 15px;
+  }
+}
+
+.center-v {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.center-h {
+  display: flex;
+  justify-content: center;
+}
+
+.center-vh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#app {
+  max-width: 100%;
+  width: 400px;
+}
+
+.card {
+  border: 0;
+  border-radius: 0px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
+  transition: .5s;
+
+  > .table-responsive .table,
+  > .table {
+    margin-bottom: 0;
+
+    tr td:first-child,
+    tr th:first-child {
+      padding-left: 20px;
+    }
+
+    tr td:last-child,
+    tr th:last-child {
+      padding-right: 20px;
+    }
+  }
+
+
+  .card-hover-show {
+    opacity: 0;
+    transition: .3s linear;
+  }
+
+  &:hover {
+    .card-hover-show {
+      opacity: 1;
+    }
+  }
+
+
+}

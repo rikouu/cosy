@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -29,8 +32,11 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
-     * @return void
+     * @param Exception $exception
+     *
+     * @throws Exception
+     *
+     * @return mixed|void
      */
     public function report(Exception $exception)
     {
@@ -40,12 +46,34 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception               $exception
+     *
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ValidationException) {
+            return new Response([
+                'status_code' => $exception->status,
+                'message'     => $exception->errorBag,
+                'errors'      => $exception->errors(),
+            ]);
+        }
+
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Convert an authentication exception into a response.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param AuthenticationException  $exception
+     *
+     * @return Response
+     */
+    public function unauthenticated($request, AuthenticationException $exception): Response
+    {
+        return response()->json(['message' => $exception->getMessage()], 401);
     }
 }

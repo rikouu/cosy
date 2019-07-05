@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * Class Slide
+ * Class Slide.
  *
  * @property Menuable slideable
  * @property string   title
@@ -24,11 +24,12 @@ class Slide extends Model
     public function getLink($params = [])
     {
         try {
-            if (!empty($this->slideable)) {
+            if (! empty($this->slideable)) {
                 return $this->slideable->getLink();
             }
         } catch (\Exception $exception) {
         }
+
         return $this->url ?? 'javascript:;';
     }
 
@@ -48,6 +49,7 @@ class Slide extends Model
         if (isset($this->slideable)) {
             return $this->slideable->getName();
         }
+
         return $this->title;
     }
 
@@ -59,6 +61,7 @@ class Slide extends Model
         if (isset($this->slideable)) {
             return $this->slideable->image;
         }
+
         return $this->image ?? cdnPath('images/default.png');
     }
 }

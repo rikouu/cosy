@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Cosy\Auth\AuthManager as Auth;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Cosy\Auth\AuthManager as Auth;
+use App\Http\Requests\Auth\RegisterRequest;
 
 class RegisterController extends Controller
 {

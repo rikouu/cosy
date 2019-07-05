@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Cosy\Auth\AuthManager as Auth;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Cosy\Auth\AuthManager as Auth;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 class LoginController extends Controller
 {
@@ -65,7 +65,6 @@ class LoginController extends Controller
      *
      * @return JsonResponse
      * @throws ValidationException
-     *
      */
     public function login(LoginRequest $request)
     {
@@ -128,7 +127,7 @@ class LoginController extends Controller
     protected function sendLoginResponse(LoginRequest $request)
     {
         $this->clearLoginAttempts($request);
-        $token = 'Bearer ' . $this->auth->getToken();
+        $token = 'Bearer '.$this->auth->getToken();
         $user = $this->auth->user();
         $welcome = $this->generateWelcome($user);
 
@@ -150,7 +149,7 @@ class LoginController extends Controller
      */
     protected function generateWelcome(User $user)
     {
-        return $user->display_name . ', 欢迎回来!';
+        return $user->display_name.', 欢迎回来!';
     }
 
     /**
@@ -162,5 +161,4 @@ class LoginController extends Controller
     {
         return 'username';
     }
-
 }

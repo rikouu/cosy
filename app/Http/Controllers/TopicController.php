@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Blog;
-use App\Models\Article;
 use App\Models\Topic;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -18,6 +18,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::withCount('articles')->paginate();
+
         return view('topics.index', compact('topics'));
     }
 
@@ -39,6 +40,7 @@ class TopicController extends Controller
             ->paginate();
 
         Blog::title($topic->name);
+
         return view('topics.show', compact('articles', 'topic'));
     }
 }

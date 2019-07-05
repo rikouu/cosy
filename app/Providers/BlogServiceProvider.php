@@ -2,14 +2,12 @@
 
 namespace App\Providers;
 
+use Blade;
 use App\Cosy\Blog as BlogFactory;
 use Illuminate\Support\ServiceProvider;
-use \Blade;
 
 /**
- * Class BlogServiceProvider
- *
- * @package App\Providers
+ * Class BlogServiceProvider.
  */
 class BlogServiceProvider extends ServiceProvider
 {
@@ -20,7 +18,6 @@ class BlogServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 
     /**
@@ -33,7 +30,7 @@ class BlogServiceProvider extends ServiceProvider
         $this->app->singleton('cosy.blog', function () {
             return $this->app->make(BlogFactory::class);
         });
-        
+
         Blade::directive('datetime', function ($expression) {
             return "<?php echo ($expression)->format('m/d/Y H:i'); ?>";
         });

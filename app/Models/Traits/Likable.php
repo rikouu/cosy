@@ -20,7 +20,7 @@ trait Likable
      */
     public function getLikeKey()
     {
-        return md5('prism_like_' . self::class);
+        return md5('prism_like_'.self::class);
     }
 
     /**
@@ -30,9 +30,9 @@ trait Likable
     {
         if (is_null(self::$_liked)) {
             self::$_liked = collect(explode(',', Cookie::get($this->getLikeKey())))->filter(function ($item) {
-                return !empty($item);
+                return ! empty($item);
             })->map(function ($item) {
-                return (int)$item;
+                return (int) $item;
             });
         }
 

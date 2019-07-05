@@ -51,7 +51,7 @@ Route::get('slide/{id}', 'SlideController@show')->name('slide.show');
 // RSS Feed
 Route::get('feed.xml', 'HomeController@feed')->name('feed');
 
-Route::group(['prefix' => Cosy::path(),], function () {
+Route::group(['prefix' => Cosy::path()], function () {
     Route::get('/', 'Admin\DashboardController@dashboard')->name('dashboard');
     Route::get('/{any}', 'Admin\DashboardController@dashboard')->where('any', '.*');
 });

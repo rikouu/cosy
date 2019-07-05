@@ -2,18 +2,17 @@
 
 namespace App\Jobs;
 
+use Parsedown;
 use App\Models\Article;
-use App\Models\ArticleContent;
-use Fukuball\Jieba\Finalseg;
 use Fukuball\Jieba\Jieba;
-use Fukuball\Jieba\JiebaAnalyse;
+use Fukuball\Jieba\Finalseg;
 use Illuminate\Bus\Queueable;
+use App\Models\ArticleContent;
+use Fukuball\Jieba\JiebaAnalyse;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
-use Parsedown;
 
 class GenerateArticleSeo implements ShouldQueue
 {
@@ -42,12 +41,12 @@ class GenerateArticleSeo implements ShouldQueue
     public function handle()
     {
         $text = (new Parsedown())->setBreaksEnabled(false)->text($this->article->markdown);
-        $text = preg_replace("/<pre[^>]*>(.*?)<\/pre>/is", "", $text);
+        $text = preg_replace("/<pre[^>]*>(.*?)<\/pre>/is", '', $text);
         $text = strip_tags($text);
         ini_set('memory_limit', '1024M');
         Jieba::init([
             'mode' => 'default',
-            'dict' => 'small'
+            'dict' => 'small',
         ]);
         Finalseg::init();
         JiebaAnalyse::init();

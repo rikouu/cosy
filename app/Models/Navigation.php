@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class Menu
+ * Class Menu.
  *
  * @property Collection menus
  */
@@ -19,7 +19,7 @@ class Navigation extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'position'
+        'name', 'description', 'position',
     ];
 
     /**
@@ -37,5 +37,4 @@ class Navigation extends Model
     {
         return $this->hasMany(Menu::class);
     }
-
 }

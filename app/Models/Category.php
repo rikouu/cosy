@@ -7,7 +7,7 @@ use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Class Category
+ * Class Category.
  *
  * @property string name
  * @property string slug
@@ -50,5 +50,4 @@ class Category extends Model
     {
         return $this->name;
     }
-
 }

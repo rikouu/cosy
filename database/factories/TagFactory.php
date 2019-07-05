@@ -3,8 +3,8 @@
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
 use App\Models\Tag;
-use Faker\Generator as Faker;
 use Illuminate\Support\Str;
+use Faker\Generator as Faker;
 
 $factory->define(Tag::class, function (Faker $faker) {
     $title = $faker->words(3, true);

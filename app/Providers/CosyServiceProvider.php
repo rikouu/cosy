@@ -8,9 +8,7 @@ use App\Facades\Blog;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class CosyServiceProvider
- *
- * @package App\Providers
+ * Class CosyServiceProvider.
  */
 class CosyServiceProvider extends ServiceProvider
 {

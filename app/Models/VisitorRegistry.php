@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class VisitorRegistry
- *
- * @package App\Models
+ * Class VisitorRegistry.
  */
 class VisitorRegistry extends Model
 {

@@ -25,6 +25,7 @@ class SEO
     public function generate($minify = false)
     {
         $html = '<meta name="title" content="">';
+
         return ($minify) ? str_replace(PHP_EOL, '', $html) : $html;
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Facades\Blog;
 use App\Models\Article;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -39,6 +39,7 @@ class UserController extends Controller
             ->paginate();
 
         Blog::title($user->display_name);
+
         return view('users.show', compact('articles', 'user'));
     }
 }

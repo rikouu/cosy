@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class SearchHistory
- *
- * @package App\Models
+ * Class SearchHistory.
  */
 class SearchHistory extends Model
 {
@@ -19,5 +17,4 @@ class SearchHistory extends Model
     protected $fillable = [
         'query', 'search_date', 'search_count', 'description',
     ];
-
 }

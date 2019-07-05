@@ -5,7 +5,7 @@ namespace App\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class Blog
+ * Class Blog.
  */
 class Blog extends Facade
 {

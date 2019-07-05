@@ -5,11 +5,8 @@ namespace App\Models\Builders;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Class ArticleBuilder
- *
- * @package App\Models\Builders
+ * Class ArticleBuilder.
  */
 class ArticleBuilder extends Builder
 {
-
 }

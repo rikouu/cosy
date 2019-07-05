@@ -6,7 +6,6 @@ use Parsedown;
 
 class Markdown
 {
-
     /**
      * @var Parsedown
      */
@@ -26,7 +25,4 @@ class Markdown
             ->setBreaksEnabled(true)
             ->text($markdown);
     }
-
-
-
 }

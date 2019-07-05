@@ -5,11 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
- * Class Model
- *
- * @package App\Models
+ * Class Model.
  */
 class Model extends BaseModel
 {
-
 }

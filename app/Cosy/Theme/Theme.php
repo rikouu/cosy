@@ -2,13 +2,13 @@
 
 namespace App\Cosy\Theme;
 
+use App\Models\Tag;
+use App\Models\Link;
 use App\Facades\Cosy;
 use App\Models\Article;
 use App\Models\Category;
-use App\Models\Link;
 use App\Models\Navigation;
 use App\Models\SearchHistory;
-use App\Models\Tag;
 use Illuminate\Support\Facades\Cache;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -31,11 +31,11 @@ class Theme
     public function title($title = null)
     {
         $name = Cosy::name();
-        if (!empty($title)) {
+        if (! empty($title)) {
             $this->title = $title;
         }
 
-        return !empty($this->title) ? ($this->title.' - '.$name) : $name;
+        return ! empty($this->title) ? ($this->title.' - '.$name) : $name;
     }
 
     /**
@@ -45,15 +45,14 @@ class Theme
      */
     public function navigation($name = '')
     {
-        return Cache::remember('navigation' . $name, 1, function () use ($name) {
+        return Cache::remember('navigation'.$name, 1, function () use ($name) {
             $navigation = Navigation::with(['menus' => function ($query) {
                 $query->with('menuable')->where('parent_id', '=', 0)->orderBy('order', 'asc');
             }])->whereName($name)->first();
 
-            if (!empty($navigation)) {
+            if (! empty($navigation)) {
                 return view('components.menus.items', ['items' => $navigation->menus])->render();
             }
-            return null;
         });
     }
 
@@ -66,6 +65,7 @@ class Theme
     {
         $limit = max($limit, 3);
         $searches = SearchHistory::groupBy('query')->selectRaw('query, sum(search_count) as search_count')->orderByDesc('search_count')->take($limit)->get();
+
         return $searches;
     }
 
@@ -85,7 +85,7 @@ class Theme
         ]);
 
         return $socials->map(function ($item) {
-            if (is_array($item) && !empty($item['link'])) {
+            if (is_array($item) && ! empty($item['link'])) {
                 $item['img'] = 'data:image/png;base64,'.base64_encode(QrCode::format('png')->size(320)->generate($item['link']));
             }
 
@@ -138,5 +138,4 @@ class Theme
     {
         return Category::take(12)->get();
     }
-
 }

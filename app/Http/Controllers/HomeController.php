@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Blog;
-use App\Http\Requests\SearchRequest;
-use App\Models\Article;
-use App\Models\SearchHistory;
 use App\Models\Slide;
+use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Models\SearchHistory;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
+use App\Http\Requests\SearchRequest;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
-
     /**
      * Show the application dashboard.
      *
@@ -37,15 +36,12 @@ class HomeController extends Controller
             $count++;
         }
         $slideBg = cdnPath('images/bg.jpg');
+
         return view('pages.home', compact('slides', 'articles', 'slideBg'));
     }
 
-    /**
-     *
-     */
     public function history()
     {
-
     }
 
     /**
@@ -55,8 +51,10 @@ class HomeController extends Controller
     {
         $view = Cache::remember('feed', -1, function () {
             $articles = Article::all();
+
             return view('pages.feed', compact('articles'))->render();
         });
+
         return response($view)->header('Content-Type', 'text/xml');
     }
 
@@ -69,30 +67,31 @@ class HomeController extends Controller
     {
         $search = trim($request->q);
 
-        $articles = Article::where('title', 'like', '%' . $search . '%')
+        $articles = Article::where('title', 'like', '%'.$search.'%')
             ->orWhereHas('tags', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })
             ->orWhereHas('category', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })
             ->orWhereHas('topics', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })
             ->paginate();
 
-        $cacheKey = $request->ip() . $search;
+        $cacheKey = $request->ip().$search;
         $hasSearch = Cache::get($cacheKey, false);
-        if (!$hasSearch) {
+        if (! $hasSearch) {
             SearchHistory::firstOrCreate([
                 'query'       => $search,
-                'search_date' => Carbon::today()->toDateString()
+                'search_date' => Carbon::today()->toDateString(),
             ])
                 ->increment('search_count');
             Cache::put($cacheKey, true, 600);
         }
 
         Blog::title(__('cosy.search.title', ['search' => $search]));
+
         return view('pages.search', compact('articles'));
     }
 
@@ -103,8 +102,10 @@ class HomeController extends Controller
     {
         $view = Cache::remember('sitemap', -1, function () {
             $articles = Article::all();
+
             return view('pages.sitemap', compact('articles'))->render();
         });
+
         return response($view)->header('Content-Type', 'text/xml');
     }
 }

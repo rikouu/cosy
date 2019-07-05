@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Cosy\Auth\AuthManager;
-use App\Exceptions\AuthenticationException;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Cosy\Auth\AuthManager;
+use App\Exceptions\AuthenticationException;
 
 class Authenticate
 {
@@ -79,7 +79,8 @@ class Authenticate
     protected function setAuthenticationHeader(Response $response, string $token)
     {
         $token = $token ? '' : $this->auth->tokenRefresh();
-        $response->headers->set('Authorization', 'Bearer ' . $token);
+        $response->headers->set('Authorization', 'Bearer '.$token);
+
         return $response;
     }
 }

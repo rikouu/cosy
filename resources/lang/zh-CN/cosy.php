@@ -11,5 +11,5 @@ return [
         'previous' => '上一篇',
         'next'     => '下一篇',
         'related'  => '相关文章',
-    ]
+    ],
 ];

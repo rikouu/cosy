@@ -3,9 +3,7 @@
 namespace App\Models;
 
 /**
- * Class Setting
- *
- * @package App\Models
+ * Class Setting.
  */
 class Setting extends Model
 {

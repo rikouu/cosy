@@ -56,5 +56,4 @@ class UserPolicy extends Policy
     {
         return false;
     }
-
 }

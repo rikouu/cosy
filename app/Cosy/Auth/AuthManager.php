@@ -3,11 +3,11 @@
 namespace App\Cosy\Auth;
 
 use App\Models\User;
-use Illuminate\Auth\AuthManager as LaravelAuth;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\JWTAuth;
+use Illuminate\Http\Request;
+use Illuminate\Auth\AuthManager as LaravelAuth;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 /**
  * Class AuthManager.
@@ -65,7 +65,6 @@ class AuthManager
     /**
      * @return string
      * @throws TokenInvalidException
-     *
      */
     public function tokenRefresh()
     {
@@ -81,7 +80,7 @@ class AuthManager
      */
     public function checkForToken(Request $request)
     {
-        if (!$this->jwtAuth->parser()->setRequest($request)->hasToken()) {
+        if (! $this->jwtAuth->parser()->setRequest($request)->hasToken()) {
             throw new UnauthorizedHttpException('jwt-auth', 'Token not provided');
         }
     }
@@ -120,7 +119,7 @@ class AuthManager
             $remember
         );
 
-        if (!empty($token) || !empty($user)) {
+        if (! empty($token) || ! empty($user)) {
             session()->regenerate();
             $this->jwtAuth->setToken($token);
 

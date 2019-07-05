@@ -3,11 +3,10 @@
 namespace App\Http\Requests;
 
 /**
- * Class SearchRequest
+ * Class SearchRequest.
  *
  * @property string q
  */
 class SearchRequest extends Request
 {
-    
 }

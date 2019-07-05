@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Models\Traits\Menuable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class Menu
+ * Class Menu.
  *
  * @property Collection menus
  * @property string     url
@@ -70,7 +70,7 @@ class Menu extends Model
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChildren()
     {
@@ -82,6 +82,7 @@ class Menu extends Model
         if (isset($this->menuable)) {
             return $this->menuable->getName();
         }
+
         return $this->title;
     }
 
@@ -93,15 +94,16 @@ class Menu extends Model
     public function getLink($param = [])
     {
         try {
-            if (!empty($this->menuable)) {
+            if (! empty($this->menuable)) {
                 return $this->menuable->getLink();
             }
 
-            if (!empty($this->route)) {
+            if (! empty($this->route)) {
                 return route($this->route, json_decode($this->parameters, true));
             }
         } catch (\Exception $exception) {
         }
+
         return $this->url ?? 'javascript:;';
     }
 }

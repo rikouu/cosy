@@ -6,10 +6,10 @@ use App\Cosy\Markdown\Markdown;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class ArticleContent
+ * Class ArticleContent.
  * @property string  template
  * @property string  type
- * @property boolean is_html
+ * @property bool is_html
  * @property string  html
  * @property string  markdown
  */
@@ -31,7 +31,7 @@ class ArticleContent extends Model
         if ($this->is_html) {
             return $this->html;
         }
+
         return (new Markdown())->convertMarkdownToHtml($this->markdown);
     }
-
 }

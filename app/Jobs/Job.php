@@ -12,5 +12,5 @@ abstract class Job implements ShouldQueue
     /**
      * @return mixed
      */
-    abstract function handle();
+    abstract public function handle();
 }

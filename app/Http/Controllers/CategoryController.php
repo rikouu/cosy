@@ -46,6 +46,7 @@ class CategoryController extends Controller
             ->paginate();
 
         Blog::title($category->name);
+
         return view('categories.show', compact('articles', 'category', 'topArticles'));
     }
 }

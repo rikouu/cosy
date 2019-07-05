@@ -7,7 +7,7 @@ use App\Models\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
- * Class Topic
+ * Class Topic.
  *
  * @property string slug
  * @property string name

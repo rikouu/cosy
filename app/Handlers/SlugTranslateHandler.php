@@ -20,7 +20,7 @@ class SlugTranslateHandler
 
         // 初始化配置信息
         $api = 'http://api.fanyi.baidu.com/api/trans/vip/translate?';
-        $appid = '20170207000038668';// config('services.baidu_translate.appid');
+        $appid = '20170207000038668'; // config('services.baidu_translate.appid');
         $key = 'obwKZJN0OocKnMcWp_Q7'; //config('services.baidu_translate.key');
         $salt = time();
 
@@ -32,20 +32,20 @@ class SlugTranslateHandler
         // 根据文档，生成 sign
         // http://api.fanyi.baidu.com/api/trans/product/apidoc
         // appid+q+salt+密钥 的MD5值
-        $sign = md5($appid . $text . $salt . $key);
+        $sign = md5($appid.$text.$salt.$key);
 
         // 构建请求参数
         $query = http_build_query([
-            "q"     => $text,
-            "from"  => "zh",
-            "to"    => "en",
-            "appid" => $appid,
-            "salt"  => $salt,
-            "sign"  => $sign,
+            'q'     => $text,
+            'from'  => 'zh',
+            'to'    => 'en',
+            'appid' => $appid,
+            'salt'  => $salt,
+            'sign'  => $sign,
         ]);
 
         // 发送 HTTP Get 请求
-        $response = $http->get($api . $query);
+        $response = $http->get($api.$query);
 
         $result = json_decode($response->getBody(), true);
 
@@ -60,7 +60,7 @@ class SlugTranslateHandler
          * "dst" => "XSS security vulnerability"
          * ]
          * ]
-         * ]
+         * ].
          **/
 
         // 尝试获取获取翻译结果

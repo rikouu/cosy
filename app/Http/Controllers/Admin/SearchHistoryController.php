@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\SearchHistory;
 use Illuminate\Http\Request;
+use App\Models\SearchHistory;
+use App\Http\Controllers\Controller;
 
 class SearchHistoryController extends Controller
 {

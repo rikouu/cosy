@@ -10,5 +10,5 @@ return [
         'previous' => 'Previous',
         'next'     => 'Next',
         'related'  => 'Related Articles',
-    ]
+    ],
 ];

@@ -6,17 +6,17 @@ use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
- * Class User
+ * Class User.
  *
  * @property string name
  * @property string display_name
@@ -78,7 +78,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function getAvatarAttribute($avatar)
     {
-        return !empty($avatar) ? $avatar : getAvatar($this->email);
+        return ! empty($avatar) ? $avatar : getAvatar($this->email);
     }
 
     /**

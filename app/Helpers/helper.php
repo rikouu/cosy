@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Mix;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Foundation\Mix;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
-if (!function_exists('getAvatar')) {
+if (! function_exists('getAvatar')) {
     function getAvatar($email)
     {
         $hash = Str::length($email) === 32 && ctype_xdigit($email)
@@ -26,7 +26,7 @@ if (!function_exists('getAvatar')) {
     }
 }
 
-if (!function_exists('cdnMix')) {
+if (! function_exists('cdnMix')) {
     /**
      * @param        $path
      * @param string $manifestDirectory
@@ -36,11 +36,12 @@ if (!function_exists('cdnMix')) {
     function cdnMix($path, $manifestDirectory = '')
     {
         $cdnPath = app(Mix::class)(...func_get_args());
+
         return cdnPath($cdnPath);
     }
 }
 
-if (!function_exists('cdnImage')) {
+if (! function_exists('cdnImage')) {
     /**
      * @param string $path
      *
@@ -49,14 +50,15 @@ if (!function_exists('cdnImage')) {
     function cdnImage($path)
     {
         $url = $path;
-        if (!Str::startsWith($path, config('filesystems.disks.qiniu.domain'))) {
+        if (! Str::startsWith($path, config('filesystems.disks.qiniu.domain'))) {
             $url = cdnPath($path);
         }
+
         return $url.'?imageView2/2/w/480/h/320/format/jpg/interlace/1/q/100';
     }
 }
 
-if (!function_exists('cdnPath')) {
+if (! function_exists('cdnPath')) {
 
     /**
      * @param string $path
@@ -65,14 +67,15 @@ if (!function_exists('cdnPath')) {
      */
     function cdnPath($path)
     {
-        if (!empty(config('cosy.cdn'))) {
+        if (! empty(config('cosy.cdn'))) {
             return Storage::disk('qiniu')->getUrl($path);
         }
+
         return asset($path);
     }
 }
 
-if (!function_exists('routeIs')) {
+if (! function_exists('routeIs')) {
     /**
      * route_is.
      *
@@ -86,7 +89,7 @@ if (!function_exists('routeIs')) {
     }
 }
 
-if (!function_exists('routeIsNot')) {
+if (! function_exists('routeIsNot')) {
     /**
      * route_is_not.
      *
@@ -96,6 +99,6 @@ if (!function_exists('routeIsNot')) {
      */
     function routeIsNot(string $expression)
     {
-        return !fnmatch($expression, Route::currentRouteName());
+        return ! fnmatch($expression, Route::currentRouteName());
     }
 }

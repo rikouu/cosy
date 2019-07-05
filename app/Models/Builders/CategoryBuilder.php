@@ -5,13 +5,10 @@ namespace App\Models\Builders;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Class CategoryBuilder
- *
- * @package App\Models\Builders
+ * Class CategoryBuilder.
  */
 class CategoryBuilder extends Builder
 {
-
     /**
      * @param string $slug
      *
@@ -21,5 +18,4 @@ class CategoryBuilder extends Builder
     {
         return $this->query->where('slug', $slug);
     }
-
 }

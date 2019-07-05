@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class Theme
+ * Class Theme.
  *
  * @method static Collection searchTop(int $limit = 8)
  */

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers;
 
 use App\Facades\Blog;
-use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Tag;
 use Illuminate\Http\Request;

@@ -20,7 +20,8 @@ mix.webpackConfig({
   resolve: {
     extensions: ['.js', '.jsx', '.vue'],
     alias: {
-      '@': path.resolve(__dirname, 'resources/js/admin')
+      '@': path.resolve(__dirname, 'resources/js/admin'),
+      '@img': path.resolve(__dirname, 'resources/assets/images')
     }
   },
   module: {
@@ -56,3 +57,10 @@ mix
   .js('resources/js/app/app.js', 'public/js/app.js')
   .version()
   .disableSuccessNotifications()
+
+if (process.env.MIX_BROWSERSYNC || false) {
+  mix.browserSync({
+    proxy: process.env.MIX_BROWSERSYNC_PROXY || 'homestead.test',
+    open: (process.env.MIX_BROWSERSYNC_OPEN === 'true')
+  })
+}

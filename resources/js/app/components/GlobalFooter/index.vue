@@ -1,17 +1,15 @@
 <template>
-    <div class="home">
-        <img alt="Vue logo" src="../assets/logo.png">
-    </div>
+  <div class="home">
+    <img alt="Vue logo" src="@img/favicon.png" />
+  </div>
 </template>
 
-<script >
-
+<script>
 export default {
   name: 'GlobalFooter'
 }
-
 </script>
 
 <style lang="less" scoped>
-    @import "./index";
+@import "./index";
 </style>

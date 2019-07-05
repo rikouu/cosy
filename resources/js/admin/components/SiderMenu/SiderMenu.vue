@@ -9,7 +9,7 @@
   >
     <div id="logo" class="logo">
       <router-link to="/">
-        <img src="~@/assets/images/logo.svg" alt="logo">
+        <img src="~@img/favicon.png" alt="logo">
         <h1>{{ title }}</h1>
       </router-link>
     </div>

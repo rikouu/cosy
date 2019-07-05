@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Cosy\Auth\AuthManager;
+use App\Cosy\Auth\AuthManager as Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
@@ -27,16 +27,16 @@ class LoginController extends Controller
     use ThrottlesLogins;
 
     /**
-     * @var AuthManager
+     * @var Auth
      */
     protected $auth;
 
     /**
      * LoginController constructor.
      *
-     * @param AuthManager $auth
+     * @param Auth $auth
      */
-    public function __construct(AuthManager $auth)
+    public function __construct(Auth $auth)
     {
         $this->auth = $auth;
     }
@@ -61,13 +61,13 @@ class LoginController extends Controller
     /**
      * Handle a login request to the application.
      *
-     * @param Request $request
+     * @param LoginRequest $request
      *
      * @return JsonResponse
      * @throws ValidationException
      *
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
@@ -88,11 +88,11 @@ class LoginController extends Controller
     /**
      * Attempt to log the user into the application.
      *
-     * @param Request $request
+     * @param LoginRequest $request
      *
      * @return bool
      */
-    protected function attemptLogin(Request $request)
+    protected function attemptLogin(LoginRequest $request)
     {
         return $this->auth->attempt(
             $this->credentials($request),
@@ -103,11 +103,11 @@ class LoginController extends Controller
     /**
      * Get the needed authorization credentials from the request.
      *
-     * @param Request $request
+     * @param LoginRequest $request
      *
      * @return array
      */
-    protected function credentials(Request $request)
+    protected function credentials(LoginRequest $request)
     {
         $username = $request->only($this->username());
         $type = filter_var($username, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
@@ -121,11 +121,11 @@ class LoginController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param Request $request
+     * @param LoginRequest $request
      *
      * @return JsonResponse
      */
-    protected function sendLoginResponse(Request $request)
+    protected function sendLoginResponse(LoginRequest $request)
     {
         $this->clearLoginAttempts($request);
         $token = 'Bearer ' . $this->auth->getToken();

@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <router-link v-if="isMobile" class="logo" :to="{path:'/'}">
-      <img src="~@/assets/images/logo.svg" alt="logo" width="32">
+      <img src="~@img/favicon.png" alt="logo" width="32">
     </router-link>
     <span class="trigger" @click="toggle">
       <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\VisitorRegistry;
 
 class VisitorRegistryController extends Controller

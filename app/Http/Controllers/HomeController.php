@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers;
 
 use App\Facades\Blog;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use App\Models\Article;
 use App\Models\SearchHistory;
@@ -70,19 +69,19 @@ class HomeController extends Controller
     {
         $search = trim($request->q);
 
-        $articles = Article::where('title', 'like', '%'.$search.'%')
+        $articles = Article::where('title', 'like', '%' . $search . '%')
             ->orWhereHas('tags', function ($query) use ($search) {
-                $query->where('name', 'like', '%'.$search.'%');
+                $query->where('name', 'like', '%' . $search . '%');
             })
             ->orWhereHas('category', function ($query) use ($search) {
-                $query->where('name', 'like', '%'.$search.'%');
+                $query->where('name', 'like', '%' . $search . '%');
             })
             ->orWhereHas('topics', function ($query) use ($search) {
-                $query->where('name', 'like', '%'.$search.'%');
+                $query->where('name', 'like', '%' . $search . '%');
             })
             ->paginate();
 
-        $cacheKey = $request->ip().$search;
+        $cacheKey = $request->ip() . $search;
         $hasSearch = Cache::get($cacheKey, false);
         if (!$hasSearch) {
             SearchHistory::firstOrCreate([

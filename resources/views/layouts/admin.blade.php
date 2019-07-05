@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Cosy') }}</title>
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <script>
-        window.config = { base: '/admin'}
+      window.config = {base: '/admin', debug: Boolean({{ config('app.debug') }})}
     </script>
 </head>
 <body>

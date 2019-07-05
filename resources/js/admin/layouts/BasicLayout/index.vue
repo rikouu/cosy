@@ -10,11 +10,7 @@
         @collapse="handleMenuCollapse"
       />
       <a-layout :style="[{ minHeight: '100vh' }, layoutStyle]">
-        <basic-header
-          :menus="menus"
-          :collapsed="collapsed"
-          @collapse="handleMenuCollapse"
-        />
+        <basic-header :menus="menus" :collapsed="collapsed" @collapse="handleMenuCollapse" />
         <a-layout-content class="basic-content" :style="contentStyle">
           <router-view />
         </a-layout-content>
@@ -26,7 +22,6 @@
 </template>
 
 <script>
-
 import { Layout } from 'ant-design-vue'
 import SiderMenu from '@/components/SiderMenu'
 import SettingDrawer from '@/components/SettingDrawer'
@@ -42,10 +37,10 @@ export default {
     BasicHeader: Header,
     SiderMenu,
     SettingDrawer,
-    'ALayout': Layout,
-    'ALayoutContent': Layout.Content
+    ALayout: Layout,
+    ALayoutContent: Layout.Content
   },
-  mixins: [ themeMixin ],
+  mixins: [themeMixin],
   data () {
     return {
       menus: [],
@@ -54,10 +49,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('theme', [
-      'sidebar',
-      'screen'
-    ]),
+    ...mapGetters('theme', ['sidebar', 'screen']),
     ...mapGetters('permission', {
       mainMenu: 'addRouters'
     }),
@@ -77,8 +69,8 @@ export default {
     }
   },
   created () {
-    this.menus = this.mainMenu.find((item) => item.path === '/').children
-    this.showSettingDrawer = process.env.NODE_ENV === 'production'
+    this.menus = this.mainMenu.find(item => item.path === '/').children
+    this.showSettingDrawer = window.config.debug || false
   },
   methods: {
     setSidebar (value) {
@@ -93,11 +85,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
+@import "~@/styles/variables.less";
 
 .basic-content {
   margin: 24px;
   padding-top: @layout-header-height;
 }
-
 </style>

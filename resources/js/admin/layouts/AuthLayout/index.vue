@@ -12,7 +12,7 @@
       <div class="top">
         <div class="header">
           <router-link :to="{ path: '/' }">
-            <img alt="logo" class="logo" src="~@/assets/images/logo.png">
+            <img alt="logo" class="logo" src="~@img/favicon.png">
             <span class="title">{{ name }}</span>
           </router-link>
         </div>

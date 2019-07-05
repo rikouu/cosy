@@ -2,42 +2,39 @@
   <div :class="{
     right: true,
     dark: darkClass
-  }"
-  >
+  }">
     <header-search class="action search" @search="onSearch" />
     <a-tooltip title="Help">
-      <a target="_blank" href="https://github.com/loyep/cosy" rel="noopener noreferrer" class="action">
+      <a
+        target="_blank"
+        href="https://github.com/loyep/cosy"
+        rel="noopener noreferrer"
+        class="action"
+      >
         <a-icon type="question-circle-o" />
       </a>
     </a-tooltip>
     <notice-icon class="action" />
-    <a-dropdown
-      class="action account"
-    >
+    <a-dropdown class="action account">
       <span class="dropDown">
         <a-avatar class="avatar" size="small" :src="user.avatar" />
-        <span class="name">
-          {{ user.display_name }}
-        </span>
+        <span class="name">{{ user.display_name }}</span>
       </span>
       <template v-slot:overlay>
         <a-menu class="menu">
           <a-menu-item>
             <router-link :to="{ name: 'profile' }">
-              <a-icon type="user" />
-              个人中心
+              <a-icon type="user" />个人中心
             </router-link>
           </a-menu-item>
           <a-menu-item key="userinfo">
             <router-link :to="{ path: '/user/setting' }">
-              <a-icon type="setting" />
-              账号设置
+              <a-icon type="setting" />账号设置
             </router-link>
           </a-menu-item>
           <a-menu-divider />
           <a-menu-item @click="logout">
-            <a-icon type="logout" />
-            退出登录
+            <a-icon type="logout" />退出登录
           </a-menu-item>
         </a-menu>
       </template>
@@ -60,17 +57,15 @@ export default {
     SelectLang,
     NoticeIcon,
     HeaderSearch,
-    'AAvatar': Avatar,
-    'ADropdown': Dropdown,
-    'AMenu': Menu,
-    'AMenuDivider': Menu.Divider,
-    'AMenuItem': Menu.Item
+    AAvatar: Avatar,
+    ADropdown: Dropdown,
+    AMenu: Menu,
+    AMenuDivider: Menu.Divider,
+    AMenuItem: Menu.Item
   },
-  mixins: [ themeMixin ],
+  mixins: [themeMixin],
   computed: {
-    ...mapGetters('auth', [
-      'user'
-    ]),
+    ...mapGetters('auth', ['user']),
     darkClass () {
       if (this.isMobile || !this.isTopMenu) {
         return false
@@ -85,11 +80,14 @@ export default {
         title: '提示',
         content: '真的要注销登录吗 ?',
         onOk () {
-          return that.$store.dispatch('auth/Logout').then(() => {
-            location.reload()
-          }).catch(() => {
-            console.log('Oops errors!')
-          })
+          return that.$store
+            .dispatch('auth/Logout')
+            .then(() => {
+              location.reload()
+            })
+            .catch(() => {
+              console.log('Oops errors!')
+            })
         },
         onCancel () {}
       })
@@ -102,7 +100,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
+@import "~@/styles/variables.less";
 
 .menu {
   :global(.anticon) {
@@ -143,7 +141,7 @@ export default {
   }
   .account {
     .avatar {
-      margin: ~'calc((@{layout-header-height} - 24px) / 2)' 0;
+      margin: ~"calc((@{layout-header-height} - 24px) / 2)" 0;
       margin-right: 8px;
       color: @primary-color;
       background: rgba(255, 255, 255, 0.85);
@@ -194,5 +192,4 @@ export default {
     }
   }
 }
-
 </style>

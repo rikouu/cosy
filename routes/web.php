@@ -1,7 +1,6 @@
 <?php
 
 use App\Facades\Cosy;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,41 +15,41 @@ use Illuminate\Support\Facades\Route;
 */
 
 // 首页
-Route::get('/', 'App\HomeController@home');
+Route::get('/', 'HomeController@home');
 
 // 历史页
-Route::get('history', 'App\HomeController@history')->name('history');
+Route::get('history', 'HomeController@history')->name('history');
 
 // 搜索页
-Route::get('search/{q?}', 'App\HomeController@search')->name('search');
+Route::get('search/{q?}', 'HomeController@search')->name('search');
 
 // 作者页
-Route::get('author/{slug}', 'App\UserController@show')->name('user.show');
+Route::get('author/{slug}', 'UserController@show')->name('user.show');
 
 // 分类页
-Route::get('category/{slug}', 'App\CategoryController@show')->name('category.show');
-Route::get('category', 'App\CategoryController@index')->name('category.index');
+Route::get('category/{slug}', 'CategoryController@show')->name('category.show');
+Route::get('category', 'CategoryController@index')->name('category.index');
 
 // 标签页
-Route::get('tag/{slug}', 'App\TagController@show')->name('tag.show');
-Route::get('tag', 'App\TagController@index')->name('tag.index');
+Route::get('tag/{slug}', 'TagController@show')->name('tag.show');
+Route::get('tag', 'TagController@index')->name('tag.index');
 
 // 专题页
-Route::get('topic/{slug}', 'App\TopicController@show')->name('topic.show');
-Route::get('topic', 'App\TopicController@index')->name('topic.index');
+Route::get('topic/{slug}', 'TopicController@show')->name('topic.show');
+Route::get('topic', 'TopicController@index')->name('topic.index');
 
 // 文章页
-Route::get('{slug}.html', 'App\ArticleController@show')->name('article.show');
-Route::get('random-article', 'App\ArticleController@randomArticle')->name('article.random');
+Route::get('{slug}.html', 'ArticleController@show')->name('article.show');
+Route::get('random-article', 'ArticleController@randomArticle')->name('article.random');
 
 // Site Map
-Route::get('sitemap', 'App\HomeController@siteMap')->name('sitemap');
+Route::get('sitemap', 'HomeController@siteMap')->name('sitemap');
 
 // 幻灯片
-Route::get('slide/{id}', 'App\SlideController@show')->name('slide.show');
+Route::get('slide/{id}', 'SlideController@show')->name('slide.show');
 
 // RSS Feed
-Route::get('feed.xml', 'App\HomeController@feed')->name('feed');
+Route::get('feed.xml', 'HomeController@feed')->name('feed');
 
 Route::group(['prefix' => Cosy::path(),], function () {
     Route::get('/', 'Admin\DashboardController@dashboard')->name('dashboard');
@@ -58,5 +57,5 @@ Route::group(['prefix' => Cosy::path(),], function () {
 });
 
 Route::group(['middleware' => 'throttle:5,1'], function () {
-    Route::post('article/{id}/like', 'App\ArticleController@like')->name('article.like');
+    Route::post('article/{id}/like', 'ArticleController@like')->name('article.like');
 });

@@ -1,30 +1,3 @@
-<template>
-  <a-drawer
-    v-if="isMobile"
-    :visible="!collapsed"
-    :wrapStyle="{
-      padding: 0,
-      height: '100vh',
-    }"
-    zIndex="10"
-    placement="left"
-    @close="() => collapse(true)"
-  >
-    <sider-menu
-      :menus="menus"
-      :mode="mode"
-      :collapsed="(isMobile ? false : isMobile)"
-      @select="onSelect"
-    />
-  </a-drawer>
-  <sider-menu v-else
-              :menus="menus"
-              :mode="mode"
-              :collapsed="collapsed"
-              @select="onSelect"
-  />
-</template>
-
 <script>
 import { Drawer } from 'ant-design-vue'
 import SiderMenu from './SiderMenu'
@@ -33,10 +6,10 @@ import { themeMixin } from '@/mixins'
 export default {
   name: 'SiderMenuWrapper',
   components: {
-    SiderMenu,
-    'ADrawer': Drawer
+    SiderMenu: SiderMenu,
+    ADrawer: Drawer
   },
-  mixins: [ themeMixin ],
+  mixins: [themeMixin],
   props: {
     mode: {
       type: String,
@@ -69,12 +42,39 @@ export default {
     collapse (collapsed) {
       this.$emit('collapse', collapsed)
     }
+  },
+  render () {
+    const { isMobile, menus, collapsed, mode, onCollapse } = this
+    return isMobile ? (
+      <ADrawer
+        visible={!collapsed}
+        wrapStyle={{
+          padding: 0,
+          height: '100vh'
+        }}
+        zIndex={10}
+        placement="left"
+        onClose={() => onCollapse && onCollapse(true)}
+      >
+        <SiderMenu
+          menus={menus}
+          mode={mode}
+          collapsed={isMobile ? false : collapsed}
+        />
+      </ADrawer>
+    ) : (
+      <SiderMenu
+        menus={menus}
+        mode={mode}
+        collapsed={isMobile ? false : collapsed}
+        onSelect={this.onSelect}
+      />
+    )
   }
 }
 </script>
 
 <style lang="less">
-
 .drawer .drawer-content {
   background: #001529;
 }
@@ -83,5 +83,4 @@ export default {
     padding: 0;
   }
 }
-
 </style>

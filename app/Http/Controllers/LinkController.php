@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Link;
 
-class CommentController extends Controller
+class LinkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +19,11 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param \App\Models\Link $link
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Link $link)
     {
         //
     }

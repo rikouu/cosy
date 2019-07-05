@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Cosy\Auth\AuthManager;
+use App\Cosy\Auth\AuthManager as Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,18 +24,34 @@ class RegisterController extends Controller
     */
 
     /**
-     * @var AuthManager
+     * @var Auth
      */
     protected $auth;
 
     /**
      * RegisterController constructor.
      *
-     * @param AuthManager $auth
+     * @param Auth $auth
      */
-    public function __construct(AuthManager $auth)
+    public function __construct(Auth $auth)
     {
         $this->auth = $auth;
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param RegisterRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function register(RegisterRequest $request)
+    {
+        $user = $this->create($request->all());
+
+        $this->auth->login($user);
+
+        return $this->registered($request, $user);
     }
 
     /**
@@ -60,12 +77,12 @@ class RegisterController extends Controller
     /**
      * The user has been registered.
      *
-     * @param Request $request
+     * @param RegisterRequest $request
      * @param mixed   $user
      *
      * @return JsonResponse
      */
-    protected function registered(Request $request, $user)
+    protected function registered(RegisterRequest $request, $user)
     {
         $token = $this->auth->getToken();
 

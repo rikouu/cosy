@@ -15,12 +15,15 @@ const themeMixin = {
       sidebarOpened: state => state.sidebar,
       device: state => state.device
     }),
+
     isTopMenu () {
       return this.layoutMode === 'topmenu'
     },
+
     isSideMenu () {
       return this.layoutMode === 'sidemenu'
     },
+
     isMobile () {
       return this.device === DEVICE_TYPE.MOBILE
     },

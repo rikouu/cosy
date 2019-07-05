@@ -1,23 +1,28 @@
 <template>
-  <div :class="{ head: true, light: navTheme === 'light' }">
-    <div :class="[ 'main', { wide: wide }]">
-      <div class="left">
-        <div id="logo" class="logo">
+  <div :class="{ 'top-nav-header': true, 'light': navTheme === 'light' }">
+    <div ref="maim" :class="[ 'top-nav-header-main', { 'wide': wide }]">
+      <div class="top-nav-header-left">
+        <div id="logo" class="top-nav-header-logo">
           <router-link :to="{ path: '/' }">
-            <img src="~@/assets/images/logo.svg" alt="logo">
+            <img src="~@/assets/images/logo.svg" alt="logo" />
             <h1>{{ title }}</h1>
           </router-link>
         </div>
-        <div :style="{ maxWidth }">
-          <base-menu
-            :collapsed="collapsed"
-            :menu="menus"
-            mode="horizontal"
-            :theme="navTheme"
-            class="menu"
-            @select="onSelect"
-          />
-        </div>
+      </div>
+      <div
+        :style="{
+         'maxWidth': maxWidth,
+         'flex': 1,
+         }"
+        class="top-nav-header-menu"
+      >
+        <base-menu
+          :collapsed="collapsed"
+          :menu="menus"
+          mode="horizontal"
+          :theme="navTheme"
+          @select="onSelect"
+        />
       </div>
       <right-content />
     </div>
@@ -33,9 +38,10 @@ import config from '@/config/base'
 export default {
   name: 'TopNavHeader',
   components: {
-    BaseMenu, RightContent
+    BaseMenu,
+    RightContent
   },
-  mixins: [ themeMixin ],
+  mixins: [themeMixin],
   props: {
     collapsed: {
       type: Boolean,
@@ -49,7 +55,8 @@ export default {
   },
   data () {
     return {
-      title: config.name
+      title: config.name,
+      main: undefined
     }
   },
   computed: {
@@ -57,7 +64,11 @@ export default {
       return this.contentWidth === 'Fixed'
     },
     maxWidth () {
-      const width = (this.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 280 - 120 - 40
+      const width =
+        (this.contentWidth === 'Fixed' ? 1200 : window.innerWidth) -
+        280 -
+        120 -
+        40
       return `${width}px`
     }
   },
@@ -70,77 +81,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
-
-.head {
-  position: relative;
-  width: 100%;
-  height: @layout-header-height;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  transition: background 0.3s, width 0.2s;
-  :global {
-    .ant-menu-submenu.ant-menu-submenu-horizontal {
-      height: 100%;
-      line-height: @layout-header-height;
-      .ant-menu-submenu-title {
-        height: 100%;
-      }
-    }
-  }
-  &.light {
-    background-color: #fff;
-  }
-  .main {
-    display: flex;
-    height: @layout-header-height;
-    padding-left: 24px;
-    &.wide {
-      max-width: 1200px;
-      margin: auto;
-      padding-left: 0;
-    }
-    .left {
-      display: flex;
-      flex: 1;
-    }
-    // .right {
-      // width: 324px;
-    // }
-  }
-}
-
-.logo {
-  position: relative;
-  width: 165px;
-  height: @layout-header-height;
-  overflow: hidden;
-  line-height: @layout-header-height;
-  transition: all 0.3s;
-  img {
-    display: inline-block;
-    height: 32px;
-    vertical-align: middle;
-  }
-  h1 {
-    display: inline-block;
-    margin: 0 0 0 12px;
-    color: #fff;
-    font-weight: 400;
-    font-size: 16px;
-    vertical-align: top;
-  }
-}
-
-.light {
-  h1 {
-    color: #002140;
-  }
-}
-
-.menu {
-  height: @layout-header-height;
-  line-height: @layout-header-height;
-  border: none;
-}
-
+@import "./index.less";
 </style>

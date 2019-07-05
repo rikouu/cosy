@@ -1,10 +1,10 @@
 <template>
-  <locale-provider :locale="locale">
+  <a-locale-provider :locale="locale">
     <div id="app">
       <loading />
       <router-view v-if="isRouterAlive" />
     </div>
-  </locale-provider>
+  </a-locale-provider>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ import { deviceEnquire } from '@/utils/device'
 export default {
   name: 'App',
   components: {
-    LocaleProvider,
+    ALocaleProvider: LocaleProvider,
     Loading
   },
   provide () {

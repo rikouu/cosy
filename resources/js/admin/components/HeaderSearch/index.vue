@@ -1,10 +1,19 @@
 <template>
-  <span class="headerSearch" @click="enterSearchMode">
+  <span
+    class="header-search"
+    @click="enterSearchMode"
+    @transitionEnd="({ propertyName }) => {
+      if (propertyName === 'width' && !searchMode) {
+        const { onVisibleChange } = this.props;
+        onVisibleChange(searchMode);
+      }
+    }"
+  >
     <a-icon type="search" />
     <a-auto-complete
       key="AutoComplete"
       ref="input"
-      :class="['input ', {'show': searchMode}]"
+      :class="['input', {'show': searchMode}]"
       :dataSource="dataSource"
       :value="value"
       @change="onSearchChange"
@@ -27,7 +36,7 @@ import { AutoComplete } from 'ant-design-vue'
 export default {
   name: 'HeaderSearch',
   components: {
-    'AAutoComplete': AutoComplete
+    AAutoComplete: AutoComplete
   },
   props: {
     placeholder: {
@@ -53,9 +62,7 @@ export default {
     onSearch () {
       this.$emit('search', this.value)
     },
-    onKeyDown (e) {
-
-    },
+    onKeyDown (e) {},
     onSearchChange (value) {
       this.value = value
       if (this.onChange) {
@@ -76,28 +83,24 @@ export default {
 }
 </script>
 
-<style lang="less" scope>
-@import '~@/styles/variables.less';
+<style lang="less" scoped>
+@import '~ant-design-vue/es/style/themes/default';
 
-.headerSearch {
-  :global(.anticon-search) {
-    font-size: 16px;
-    cursor: pointer;
-  }
+.header-search {
+
   .input {
     width: 0;
     background: transparent;
     border-radius: 0;
     transition: width 0.3s, margin-left 0.3s;
-    :global(.ant-select-selection) {
-      background: transparent;
-    }
+
     input {
       padding-right: 0;
       padding-left: 0;
       border: 0;
       box-shadow: none !important;
     }
+
     &,
     &:hover,
     &:focus {
@@ -110,4 +113,19 @@ export default {
   }
 }
 
+</style>
+
+<style lang="less">
+.header-search {
+
+  .anticon-search {
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .input {
+    .ant-select-selection {
+      background: transparent;
+    }
+  }
+}
 </style>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Cosy\Auth\AuthManager;
+use App\Cosy\Auth\AuthManager as Auth;
 use App\Exceptions\AuthenticationException;
 use Closure;
 use Exception;
@@ -12,16 +12,16 @@ use Illuminate\Http\Response;
 class Authenticate
 {
     /**
-     * @var AuthManager
+     * @var Auth
      */
     protected $auth;
 
     /**
      * Authenticate constructor.
      *
-     * @param AuthManager $auth
+     * @param Auth $auth
      */
-    public function __construct(AuthManager $auth)
+    public function __construct(Auth $auth)
     {
         $this->auth = $auth;
     }

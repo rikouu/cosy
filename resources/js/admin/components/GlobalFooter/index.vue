@@ -44,33 +44,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
-
-.globalFooter {
-  padding: 0 16px;
-  margin: 48px 0 24px 0;
-  text-align: center;
-
-  .links {
-    margin-bottom: 8px;
-
-    a {
-      color: @text-color-secondary;
-      transition: all 0.3s;
-
-      &:not(:last-child) {
-        margin-right: 40px;
-      }
-
-      &:hover {
-        color: @text-color;
-      }
-    }
-  }
-
-  .copyright {
-    color: @text-color-secondary;
-    font-size: @font-size-base;
-  }
-}
+@import './index';
 </style>

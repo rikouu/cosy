@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\JWTAuth;
+use Tymon\JWTAuth\Manager;
 
 /**
  * Class AuthManager.
@@ -60,6 +61,14 @@ class AuthManager
         $this->auth->login($user);
 
         $this->jwtAuth->login($user);
+    }
+
+    /**
+     * @return Manager
+     */
+    public function manager()
+    {
+        return $this->jwtAuth->manager();
     }
 
     /**

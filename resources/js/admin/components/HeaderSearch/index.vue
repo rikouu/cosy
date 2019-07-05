@@ -32,9 +32,7 @@ export default {
   props: {
     placeholder: {
       type: String,
-      default: function () {
-        return '站内搜索'
-      }
+      default: '站内搜索'
     }
     // onSearch: {
     //   type: Function,
@@ -66,14 +64,6 @@ export default {
     },
     enterSearchMode () {
       this.searchMode = true
-      // const input = this.$refs.input
-      // setTimeout(() => input.focus(), 300)
-      // this.setState({ searchMode: true }, () => {
-      //   const { searchMode } = this.state
-      //   if (searchMode) {
-      //     this.input.focus()
-      //   }
-      // })
       setTimeout(() => {
         this.$refs.input.focus()
       }, 300)

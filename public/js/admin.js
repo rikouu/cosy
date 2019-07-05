@@ -80220,7 +80220,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************!*\
   !*** ./resources/js/admin/admin.js ***!
   \*************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80241,15 +80241,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.productionTip = false;
-/**
- * 注册指令
- */
-
 Object(_directive__WEBPACK_IMPORTED_MODULE_5__["default"])(vue__WEBPACK_IMPORTED_MODULE_0___default.a);
-new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
+var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _router__WEBPACK_IMPORTED_MODULE_2__["default"],
-  i18n: _locales__WEBPACK_IMPORTED_MODULE_4__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_3__["default"],
+  i18n: _locales__WEBPACK_IMPORTED_MODULE_4__["default"],
   created: function created() {
     Object(_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"])();
   },
@@ -80257,6 +80253,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     return h(_App__WEBPACK_IMPORTED_MODULE_1__["default"]);
   }
 }).$mount('#app');
+/* harmony default export */ __webpack_exports__["default"] = (app);
 
 /***/ }),
 

@@ -1,18 +1,9 @@
-<template>
-  <div class="header">
-    <router-link v-if="isMobile" class="logo" :to="{path:'/'}">
-      <img src="~@img/favicon.png" alt="logo" width="32">
-    </router-link>
-    <span class="trigger" @click="toggle">
-      <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
-    </span>
-    <right-content />
-  </div>
-</template>
 
 <script>
+import { Icon } from 'ant-design-vue'
 import RightContent from './RightContent'
 import { themeMixin } from '@/mixins'
+import Logo from '@img/favicon.png'
 
 export default {
   name: 'GlobalHeader',
@@ -38,6 +29,22 @@ export default {
       this.$emit('collapse', !this.collapsed)
       // this.collapse(!this.collapsed)
     }
+  },
+  render () {
+    const { collapsed, isMobile } = this
+    return (
+      <div class="global-header">
+        {isMobile && (
+          <RouterLink class="global-header-logo" to={{ path: '/' }}>
+            <img src={Logo} />
+          </RouterLink>
+        )}
+        <span class="trigger" onClick={this.toggle}>
+          <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
+        </span>
+        <RightContent />
+      </div>
+    )
   }
 }
 </script>

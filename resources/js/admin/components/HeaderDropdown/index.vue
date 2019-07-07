@@ -1,20 +1,12 @@
-<template>
-    <a-dropdown>
-
-    </a-dropdown>
-</template>
-
 <script>
 import { Dropdown } from 'ant-design-vue'
-export default {
-  name: 'HeaderDropdown',
-  components: {
-    ADropdown: Dropdown
-
-  }
+const HeaderDropdown = ({
+  overlayClassName: cls,
+  ...restProps
+}) => {
+  // eslint-disable-next-line no-unused-expressions
+  console.log(cls)
+  return (<Dropdown overlayClassName={'container ' + String(cls)} {...restProps}/>)
 }
+export default HeaderDropdown
 </script>
-
-<style>
-
-</style>

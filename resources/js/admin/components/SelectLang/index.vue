@@ -1,23 +1,8 @@
-<template>
-  <a-dropdown placement="bottomRight">
-    <span class="dropDown">
-      <a-icon type="global" />
-    </span>
-    <template v-slot:overlay>
-      <a-menu class="menu" :selectedKeys="[locale]" @click="changeLang">
-        <a-menu-item v-for="item in locales" :key="item">
-          <span role="img" :title="languageLabels[item]" :aria-label="languageLabels[item ]">
-            {{ languageIcons[item] }}
-          </span>
-          {{ languageLabels[item] }}
-        </a-menu-item>
-      </a-menu>
-    </template>
-  </a-dropdown>
-</template>
-
 <script>
-import { Dropdown, Menu } from 'ant-design-vue'
+import { Dropdown, Menu, Icon } from 'ant-design-vue'
+
+const { Item } = Menu
+
 const languageLabels = {
   'zh_CN': '简体中文',
   'en_US': 'English'
@@ -30,27 +15,13 @@ const languageIcons = {
 
 const locales = ['zh_CN', 'en_US']
 
-export default {
+const SelectLang = {
   name: 'SelectLang',
-  components: {
-    'ADropdown': Dropdown,
-    'AMenu': Menu,
-    'AMenuItem': Menu.Item
-  },
   inject: ['reload'],
-  data () {
-    return {
-      locales,
-      languageIcons,
-      languageLabels
-    }
-  },
-  computed: {
-    locale () {
-      return this.$i18n.locale
-    }
-  },
   methods: {
+    getLocale () {
+      return this.$i18n.locale
+    },
     changeLang ({ key }) {
       const locale = key
       this.$store.dispatch('app/SetLocale', locale)
@@ -58,8 +29,30 @@ export default {
       this.$message.success(this.$t('navBar.lang.switch'))
       this.reload()
     }
+  },
+  render () {
+    const selectedLang = this.getLocale()
+    return (
+      <Dropdown placement="bottomRight">
+        <span class="dropDown">
+          <Icon type="global" />
+        </span>
+        <Menu slot="overlay" class="menu" selectedKeys={[selectedLang]} onClick={this.changeLang}>
+          {locales.map(locale => (
+            <Item key={locale}>
+              <span role="img" aria-label={languageLabels[locale]}>
+                {languageIcons[locale]}
+              </span>{' '}
+              {languageLabels[locale]}
+            </Item>
+          ))}
+        </Menu>
+      </Dropdown>
+    )
   }
 }
+
+export default SelectLang
 </script>
 
 <style lang="less" scoped>

@@ -28,7 +28,7 @@ mix.webpackConfig({
     rules: [
       {
         test: /\.less$/,
-        loader: require.resolve('less-loader'), // compiles Less to CSS
+        loader: 'less-loader',
         options: {
           javascriptEnabled: true
         }

@@ -4,10 +4,14 @@ import path from 'path'
 import { isUrl } from '@/utils/utils'
 import IconFont from '@/components/IconFont'
 
+const { SubMenu, Item } = Menu
+
 export default {
   name: 'BaseMenu',
   components: {
-    Icon
+    Icon: Icon,
+    Menu: Menu,
+    MenuItem: Menu.Item
   },
   props: {
     menu: {
@@ -60,56 +64,68 @@ export default {
     this.updateMenu()
   },
   methods: {
-    renderIcon (h, icon) {
+    renderIcon (icon) {
       if (typeof icon === 'string') {
         if (isUrl(icon)) {
-          return h('Icon', { props: { component: {
-            template: `<img src="${icon}" class="icon" />`
-          } } })
+          return (
+            <Icon
+              components={{ template: `<img src="${icon}" class="icon" />` }}
+            />
+          )
         }
         if (icon.startsWith('icon-')) {
-          return h(IconFont, { props: { type: icon } })
+          return <IconFont type={icon} />
         }
-        return h(Icon, { props: { type: icon !== undefined ? icon : '' } })
+        return <Icon type={icon !== undefined ? icon : ''} />
       }
-      return icon === 'none' || icon === undefined ? null : h(Icon, { props: { type: icon !== undefined ? icon : '' } })
+      return icon === 'none' || icon === undefined ? null : (
+        <Icon type={icon !== undefined ? icon : ''} />
+      )
     },
-    renderMenuItem (h, menu, pIndex, index, basePath) {
+    renderMenuItem (menu, pIndex, index, basePath) {
       const target = menu.meta.target || null
       const routePath = path.resolve(basePath, menu.path)
-      return h(Menu.Item, { key: routePath }, [
-        h('router-link', { attrs: { to: { path: routePath }, target } }, [
-          this.renderIcon(h, menu.meta.icon),
-          h('span', [menu.meta.title])
-        ])
-      ])
+      return (
+        <Item key={routePath}>
+          <RouterLink to={{ path: routePath, target: target }}>
+            {this.renderIcon(menu.meta.icon)}
+            <span>{menu.meta.title}</span>
+          </RouterLink>
+        </Item>
+      )
     },
-    renderSubMenu (h, menu, pIndex, index, basePath) {
+    renderSubMenu (menu, pIndex, index, basePath) {
       const that = this
-      const subItem = [h('span', { slot: 'title' }, [this.renderIcon(h, menu.meta.icon), h('span', [menu.meta.title])])]
+      const subItem = [
+        (<span slot="title">
+          {this.renderIcon(menu.meta.icon)}
+          <span> {[menu.meta.title]} </span>
+        </span>)
+      ]
+
       const itemArr = []
       const pIndex_ = `${pIndex}_${index}`
       const routePath = path.resolve(basePath, menu.path)
       if (!menu.hideChildrenInMenu) {
         menu.children.forEach((item, i) => {
-          itemArr.push(that.renderItem(h, item, pIndex_, i, routePath))
+          itemArr.push(that.renderItem(item, pIndex_, i, routePath))
         })
       }
-      return h(Menu.SubMenu, { key: routePath }, subItem.concat(itemArr))
+      return <SubMenu key={routePath}>{subItem.concat(itemArr)}</SubMenu>
     },
-    renderItem (h, menu, pIndex, index, basePath) {
+    renderItem (menu, pIndex, index, basePath) {
       if (!menu.hidden) {
         return menu.children && !menu.hideChildrenInMenu
-          ? this.renderSubMenu(h, menu, pIndex, index, basePath)
-          : this.renderMenuItem(h, menu, pIndex, index, basePath)
+          ? this.renderSubMenu(menu, pIndex, index, basePath)
+          : this.renderMenuItem(menu, pIndex, index, basePath)
       }
     },
-    renderMenu (h, menuTree, basePath) {
+    renderMenu (menuTree, basePath) {
       const that = this
       const menuArr = []
       menuTree.forEach((menu, i) => {
         if (!menu.hidden) {
-          menuArr.push(that.renderItem(h, menu, '0', i, basePath))
+          menuArr.push(that.renderItem(menu, '0', i, basePath))
         }
       })
       return menuArr
@@ -124,9 +140,12 @@ export default {
       }
     },
     updateMenu () {
-      const routes = this.$route.matched.concat().filter(item => item.path).map(item => {
-        return item.path
-      })
+      const routes = this.$route.matched
+        .concat()
+        .filter(item => item.path)
+        .map(item => {
+          return item.path
+        })
 
       if (routes.length >= 4 && this.$route.meta.hidden) {
         routes.pop()
@@ -150,38 +169,35 @@ export default {
         }
       })
 
-      this.collapsed ? (this.cachedOpenKeys = openKeys) : (this.openKeys = openKeys)
+      this.collapsed
+        ? (this.cachedOpenKeys = openKeys)
+        : (this.openKeys = openKeys)
     }
   },
-  render (h) {
-    return h(
-      Menu,
-      {
-        props: {
-          theme: this.$props.theme,
-          mode: this.$props.mode,
-          openKeys: this.openKeys,
-          selectedKeys: this.selectedKeys
-        },
-        class: [
-          this.$class,
+  render () {
+    return (
+      <Menu
+        theme={this.theme}
+        mode={this.mode}
+        openKeys={this.openKeys}
+        selectedKeys={this.selectedKeys}
+        class={[
+          // this.$class,
           {
             'top-nav-menu': this.$props.mode === 'horizontal'
           }
-        ],
-        on: {
-          openChange: this.onOpenChange,
-          select: obj => {
-            this.selectedKeys = obj.selectedKeys
-            this.$emit('select', obj)
-          }
-        }
-      },
-      this.renderMenu(h, this.menu, '/')
+        ]}
+        onOpenChange={this.onOpenChange}
+        onSelect={obj => {
+          this.selectedKeys = obj.selectedKeys
+          this.$emit('select', obj)
+        }}
+      >
+        {this.renderMenu(this.menu, '/')}
+      </Menu>
     )
   }
 }
-
 </script>
 
 <style lang="less" scoped>

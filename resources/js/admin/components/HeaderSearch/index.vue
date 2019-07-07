@@ -1,60 +1,27 @@
-<template>
-  <span
-    class="header-search"
-    @click="enterSearchMode"
-    @transitionEnd="({ propertyName }) => {
-      if (propertyName === 'width' && !searchMode) {
-        const { onVisibleChange } = this.props;
-        onVisibleChange(searchMode);
-      }
-    }"
-  >
-    <a-icon type="search" />
-    <a-auto-complete
-      key="AutoComplete"
-      ref="input"
-      :class="['input', {'show': searchMode}]"
-      :dataSource="dataSource"
-      :value="value"
-      @change="onSearchChange"
-      @search="onSearch"
-    >
-      <a-input
-        ref="searchInput"
-        :placeholder="placeholder"
-        :value="value"
-        :aria-label="placeholder"
-        @keydown="(e) => onKeyDown(e)"
-        @blur="leaveSearchMode"
-      />
-    </a-auto-complete>
-  </span>
-</template>
 
 <script>
-import { AutoComplete } from 'ant-design-vue'
+import { AutoComplete, Icon } from 'ant-design-vue'
 export default {
   name: 'HeaderSearch',
   components: {
-    AAutoComplete: AutoComplete
+    AAutoComplete: AutoComplete,
+    AIcon: Icon
   },
   props: {
     placeholder: {
       type: String,
       default: '站内搜索'
+    },
+    dataSource: {
+      type: Array,
+      default: function () {
+        return []
+      }
     }
-    // onSearch: {
-    //   type: Function,
-    //   required: false,
-    //   default: function () {
-    //     return () => { console.log(this.value) }
-    //   }
-    // }
   },
   data () {
     return {
       searchMode: false,
-      dataSource: [],
       value: ''
     }
   },
@@ -65,9 +32,7 @@ export default {
     onKeyDown (e) {},
     onSearchChange (value) {
       this.value = value
-      if (this.onChange) {
-        this.onChange()
-      }
+      this.$emit('change', value)
     },
     enterSearchMode () {
       this.searchMode = true
@@ -79,28 +44,66 @@ export default {
       this.value = ''
       this.searchMode = false
     }
+  },
+  render () {
+    const { placeholder, value, searchMode, dataSource } = this
+    return (
+      <span
+        class={'headerSearch'}
+        onClick={this.enterSearchMode}
+        onTransitionEnd={({ propertyName }) => {
+          if (propertyName === 'width' && !searchMode) {
+            console.log(2)
+          }
+        }}
+      >
+        <Icon type="search" />
+        <AutoComplete
+          key="AutoComplete"
+          ref="input"
+          class={['input', { 'show': searchMode }]}
+          dataSource={dataSource}
+          value={value}
+          onChange={this.onSearchChange}
+          onSearch={this.onSearch}
+          onBlur={this.leaveSearchMode}
+        >
+          <Input
+            ref="searchInput"
+            placeholder={placeholder}
+            value={value}
+            onKeydown={(e) => this.onKeyDown(e)}
+            onBlur={this.leaveSearchMode}
+          />
+        </AutoComplete>
+      </span>
+    )
   }
 }
 </script>
 
-<style lang="less" scoped>
-@import '~ant-design-vue/es/style/themes/default';
+<style lang="less" >
+@import "~ant-design-vue/es/style/themes/default";
 
-.header-search {
-
+.headerSearch {
+  .anticon-search {
+    font-size: 16px;
+    cursor: pointer;
+  }
   .input {
     width: 0;
     background: transparent;
     border-radius: 0;
     transition: width 0.3s, margin-left 0.3s;
-
+    .ant-select-selection {
+      background: transparent;
+    }
     input {
       padding-right: 0;
       padding-left: 0;
       border: 0;
       box-shadow: none !important;
     }
-
     &,
     &:hover,
     &:focus {
@@ -109,22 +112,6 @@ export default {
     &.show {
       width: 210px;
       margin-left: 8px;
-    }
-  }
-}
-
-</style>
-
-<style lang="less">
-.header-search {
-
-  .anticon-search {
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .input {
-    .ant-select-selection {
-      background: transparent;
     }
   }
 }

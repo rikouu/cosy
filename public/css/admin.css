@@ -20380,3 +20380,16 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
     opacity: 0;
   }
 }
+.headerDropdown > * {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+@media screen and (max-width: 480px) {
+  .headerDropdown {
+    width: 100% !important;
+  }
+  .headerDropdown > * {
+    border-radius: 0 !important;
+  }
+}

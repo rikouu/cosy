@@ -32,21 +32,24 @@ const SelectLang = {
   },
   render () {
     const selectedLang = this.getLocale()
+
+    const langMenu = (
+      <Menu class="menu" selectedKeys={[selectedLang]} onClick={this.changeLang}>
+        {locales.map(locale => (
+          <Item key={locale}>
+            <span role="img" aria-label={languageLabels[locale]}>
+              {languageIcons[locale]}
+            </span>{' '}
+            {languageLabels[locale]}
+          </Item>
+        ))}
+      </Menu>
+    )
     return (
-      <Dropdown placement="bottomRight">
+      <Dropdown overlay={langMenu} placement="bottomRight" overlayClassName="header-dropdown">
         <span class="dropDown">
           <Icon type="global" />
         </span>
-        <Menu slot="overlay" class="menu" selectedKeys={[selectedLang]} onClick={this.changeLang}>
-          {locales.map(locale => (
-            <Item key={locale}>
-              <span role="img" aria-label={languageLabels[locale]}>
-                {languageIcons[locale]}
-              </span>{' '}
-              {languageLabels[locale]}
-            </Item>
-          ))}
-        </Menu>
       </Dropdown>
     )
   }
@@ -56,13 +59,13 @@ export default SelectLang
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
+@import '~ant-design-vue/es/style/themes/default';
 
 .menu {
-  :global(.anticon) {
+  .anticon {
     margin-right: 8px;
   }
-  :global(.ant-dropdown-menu-item) {
+  .ant-dropdown-menu-item {
     min-width: 160px;
   }
 }

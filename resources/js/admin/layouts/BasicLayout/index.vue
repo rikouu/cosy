@@ -1,26 +1,3 @@
-<template>
-  <div :class="screen">
-    <a-layout>
-      <sider-menu
-        v-if="!(isTopMenu && !isMobile)"
-        :menus="menus"
-        :collapsed="collapsed"
-        mode="inline"
-        :collapsible="true"
-        @collapse="handleMenuCollapse"
-      />
-      <a-layout :style="[{ minHeight: '100vh' }, layoutStyle]">
-        <basic-header :menus="menus" :collapsed="collapsed" @collapse="handleMenuCollapse" />
-        <a-layout-content class="basic-content" :style="contentStyle">
-          <router-view />
-        </a-layout-content>
-        <basic-footer />
-      </a-layout>
-    </a-layout>
-    <setting-drawer v-if="showSettingDrawer" />
-  </div>
-</template>
-
 <script>
 import { Layout } from 'ant-design-vue'
 import SiderMenu from '@/components/SiderMenu'

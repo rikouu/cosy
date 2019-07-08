@@ -1,18 +1,5 @@
-<template>
-  <footer class="globalFooter">
-    <div class="links">
-      <a v-for="link in footerLinks" :key="link.key" :href="link.path" :target="link.target || '_blank'">
-        <a-icon v-if="link.icon" :type="link.icon" /> {{ link.title }}
-      </a>
-      <!--<router-link v-for="link in links" :key="link.key" :to="{ path: link.path }"><a-icon v-if="link.icon" :type="link.icon"/> {{ link.title }}</router-link>-->
-    </div>
-    <div class="copyright">
-      <slot name="copyright" />
-    </div>
-  </footer>
-</template>
-
 <script>
+import { Icon } from 'ant-design-vue'
 export default {
   name: 'GlobalFooter',
   props: {
@@ -27,8 +14,14 @@ export default {
     footerLinks () {
       // role.permissionList = role.permissions.map(permission => { return permission.permissionId })
       return this.links.map(link => {
-        if (link.path !== undefined && link.path.substr(0, 7).toLowerCase() !== 'http://' && link.path.substr(0, 8).toLowerCase() !== 'https://') {
-          link.path = `${this.$router.base}/${(this.$router.mode === 'hash' ? '#/' : '')}${link.path}`
+        if (
+          link.path !== undefined &&
+          link.path.substr(0, 7).toLowerCase() !== 'http://' &&
+          link.path.substr(0, 8).toLowerCase() !== 'https://'
+        ) {
+          link.path = `${this.$router.base}/${
+            this.$router.mode === 'hash' ? '#/' : ''
+          }${link.path}`
         }
 
         if (link.blankTarget) {
@@ -39,10 +32,33 @@ export default {
         return link
       })
     }
+  },
+  render () {
+    const { links } = this
+    return (
+      <footer class="global-footer">
+        <div class="global-footer-links">
+          {links.map(link => (
+            <a
+              href={link.path}
+              key={link.key}
+              title={link.key}
+              target={link.blankTarget ? '_blank' : '_self'}
+              href={link.href}
+            >
+              {link.icon && <Icon type={link.icon} />} {link.title}
+            </a>
+          ))}
+        </div>
+        <div class="global-footer-copyright">
+          <slot name="copyright" />
+        </div>
+      </footer>
+    )
   }
 }
 </script>
 
 <style lang="less" scoped>
-@import './index';
+@import "./index";
 </style>

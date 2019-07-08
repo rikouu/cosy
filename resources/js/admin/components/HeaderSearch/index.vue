@@ -1,12 +1,8 @@
 
 <script>
-import { AutoComplete, Icon } from 'ant-design-vue'
+import { AutoComplete, Icon, Input } from 'ant-design-vue'
 export default {
   name: 'HeaderSearch',
-  components: {
-    AAutoComplete: AutoComplete,
-    AIcon: Icon
-  },
   props: {
     placeholder: {
       type: String,
@@ -49,7 +45,7 @@ export default {
     const { placeholder, value, searchMode, dataSource } = this
     return (
       <span
-        class={'headerSearch'}
+        class='header-search'
         onClick={this.enterSearchMode}
         onTransitionEnd={({ propertyName }) => {
           if (propertyName === 'width' && !searchMode) {
@@ -61,7 +57,7 @@ export default {
         <AutoComplete
           key="AutoComplete"
           ref="input"
-          class={['input', { 'show': searchMode }]}
+          class={['input', { show: searchMode }]}
           dataSource={dataSource}
           value={value}
           onChange={this.onSearchChange}
@@ -71,8 +67,9 @@ export default {
           <Input
             ref="searchInput"
             placeholder={placeholder}
+            aria-label={placeholder}
             value={value}
-            onKeydown={(e) => this.onKeyDown(e)}
+            onKeydown={e => this.onKeyDown(e)}
             onBlur={this.leaveSearchMode}
           />
         </AutoComplete>
@@ -83,36 +80,5 @@ export default {
 </script>
 
 <style lang="less" >
-@import "~ant-design-vue/es/style/themes/default";
-
-.headerSearch {
-  .anticon-search {
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .input {
-    width: 0;
-    background: transparent;
-    border-radius: 0;
-    transition: width 0.3s, margin-left 0.3s;
-    .ant-select-selection {
-      background: transparent;
-    }
-    input {
-      padding-right: 0;
-      padding-left: 0;
-      border: 0;
-      box-shadow: none !important;
-    }
-    &,
-    &:hover,
-    &:focus {
-      border-bottom: 1px solid @border-color-base;
-    }
-    &.show {
-      width: 210px;
-      margin-left: 8px;
-    }
-  }
-}
+@import "./index.less";
 </style>

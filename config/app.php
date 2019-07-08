@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Overtrue\LaravelFilesystem\Qiniu\QiniuStorageServiceProvider::class,
+        Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class,
     ],
 
     /*

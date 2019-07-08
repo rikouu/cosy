@@ -1,7 +1,7 @@
 
 <script>
 import { Icon } from 'ant-design-vue'
-import RightContent from './RightContent'
+import RightContent from '@/components/RightContent'
 import { themeMixin } from '@/mixins'
 import Logo from '@img/favicon.png'
 
@@ -39,7 +39,7 @@ export default {
             <img src={Logo} />
           </RouterLink>
         )}
-        <span class="trigger" onClick={this.toggle}>
+        <span class="global-header-trigger" onClick={this.toggle}>
           <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
         </span>
         <RightContent />
@@ -50,5 +50,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import './index.less';
+@import "./index.less";
 </style>

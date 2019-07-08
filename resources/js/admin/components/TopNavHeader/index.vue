@@ -31,7 +31,7 @@
 
 <script >
 import BaseMenu from '@/components/SiderMenu/BaseMenu'
-import RightContent from '@/components/GlobalHeader/RightContent'
+import RightContent from '@/components/RightContent'
 import { themeMixin } from '@/mixins'
 import config from '@/config/base'
 

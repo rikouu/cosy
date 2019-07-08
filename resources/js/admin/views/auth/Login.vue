@@ -78,12 +78,16 @@
 </template>
 
 <script >
-import AuthLayout from '@/layouts/AuthLayout';
+import AuthLayout from '@/layouts/AuthLayout'
+import { Icon, Input, Checkbox } from 'ant-design-vue'
 
 export default {
   name: 'Login',
   components: {
-    AuthLayout
+    AuthLayout,
+    AIcon: Icon,
+    AInput: Input,
+    ACheckbox: Checkbox
   },
   data () {
     return {

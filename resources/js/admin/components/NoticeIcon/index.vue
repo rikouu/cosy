@@ -1,45 +1,17 @@
-<template>
-  <a-dropdown
-    v-model="visible"
-    placement="bottomRight"
-    overlayClassName="container"
-    :trigger="['click']"
-  >
-    <span>
-      <a-badge :count="count" :style="{ boxShadow: 'none' }" class="badge">
-        <a-icon type="bell" class="icon" />
-      </a-badge>
-    </span>
-    <template v-slot:overlay>
-      <a-spin :spinning="false" :delay="0">
-        <a-tabs class="tabs">
-          <a-tab-pane key="1" tab="通知(0)">
-            <notice-list emptyText="暂无通知" emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg" />
-          </a-tab-pane>
-          <a-tab-pane key="2" tab="消息(0)">
-            <notice-list emptyText="暂无消息" emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg" />
-          </a-tab-pane>
-          <a-tab-pane key="3" tab="待办(0)">
-            <notice-list emptyText="暂无待办" emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg" />
-          </a-tab-pane>
-        </a-tabs>
-      </a-spin>
-    </template>
-  </a-dropdown>
-</template>
-
 <script>
-import { Badge, Dropdown, Spin, Tabs } from 'ant-design-vue'
+import { Badge, Dropdown, Spin, Tabs, Icon } from 'ant-design-vue'
 import NoticeList from './NoticeList'
+const { TabPane } = Tabs
+
 export default {
   name: 'NoticeIcon',
   components: {
     NoticeList,
-    'ABadge': Badge,
-    'ADropdown': Dropdown,
-    'ASpin': Spin,
-    'ATabs': Tabs,
-    'ATabPane': Tabs.TabPane
+    ABadge: Badge,
+    ADropdown: Dropdown,
+    ASpin: Spin,
+    ATabs: Tabs,
+    ATabPane: TabPane
   },
   data () {
     return {
@@ -49,58 +21,71 @@ export default {
     }
   },
   methods: {
-    onTabChange () {
-
+    onTabChange () {},
+    handleVisibleChange (visible) {
+      this.visible = visible
+      this.$emit('popupVisibleChange', visible)
     }
+  },
+  render () {
+    const { visible, count, loading } = this
+    return (
+      <Dropdown
+        visible={visible}
+        onVisibleChange={this.handleVisibleChange}
+        placement="bottomRight"
+        trigger={['click']}
+        overlayClassName="header-dropdown notice-icon-popover"
+      >
+        <span class={['noticeButton', { opened: visible }]}>
+          <Badge count={count} style={{ boxShadow: 'none' }} class="badge">
+            <Icon type="bell" class="icon" />
+          </Badge>
+        </span>
+        <Spin slot="overlay" spinning={loading} delay={300}>
+          <Tabs class="tabs">
+            <TabPane key={1} tab="通知(0)">
+              <NoticeList
+                emptyText="暂无通知"
+                emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
+              />
+            </TabPane>
+            <TabPane key={2} tab="消息(0)">
+              <NoticeList
+                emptyText="暂无消息"
+                emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
+              />
+            </TabPane>
+            <TabPane key={3} tab="待办(0)">
+              <NoticeList
+                emptyText="暂无待办"
+                emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
+              />
+            </TabPane>
+          </Tabs>
+        </Spin>
+      </Dropdown>
+    )
   }
 }
 </script>
 
 <style lang="less" scoped>
+@import "./index.less";
+</style>
 
-@import '~@/styles/variables.less';
+<style lang="less">
+.notice-icon-popover {
+  position: relative;
+  width: 336px;
 
-.noticeButton {
-  display: inline-block;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.icon {
-  padding: 4px;
-  vertical-align: middle;
-}
-
-.badge {
-  font-size: 16px;
-}
-
-.tabs {
-  :global(.ant-tabs-nav-scroll) {
-    text-align: center;
-  }
-
-  :global(.ant-tabs-bar) {
-    margin-bottom: 0;
-  }
-}
-
-:global {
-  .container > * {
-    position: relative;
-    width: 336px;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: @shadow-1-down;
-  }
-
-  @media screen and (max-width: @screen-xs) {
-    .container {
-      width: 100% !important;
+  .tabs {
+    .ant-tabs-nav-scroll {
+      text-align: center;
     }
-    .container > * {
-      border-radius: 0 !important;
+    .ant-tabs-bar {
+      margin-bottom: 0;
     }
   }
 }
-
 </style>

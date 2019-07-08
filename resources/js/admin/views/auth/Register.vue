@@ -103,13 +103,16 @@
   </auth-layout>
 </template>
 
-<script >
+<script>
 import AuthLayout from '@/layouts/AuthLayout'
+import { Icon, Input } from 'ant-design-vue'
 
 export default {
   name: 'Register',
   components: {
-    AuthLayout
+    AuthLayout,
+    AIcon: Icon,
+    AInput: Input
   },
   data () {
     return {

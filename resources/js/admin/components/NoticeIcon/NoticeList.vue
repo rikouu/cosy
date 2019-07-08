@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
+@import "~ant-design-vue/es/style/themes/default.less";
 
 .list {
   max-height: 400px;

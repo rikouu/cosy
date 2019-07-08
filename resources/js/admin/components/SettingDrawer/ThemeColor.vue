@@ -1,25 +1,5 @@
-<template>
-  <div class="themeColor">
-    <h3 class="title">
-      {{ title }}
-    </h3>
-    <div class="content">
-      <a-tooltip v-for="color in colors" :key="color.color" :title="color.key">
-        <div
-          class="colorBlock"
-          :style="{
-            backgroundColor: color.color,
-          }"
-          @click="onChange(color.color)"
-        >
-          <a-icon v-if="value === color.color" type="check" />
-        </div>
-      </a-tooltip>
-    </div>
-  </div>
-</template>
-
 <script>
+import { Icon, Tooltip } from 'ant-design-vue'
 const colorList = [
   {
     key: 'dust',
@@ -58,6 +38,8 @@ const colorList = [
 export default {
   name: 'ThemeColor',
   components: {
+    AIcon: Icon,
+    ATooltip: Tooltip
   },
   props: {
     title: {
@@ -75,21 +57,42 @@ export default {
       required: true
     }
   },
-  data () {
-    return {
-      // colorList
-    }
-  },
   methods: {
     onChange (color) {
       this.$emit('change', color)
     }
+  },
+  render () {
+    const { colors, title, value } = this
+    return (
+      <div class="themeColor">
+        <h3 class="title">{{ title }}</h3>
+        <div class="content">
+          {colors.map(color => {
+            return (
+              <Tooltip key={color.color} title={color.key}>
+                <div
+                  class="colorBlock"
+                  style={{
+                    backgroundColor: color.color
+                  }}
+                  onClick={this.onChange(color.color)}
+                >
+                  {value === color.color && <Icon type="check" />}
+                </div>
+              </Tooltip>
+            )
+          })}
+        </div>
+      </div>
+    )
   }
 }
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
+@import "~ant-design-vue/es/style/themes/default.less";
+
 .themeColor {
   margin-top: 24px;
   overflow: hidden;
@@ -111,5 +114,4 @@ export default {
     cursor: pointer;
   }
 }
-
 </style>

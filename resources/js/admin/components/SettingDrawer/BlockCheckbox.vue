@@ -17,9 +17,12 @@
 </template>
 
 <script>
+import { Icon, Tooltip } from 'ant-design-vue'
 export default {
   name: 'BlockCheckbox',
   components: {
+    AIcon: Icon,
+    ATooltip: Tooltip
   },
   props: {
     title: {
@@ -46,7 +49,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
+@import "~ant-design-vue/es/style/themes/default.less";
 
 .blockChecbox {
   display: flex;

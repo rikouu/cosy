@@ -87,11 +87,11 @@ Vue.use(Checkbox)
 // Vue.use(Drawer);
 // Vue.use(Dropdown)
 Vue.use(Form)
-Vue.use(Icon)
-Vue.use(Input)
+// Vue.use(Icon)
+// Vue.use(Input)
 // Vue.use(InputNumber);
 // Vue.use(Layout)
-Vue.use(List)
+// Vue.use(List)
 // Vue.use(LocaleProvider);
 // Vue.use(Menu)
 Vue.use(Modal)
@@ -99,14 +99,14 @@ Vue.use(Modal)
 // Vue.use(Popconfirm);
 // Vue.use(Popover);
 // Vue.use(Progress);
-Vue.use(Radio)
+// Vue.use(Radio)
 // Vue.use(Rate);
 // Vue.use(Row)
-Vue.use(Select)
+// Vue.use(Select)
 // Vue.use(Slider);
 // Vue.use(Spin);
 // Vue.use(Steps);
-Vue.use(Switch)
+// Vue.use(Switch)
 Vue.use(Table)
 // Vue.use(Transfer);
 // Vue.use(Tree);
@@ -115,7 +115,7 @@ Vue.use(Table)
 // Vue.use(Tag);
 // Vue.use(TimePicker);
 // Vue.use(Timeline);
-Vue.use(Tooltip)
+// Vue.use(Tooltip)
 // Vue.use(Upload);
 // Vue.use(Skeleton);
 // Vue.use(Comment);

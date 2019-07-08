@@ -29,17 +29,10 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import { mapGetters } from 'vuex'
 import { themeMixin } from '@/mixins'
+const { Content } = Layout
 
 export default {
   name: 'BasicLayout',
-  components: {
-    BasicFooter: Footer,
-    BasicHeader: Header,
-    SiderMenu,
-    SettingDrawer,
-    ALayout: Layout,
-    ALayoutContent: Layout.Content
-  },
   mixins: [themeMixin],
   data () {
     return {
@@ -79,16 +72,54 @@ export default {
     handleMenuCollapse (collapsed) {
       this.collapsed = !this.collapsed
       this.setSidebar(this.collapsed)
+    },
+    getPaddingLeft (hasLeftPadding, collapsed, siderWidth) {
+      if (hasLeftPadding) {
+        return collapsed ? 80 : siderWidth
+      }
+      return undefined
     }
+  },
+  render () {
+    const { screen, showSettingDrawer, fixedHeader, isTopMenu, isMobile, menus, collapsed, hasLeftPadding, siderWidth = 256 } = this
+    return (
+      <div class={`${screen} basic-layout`}>
+        <Layout>
+          {!(isTopMenu && !isMobile) && (<SiderMenu
+            menus={menus}
+            collapsed={collapsed}
+            mode="inline"
+            collapsible={true}
+            onCollapse={this.handleMenuCollapse}
+          />)}
+          <Layout style={{
+            paddingLeft: this.getPaddingLeft(!!hasLeftPadding, collapsed, siderWidth),
+            minHeight: '100vh'
+          }}>
+            <Header menus={menus} collapsed={collapsed} onCollapse={this.handleMenuCollapse} />
+            <Content class="basic-layout-content" style={!fixedHeader ? { paddingTop: 0 } : {}}>
+              <RouterView />
+            </Content>
+            <Footer />
+          </Layout>
+        </Layout>
+        {showSettingDrawer && (<SettingDrawer />)}
+      </div>
+    )
   }
 }
 </script>
 
 <style lang="less" scoped>
-@import "~@/styles/variables.less";
+@import '~ant-design-vue/es/style/themes/default';
 
-.basic-content {
+.basic-layout-content {
   margin: 24px;
   padding-top: @layout-header-height;
+}
+.basic-layout {
+  .ant-layout {
+    transition: all 0.2s;
+  }
 }
 </style>

@@ -1,24 +1,13 @@
-<template>
-  <a-layout-header v-show="visible" :style="{ 'padding': 0, 'width': getHeadWidth }" :class="{ 'fixedHeader': fixedHeader }">
-    <top-nav-header v-if="isTopMenu && !isMobile" :menus="menus" :collapsed="collapsed" />
-    <global-header v-else :collapsed="collapsed" @collapse="collapse" />
-  </a-layout-header>
-</template>
-
 <script>
-
 import { Layout } from 'ant-design-vue'
 import TopNavHeader from '@/components/TopNavHeader'
 import GlobalHeader from '@/components/GlobalHeader'
 import { themeMixin } from '@/mixins'
 
+const { Header } = Layout
+
 export default {
   name: 'Header',
-  components: {
-    TopNavHeader,
-    GlobalHeader,
-    'ALayoutHeader': Layout.Header
-  },
   mixins: [ themeMixin ],
   props: {
     collapsed: {
@@ -37,14 +26,6 @@ export default {
       visible: true
     }
   },
-  computed: {
-    getHeadWidth () {
-      if (this.isMobile || !this.fixedHeader || this.isTopMenu) {
-        return '100%'
-      }
-      return this.collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)'
-    }
-  },
   beforeDestroy () {
     document.removeEventListener('scroll', this.handScroll)
   },
@@ -52,6 +33,12 @@ export default {
     document.addEventListener('scroll', this.handScroll, { passive: true })
   },
   methods: {
+    getHeadWidth () {
+      if (this.isMobile || !this.fixedHeader || this.isTopMenu) {
+        return '100%'
+      }
+      return this.collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)'
+    },
     handScroll () {
       if (this.autoHideHeader) {
         var that = this
@@ -76,18 +63,42 @@ export default {
     },
     collapse (collapsed) {
       this.$emit('collapse', collapsed)
+    },
+    onMenuCollapse () {
+
+    },
+    renderContent () {
+      const { isMobile, navTheme, collapsed, menus, isTopMenu, title } = this
+      if (isTopMenu && !isMobile) {
+        return (
+          <TopNavHeader
+            theme={navTheme}
+            mode="horizontal"
+            menus={menus}
+            title={title}
+            onCollapse={this.onMenuCollapse}
+          />
+        )
+      } else {
+        return (<GlobalHeader title={title} menus={menus} onCollapse={this.onMenuCollapse} collapsed={collapsed} />)
+      }
     }
+  },
+  render () {
+    const { visible, fixedHeader } = this
+    const width = this.getHeadWidth()
+    return visible ? (
+      <Header
+        style={{ padding: 0, width, zIndex: 2 }}
+        class={fixedHeader ? 'fixed-header' : ''}
+      >
+        {this.renderContent()}
+      </Header>
+    ) : null
   }
 }
 </script>
 
 <style lang="less" scoped>
-.fixedHeader {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9;
-  width: 100%;
-  // transition: width 0.1s;
-}
+@import './Header.less';
 </style>

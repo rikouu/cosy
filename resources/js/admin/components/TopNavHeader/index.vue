@@ -1,39 +1,9 @@
-<template>
-  <div :class="{ 'top-nav-header': true, 'light': navTheme === 'light' }">
-    <div ref="maim" :class="[ 'top-nav-header-main', { 'wide': wide }]">
-      <div class="top-nav-header-left">
-        <div id="logo" class="top-nav-header-logo">
-          <router-link :to="{ path: '/' }">
-            <img src="~@/assets/images/logo.svg" alt="logo" />
-            <h1>{{ title }}</h1>
-          </router-link>
-        </div>
-      </div>
-      <div
-        :style="{
-         'maxWidth': maxWidth,
-         'flex': 1,
-         }"
-        class="top-nav-header-menu"
-      >
-        <base-menu
-          :collapsed="collapsed"
-          :menu="menus"
-          mode="horizontal"
-          :theme="navTheme"
-          @select="onSelect"
-        />
-      </div>
-      <right-content />
-    </div>
-  </div>
-</template>
-
 <script >
 import BaseMenu from '@/components/SiderMenu/BaseMenu'
 import RightContent from '@/components/RightContent'
 import { themeMixin } from '@/mixins'
 import config from '@/config/base'
+import logo from '@img/favicon.png'
 
 export default {
   name: 'TopNavHeader',
@@ -64,11 +34,7 @@ export default {
       return this.contentWidth === 'Fixed'
     },
     maxWidth () {
-      const width =
-        (this.contentWidth === 'Fixed' ? 1200 : window.innerWidth) -
-        280 -
-        120 -
-        40
+      const width = (this.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 280 - 120 - 40
       return `${width}px`
     }
   },
@@ -76,6 +42,36 @@ export default {
     onSelect () {
       console.log(222)
     }
+  },
+  render () {
+    const { navTheme, menus, collapsed, title, maxWidth, contentWidth } = this
+    return (
+      <div class={`top-nav-header ${navTheme === 'light' ? 'light' : ''}` }>
+        <div ref="maim" class={`top-nav-header-main ${contentWidth === 'Fixed' ? 'wide' : ''}` }>
+          <div class="top-nav-header-left">
+            <div id="logo" class="top-nav-header-logo">
+              <RouterLink to={{ path: '/' }}>
+                <img src={logo} alt="logo" />
+                <h1>{{ title }}</h1>
+              </RouterLink>
+            </div>
+          </div>
+          <div
+            style={{ maxWidth: maxWidth, flex: 1 }}
+            class="top-nav-header-menu"
+          >
+            <BaseMenu
+              collapsed={collapsed}
+              menu={menus}
+              mode="horizontal"
+              theme={navTheme}
+              onSelect={this.onSelect}
+            />
+          </div>
+          <RightContent />
+        </div>
+      </div>
+    )
   }
 }
 </script>

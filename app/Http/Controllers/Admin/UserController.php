@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         $users = User::withCount('articles')
             ->when($name = $request->get('name'), function ($query) use ($name) {
-                $query->where('name', 'like', '%' . $name . '%');
+                $query->where('name', 'like', '%'.$name.'%');
             })
             ->paginate($request->get('per_page', 10));
 

@@ -24,18 +24,16 @@ class HomeController extends Controller
      */
     public function home(Request $request)
     {
-
-        $question_ids = collect(array(
-            0 => array(
+        $question_ids = collect([
+            0 => [
                 'selectId' => 2,
                 'number'   => 0,
-            ),
-            1 =>
-                array(
+            ],
+            1 => [
                     'selectId' => 4,
                     'number'   => 1,
-                ),
-        ));
+                ],
+        ]);
         $keyed = $question_ids->keyBy('selectId')->toArray();
 
         Log::info($keyed->toArray());

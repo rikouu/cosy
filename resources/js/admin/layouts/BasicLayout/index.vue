@@ -30,12 +30,15 @@ export default {
       return { paddingTop: 0 }
     },
     layoutStyle () {
-      if (this.fixSidebar && this.layoutMode !== 'topmenu' && !this.isMobile) {
+      if (this.fixSiderbar && this.layoutMode !== 'topmenu' && !this.isMobile) {
         return {
           paddingLeft: this.collapsed ? '80px' : '256px'
         }
       }
       return {}
+    },
+    hasLeftPadding () {
+      return this.fixSiderbar && this.layoutMode !== 'topmenu' && !this.isMobile
     }
   },
   created () {
@@ -52,7 +55,7 @@ export default {
     },
     getPaddingLeft (hasLeftPadding, collapsed, siderWidth) {
       if (hasLeftPadding) {
-        return collapsed ? 80 : siderWidth
+        return `${collapsed ? 80 : siderWidth}px`
       }
       return undefined
     }

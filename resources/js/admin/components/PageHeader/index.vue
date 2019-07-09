@@ -1,42 +1,11 @@
-<template>
-  <div class="pageHeader">
-    <div :class="{ wide: wide }">
-      <!-- <a-skeleton :loading="loading" active :paragraph="{rows: 4}" :avatar="{ size: 'large', shape: 'circle' }"> -->
-      <breadcrumb v-if="!hideBread" />
-      <div class="detail">
-        <img v-if="logo" :src="logo" class="logo">
-        <div class="main">
-          <div class="row">
-            <h1 v-if="title" class="title">
-              {{ title }}
-            </h1>
-          </div>
-          <div class="row">
-            <div v-if="content" class="content">
-              {{ content }}
-            </div>
-            <div v-if="extraContent" class="extraContent">
-              {{ extraContent }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script >
-import { Skeleton } from 'ant-design-vue'
+// import { Skeleton } from 'ant-design-vue'
 import Breadcrumb from './Breadcrumb'
 import { themeMixin } from '@/mixins'
 
 export default {
   name: 'PageHeader',
-  components: {
-    'ASkeleton': Skeleton,
-    Breadcrumb
-  },
-  mixins: [ themeMixin ],
+  mixins: [themeMixin],
   props: {
     wide: {
       type: Boolean,
@@ -67,12 +36,41 @@ export default {
     return {
       loading: false
     }
+  },
+  methods: {
+    renderHeader (prefixCls) {
+      const { breadcrumb, backIcon, onBack } = this
+      if (breadcrumb && breadcrumb.routes) {
+        return this.renderBreadcrumb(breadcrumb)
+      }
+      return this.renderBack(prefixCls, backIcon, onBack)
+    }
+  },
+  render () {
+    const { logo, title, content, extraContent, hideBread } = this
+    return (
+      <div class="pageHeader">
+        {hideBread && (<Breadcrumb />)}
+        <div class="detail">
+          {logo && (<img src={logo} class="logo" />)}
+          <div class="main">
+            <div class="row">
+              {title && (<h1 v-if="title" class="title">{ title }</h1>)}
+            </div>
+            <div class="row">
+              {content && (<div class="content">{ content }</div>)}
+              {extraContent && (<div class="extraContent">{ extraContent }</div>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 }
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
+@import "~@/styles/variables.less";
 
 .pageHeader {
   padding: 16px 32px 0 32px;
@@ -233,5 +231,4 @@ export default {
     }
   }
 }
-
 </style>

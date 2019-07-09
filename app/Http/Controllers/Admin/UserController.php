@@ -3,31 +3,54 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\UserRequest;
+use App\Http\Resources\Admin\UserResource;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param UserRequest $request
+     *
+     * @return UserResource
      */
-    public function index()
+    public function index(UserRequest $request)
     {
-        //
+        $users = User::withCount('articles')
+            ->when($name = $request->get('name'), function ($query) use ($name) {
+                $query->where('name', 'like', '%' . $name . '%');
+            })
+            ->paginate($request->get('per_page', 10));
+
+        return new UserResource($users);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param UserRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $data = array_merge($request->all(), [
+            'password' => Hash::make($request->get('password')),
+        ]);
+
+        $user = User::create($data);
+
+        $response = [
+            'message' => 'User created.',
+            'data'    => new UserResource($user),
+        ];
+
+        return response()->json($response);
     }
 
     /**
@@ -35,17 +58,19 @@ class UserController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return UserResource
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return new UserResource($user);
     }
 
     /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function profile()
     {
@@ -60,25 +85,44 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param UserRequest $request
+     * @param int         $id
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $data = array_merge($request->all(), [
+            'password' => Hash::make($request->get('password')),
+        ]);
+        $user->fill($data);
+        $user->save();
+        $response = [
+            'message' => 'User updated.',
+            'data'    => $user->toArray(),
+        ];
+
+        return response()->json($response);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param string|int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function destroy($id)
     {
-        //
+        if (is_string($id)) {
+            $id = explode(',', $id);
+        }
+
+        User::destroy($id);
+
+        return response()->json([
+            'message' => 'Delete success',
+        ]);
     }
 }

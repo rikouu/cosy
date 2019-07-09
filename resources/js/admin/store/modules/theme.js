@@ -22,7 +22,7 @@ export const state = {
   layout: Storage.get(DEFAULT_LAYOUT_MODE, config.layout),
   contentWidth: Storage.get(DEFAULT_CONTENT_WIDTH_TYPE, config.contentWidth),
   fixedHeader: Storage.get(DEFAULT_FIXED_HEADER, config.fixedHeader),
-  fixSidebar: Storage.get(DEFAULT_FIXED_SIDEMENU, config.fixSidebar),
+  fixSiderbar: Storage.get(DEFAULT_FIXED_SIDEMENU, config.fixSiderbar),
   autoHideHeader: Storage.get(DEFAULT_FIXED_HEADER_HIDDEN, config.autoHideHeader),
   color: Storage.get(DEFAULT_COLOR, config.primaryColor),
   weak: Storage.get(DEFAULT_COLOR_WEAK, config.colorWeak),
@@ -55,7 +55,7 @@ export const mutations = {
   },
   TOGGLE_FIXED_SIDEBAR: (state, fixed) => {
     Storage.set(DEFAULT_FIXED_SIDEMENU, fixed)
-    state.fixSidebar = fixed
+    state.fixSiderbar = fixed
   },
   TOGGLE_FIXED_HEADER_HIDDEN: (state, show) => {
     Storage.set(DEFAULT_FIXED_HEADER_HIDDEN, show)
@@ -132,8 +132,8 @@ export const actions = {
     }
     commit('TOGGLE_FIXED_HEADER', fixedHeader)
   },
-  ToggleFixSidebar ({ commit }, fixSidebar) {
-    commit('TOGGLE_FIXED_SIDEBAR', fixSidebar)
+  ToggleFixSidebar ({ commit }, fixSiderbar) {
+    commit('TOGGLE_FIXED_SIDEBAR', fixSiderbar)
   },
   ToggleFixedHeaderHidden ({ commit }, show) {
     commit('TOGGLE_FIXED_HEADER_HIDDEN', show)
@@ -156,7 +156,7 @@ export const getters = {
   layout: state => state.layout,
   contentWidth: state => state.contentWidth,
   fixedHeader: state => state.fixedHeader,
-  fixSidebar: state => state.fixSidebar,
+  fixSiderbar: state => state.fixSiderbar,
   autoHideHeader: state => state.autoHideHeader,
   color: state => state.color,
   weak: state => state.weak,

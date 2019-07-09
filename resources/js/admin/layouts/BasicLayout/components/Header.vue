@@ -35,6 +35,7 @@ export default {
   methods: {
     getHeadWidth () {
       if (this.isMobile || !this.fixedHeader || this.isTopMenu) {
+        console.log(100)
         return '100%'
       }
       return this.collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)'
@@ -58,14 +59,8 @@ export default {
         numSlideFun()
       }
     },
-    toggle () {
-      this.collapse(!this.collapsed)
-    },
-    collapse (collapsed) {
+    onMenuCollapse (collapsed) {
       this.$emit('collapse', collapsed)
-    },
-    onMenuCollapse () {
-
     },
     renderContent () {
       const { isMobile, navTheme, collapsed, menus, isTopMenu, title } = this
@@ -89,7 +84,7 @@ export default {
     const width = this.getHeadWidth()
     return visible ? (
       <Header
-        style={{ padding: 0, width, zIndex: 2 }}
+        style={{ padding: 0, width: width, zIndex: 2 }}
         class={fixedHeader ? 'fixed-header' : ''}
       >
         {this.renderContent()}

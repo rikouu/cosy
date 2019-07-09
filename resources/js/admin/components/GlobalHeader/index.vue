@@ -18,6 +18,10 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    menus: {
+      type: Array,
+      required: true
     }
     // collapse: {
     //   type: Function,

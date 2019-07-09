@@ -36,7 +36,7 @@ export default {
         primaryColor: 'ToggleColor',
         contentWidth: 'ToggleContentWidth',
         autoHideHeader: 'ToggleFixedHeaderHidden',
-        fixSidebar: 'ToggleFixSidebar',
+        fixSiderbar: 'ToggleFixSidebar',
         colorWeak: 'ToggleWeak'
       }
       if (config[setting]) {
@@ -45,7 +45,7 @@ export default {
     }
   },
   render () {
-    const { collapse, navTheme, layoutMode, primaryColor, contentWidth, fixedHeader, autoHideHeader, colorWeak, fixSidebar, changeSetting } = this
+    const { collapse, navTheme, layoutMode, primaryColor, contentWidth, fixedHeader, autoHideHeader, colorWeak, fixSiderbar, changeSetting } = this
     return (
       <div ref="settingDrawer">
         <Drawer
@@ -156,8 +156,8 @@ export default {
                     slot="actions"
                     size="small"
                     disabled={layoutMode === 'topmenu'}
-                    checked={fixSidebar}
-                    onChange={(checked) => changeSetting('fixSidebar', checked)}
+                    checked={fixSiderbar}
+                    onChange={(checked) => changeSetting('fixSiderbar', checked)}
                   />
                 </ListItem>
               </Tooltip>

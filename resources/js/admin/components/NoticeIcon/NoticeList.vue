@@ -1,6 +1,6 @@
 <template>
   <div v-if="data.length === 0" class="notFound">
-    <div className="notFound">
+    <div class="notFound">
       <img v-show="emptyImage" :src="emptyImage" alt="not found">
       <div>{{ emptyText }}</div>
     </div>

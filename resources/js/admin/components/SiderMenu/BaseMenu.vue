@@ -3,6 +3,7 @@ import { Menu, Icon } from 'ant-design-vue'
 import path from 'path'
 import { isUrl } from '@/utils/utils'
 import IconFont from '@/components/IconFont'
+import { mapGetters } from 'vuex'
 
 const { SubMenu, Item } = Menu
 
@@ -14,7 +15,7 @@ export default {
     MenuItem: Menu.Item
   },
   props: {
-    menu: {
+    menus: {
       type: Array,
       required: true
     },
@@ -41,9 +42,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('theme', ['isMobile']),
     rootSubmenuKeys (vm) {
       const keys = []
-      vm.menu.forEach(item => keys.push(path.resolve(item.path)))
+      vm.menus.forEach(item => keys.push(path.resolve(item.path)))
       return keys
     }
   },
@@ -120,10 +122,10 @@ export default {
           : this.renderMenuItem(menu, pIndex, index, basePath)
       }
     },
-    renderMenu (menuTree, basePath) {
+    renderMenu (menus, basePath) {
       const that = this
       const menuArr = []
-      menuTree.forEach((menu, i) => {
+      menus.forEach((menu, i) => {
         if (!menu.hidden) {
           menuArr.push(that.renderItem(menu, '0', i, basePath))
         }
@@ -175,16 +177,16 @@ export default {
     }
   },
   render () {
+    const { theme, mode, openKeys, selectedKeys, menus } = this
     return (
       <Menu
-        theme={this.theme}
-        mode={this.mode}
-        openKeys={this.openKeys}
-        selectedKeys={this.selectedKeys}
+        theme={theme}
+        mode={mode}
+        openKeys={openKeys}
+        selectedKeys={selectedKeys}
         class={[
-          // this.$class,
           {
-            'top-nav-menu': this.$props.mode === 'horizontal'
+            'top-nav-menu': mode === 'horizontal'
           }
         ]}
         onOpenChange={this.onOpenChange}
@@ -193,7 +195,7 @@ export default {
           this.$emit('select', obj)
         }}
       >
-        {this.renderMenu(this.menu, '/')}
+        {this.renderMenu(menus, '/')}
       </Menu>
     )
   }

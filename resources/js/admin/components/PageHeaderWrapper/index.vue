@@ -5,6 +5,9 @@ const prefixedClassName = 'page-header-wrap';
 
 export default {
   name: 'PageHeaderWrapper',
+  props: {
+
+  },
   methods: {
     renderPageHeader () {
        const { content, extraContent } = this 

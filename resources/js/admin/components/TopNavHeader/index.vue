@@ -1,17 +1,10 @@
 <script >
 import BaseMenu from '@/components/SiderMenu/BaseMenu'
 import RightContent from '@/components/RightContent'
-import { themeMixin } from '@/mixins'
-import config from '@/config/base'
 import logo from '@img/favicon.png'
 
 export default {
   name: 'TopNavHeader',
-  components: {
-    BaseMenu,
-    RightContent
-  },
-  mixins: [themeMixin],
   props: {
     collapsed: {
       type: Boolean,
@@ -21,54 +14,67 @@ export default {
     menus: {
       type: Array,
       required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    mode: {
+      type: String,
+      required: true
+    },
+    theme: {
+      type: String,
+      required: true
+    },
+    contentWidth: {
+      type: String,
+      required: true
+    },
+    isMobile: {
+      type: Boolean,
+      required: true
     }
   },
   data () {
     return {
-      title: config.name,
       main: undefined
-    }
-  },
-  computed: {
-    wide () {
-      return this.contentWidth === 'Fixed'
-    },
-    maxWidth () {
-      const width = (this.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 280 - 120 - 40
-      return `${width}px`
     }
   },
   methods: {
     onSelect () {
       console.log(222)
+    },
+    getMaxWidth () {
+      const innerWidth = window.innerWidth || 0
+      const width = (this.contentWidth === 'Fixed' && innerWidth > 1200 ? 1200 : innerWidth) - 280 - 200
+      return width + 'px'
     }
   },
   render () {
-    const { navTheme, menus, collapsed, title, maxWidth, contentWidth } = this
+    const { theme, menus, collapsed, title, contentWidth, isMobile } = this
+    const maxWidth = this.getMaxWidth()
     return (
-      <div class={`top-nav-header ${navTheme === 'light' ? 'light' : ''}` }>
+      <div class={`top-nav-header ${theme === 'light' ? 'light' : ''}` }>
         <div ref="maim" class={`top-nav-header-main ${contentWidth === 'Fixed' ? 'wide' : ''}` }>
           <div class="top-nav-header-left">
             <div id="logo" class="top-nav-header-logo">
               <RouterLink to={{ path: '/' }}>
                 <img src={logo} alt="logo" />
-                <h1>{{ title }}</h1>
+                <h1>{ title }</h1>
               </RouterLink>
             </div>
           </div>
-          <div
-            style={{ maxWidth: maxWidth, flex: 1 }}
-            class="top-nav-header-menu"
-          >
+          <div style={{ maxWidth: maxWidth, flex: 1 }} class="top-nav-header-menu" >
             <BaseMenu
               collapsed={collapsed}
-              menu={menus}
+              menus={menus}
               mode="horizontal"
-              theme={navTheme}
+              theme={theme}
               onSelect={this.onSelect}
             />
           </div>
-          <RightContent />
+          <RightContent isMobile={isMobile} isTopMenu={true} theme={theme}/>
         </div>
       </div>
     )

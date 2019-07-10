@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     onChange (color) {
-      this.$emit('change', color)
+      // this.$emit('change', color)
     }
   },
   render () {

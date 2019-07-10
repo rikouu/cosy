@@ -1,11 +1,8 @@
 <script >
-// import { Skeleton } from 'ant-design-vue'
 import Breadcrumb from './Breadcrumb'
-import { themeMixin } from '@/mixins'
 
 export default {
   name: 'PageHeader',
-  mixins: [themeMixin],
   props: {
     wide: {
       type: Boolean,

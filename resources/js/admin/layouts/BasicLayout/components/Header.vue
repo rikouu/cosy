@@ -2,13 +2,11 @@
 import { Layout } from 'ant-design-vue'
 import TopNavHeader from '@/components/TopNavHeader'
 import GlobalHeader from '@/components/GlobalHeader'
-import { themeMixin } from '@/mixins'
 
 const { Header } = Layout
 
 export default {
   name: 'Header',
-  mixins: [ themeMixin ],
   props: {
     collapsed: {
       type: Boolean,
@@ -16,6 +14,30 @@ export default {
     },
     menus: {
       type: Array,
+      required: true
+    },
+    contentWidth: {
+      type: String,
+      required: true
+    },
+    isTopMenu: {
+      type: Boolean,
+      required: true
+    },
+    isMobile: {
+      type: Boolean,
+      required: true
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    fixedHeader: {
+      type: Boolean,
+      required: true
+    },
+    theme: {
+      type: String,
       required: true
     }
   },
@@ -63,19 +85,21 @@ export default {
       this.$emit('collapse', collapsed)
     },
     renderContent () {
-      const { isMobile, navTheme, collapsed, menus, isTopMenu, title } = this
+      const { isMobile, theme, collapsed, menus, isTopMenu, title, contentWidth } = this
       if (isTopMenu && !isMobile) {
         return (
           <TopNavHeader
-            theme={navTheme}
+            theme={theme}
             mode="horizontal"
             menus={menus}
             title={title}
+            isMobile={isMobile}
             onCollapse={this.onMenuCollapse}
+            contentWidth={contentWidth}
           />
         )
       } else {
-        return (<GlobalHeader title={title} menus={menus} onCollapse={this.onMenuCollapse} collapsed={collapsed} />)
+        return (<GlobalHeader theme={theme} isMobile={isMobile} menus={menus} onCollapse={this.onMenuCollapse} collapsed={collapsed} />)
       }
     }
   },

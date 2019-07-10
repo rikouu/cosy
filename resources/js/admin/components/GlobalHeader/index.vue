@@ -2,7 +2,6 @@
 <script>
 import { Icon } from 'ant-design-vue'
 import RightContent from '@/components/RightContent'
-import { themeMixin } from '@/mixins'
 import Logo from '@img/favicon.png'
 
 export default {
@@ -10,9 +9,6 @@ export default {
   components: {
     RightContent
   },
-  mixins: [
-    themeMixin
-  ],
   props: {
     collapsed: {
       type: Boolean,
@@ -22,11 +18,19 @@ export default {
     menus: {
       type: Array,
       required: true
+    },
+    isMobile: {
+      type: Boolean,
+      required: true
+    },
+    isTopMenu: {
+      type: Boolean,
+      default: false
+    },
+    theme: {
+      type: String,
+      required: true
     }
-    // collapse: {
-    //   type: Function,
-    //   required: true
-    // }
   },
   methods: {
     toggle () {
@@ -35,7 +39,7 @@ export default {
     }
   },
   render () {
-    const { collapsed, isMobile } = this
+    const { collapsed, isMobile, isTopMenu, theme } = this
     return (
       <div class="global-header">
         {isMobile && (
@@ -46,7 +50,7 @@ export default {
         <span class="global-header-trigger" onClick={this.toggle}>
           <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
         </span>
-        <RightContent />
+        <RightContent isMobile={isMobile} isTopMenu={isTopMenu} theme={theme}/>
       </div>
     )
   }

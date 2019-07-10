@@ -1,8 +1,6 @@
 <script>
 import { Layout } from 'ant-design-vue'
 import BaseMenu from './BaseMenu'
-import { themeMixin } from '@/mixins'
-import config from '@/config/base'
 import logo from '@img/favicon.png'
 
 const { Sider } = Layout
@@ -13,7 +11,6 @@ export default {
     BaseMenu,
     ALayoutSider: Layout.Sider
   },
-  mixins: [themeMixin],
   props: {
     collapsed: {
       type: Boolean,
@@ -27,11 +24,22 @@ export default {
     siderWidth: {
       type: Number,
       default: 256
+    },
+    theme: {
+      type: String,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    isMobile: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      title: config.name,
       firstMount: true
     }
   },
@@ -40,7 +48,7 @@ export default {
       this.$emit('onSelect', obj)
     },
     onCollapse (collapsed) {
-
+      this.$emit('collapse', collapsed)
     },
     handleOpenChange () {
 
@@ -50,7 +58,7 @@ export default {
     this.firstMount = false
   },
   render () {
-    const { collapsed, isMobile, firstMount, siderWidth, theme, menus, fixSiderbar, navTheme, title } = this
+    const { collapsed, isMobile, firstMount, siderWidth, theme, menus, fixSiderbar, title } = this
     const siderClass = ['sider-menu-sider', {
       'fix-sider-bar': fixSiderbar,
       light: theme === 'light'
@@ -78,13 +86,13 @@ export default {
           </a>
         </div>
         <BaseMenu
-          handleOpenChange={this.handleOpenChange}
-          onOpenChange={this.handleOpenChange}
+          // handleOpenChange={this.handleOpenChange}
+          // onOpenChange={this.handleOpenChange}
           style={{ padding: '16px 0', width: '100%' }}
           collapsed={collapsed}
-          menu={menus}
+          menus={menus}
           mode="inline"
-          theme={navTheme}
+          theme={theme}
           onSelect={this.onSelect}
         />
       </Sider>

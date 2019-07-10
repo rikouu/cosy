@@ -5,21 +5,22 @@ import SettingDrawer from '@/components/SettingDrawer'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import { mapGetters } from 'vuex'
-import { themeMixin } from '@/mixins'
+// import { themeMixin } from '@/mixins'
 const { Content } = Layout
 
 export default {
   name: 'BasicLayout',
-  mixins: [themeMixin],
+  // mixins: [themeMixin],
   data () {
     return {
       menus: [],
-      collapsed: false,
+      collapsed: true,
       showSettingDrawer: false
     }
   },
   computed: {
-    ...mapGetters('theme', ['sidebar', 'screen']),
+    ...mapGetters('theme', ['sidebar', 'screen', 'contentWidth',
+      'layout', 'theme', 'isTopMenu', 'isMobile', 'fixSiderbar', 'fixedHeader' ]),
     ...mapGetters('permission', {
       mainMenu: 'addRouters'
     }),
@@ -29,21 +30,14 @@ export default {
       }
       return { paddingTop: 0 }
     },
-    layoutStyle () {
-      if (this.fixSiderbar && this.layoutMode !== 'topmenu' && !this.isMobile) {
-        return {
-          paddingLeft: this.collapsed ? '80px' : '256px'
-        }
-      }
-      return {}
-    },
     hasLeftPadding () {
-      return this.fixSiderbar && this.layoutMode !== 'topmenu' && !this.isMobile
+      console.log(this)
+      return this.fixSiderbar && !this.isTopMenu && !this.isMobile
     }
   },
   created () {
     this.menus = this.mainMenu.find(item => item.path === '/').children
-    this.showSettingDrawer = window.config.debug || false
+    this.showSettingDrawer = true // window.config.debug || false
   },
   methods: {
     setSidebar (value) {
@@ -51,7 +45,7 @@ export default {
     },
     handleMenuCollapse (collapsed) {
       this.collapsed = !this.collapsed
-      this.setSidebar(this.collapsed)
+      // this.setSidebar(this.collapsed)
     },
     getPaddingLeft (hasLeftPadding, collapsed, siderWidth) {
       if (hasLeftPadding) {
@@ -61,29 +55,48 @@ export default {
     }
   },
   render () {
-    const { screen, showSettingDrawer, fixedHeader, isTopMenu, isMobile, menus, collapsed, hasLeftPadding, siderWidth = 256 } = this
+    const { screen, showSettingDrawer,
+      theme,
+      fixedHeader = false, isTopMenu, isMobile, menus,
+      collapsed, title = 'Cosy', hasLeftPadding, contentWidth, siderWidth = 256 } = this
+    console.log(showSettingDrawer)
     return (
       <div class={`${screen} basic-layout`}>
         <Layout>
-          {!(isTopMenu && !isMobile) && (<SiderMenu
-            menus={menus}
-            collapsed={collapsed}
-            mode="inline"
-            collapsible={true}
-            onCollapse={this.handleMenuCollapse}
-          />)}
+          {!(isTopMenu && !isMobile) && (
+            <SiderMenu
+              menus={menus}
+              collapsed={collapsed}
+              theme={theme}
+              contentWidth={contentWidth}
+              onCollapse={this.handleMenuCollapse}
+              isMobile={isMobile}
+              title={title}
+            />)}
           <Layout style={{
             paddingLeft: this.getPaddingLeft(!!hasLeftPadding, collapsed, siderWidth),
             minHeight: '100vh'
           }}>
-            <Header menus={menus} collapsed={collapsed} onCollapse={this.handleMenuCollapse} />
+            <Header
+              title={title}
+              contentWidth={contentWidth}
+              menus={menus}
+              isTopMenu={isTopMenu}
+              isMobile={isMobile}
+              collapsed={collapsed}
+              theme={theme}
+              fixedHeader={fixedHeader}
+              onCollapse={this.handleMenuCollapse}
+            />
             <Content class="basic-layout-content" style={!fixedHeader ? { paddingTop: 0 } : {}}>
               <RouterView />
             </Content>
             <Footer />
           </Layout>
         </Layout>
-        {showSettingDrawer && (<SettingDrawer />)}
+        {
+          showSettingDrawer && (<SettingDrawer />)
+        }
       </div>
     )
   }

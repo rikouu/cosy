@@ -1,7 +1,6 @@
 <script>
 import { Drawer } from 'ant-design-vue'
 import SiderMenu from './SiderMenu'
-import { themeMixin } from '@/mixins'
 
 export default {
   name: 'SiderMenuWrapper',
@@ -9,30 +8,31 @@ export default {
     SiderMenu: SiderMenu,
     ADrawer: Drawer
   },
-  mixins: [themeMixin],
   props: {
-    mode: {
+    theme: {
       type: String,
-      required: false,
-      default: 'inline'
+      required: true
     },
-    collapsible: {
-      type: Boolean,
-      required: false,
-      default: false
+    title: {
+      type: String,
+      required: true
+    },
+    contentWidth: {
+      type: String,
+      required: true
     },
     collapsed: {
       type: Boolean,
       required: false,
       default: false
     },
-    // collapse: {
-    //   type: Function,
-    //   required: true
-    // },
     menus: {
       type: Array,
       required: true
+    },
+    isMobile: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -44,7 +44,7 @@ export default {
     }
   },
   render () {
-    const { isMobile, menus, collapsed, mode, onCollapse } = this
+    const { isMobile, menus, collapsed, theme, title } = this
     return isMobile ? (
       <ADrawer
         visible={!collapsed}
@@ -54,20 +54,25 @@ export default {
         }}
         zIndex={10}
         placement="left"
-        onClose={() => onCollapse && onCollapse(true)}
+        onClose={() => this.collapse(true)}
       >
         <SiderMenu
           menus={menus}
-          mode={mode}
+          theme={theme}
+          title={title}
+          isMobile={isMobile}
           collapsed={isMobile ? false : collapsed}
+          onCollapse={this.collapse}
         />
       </ADrawer>
     ) : (
       <SiderMenu
         menus={menus}
-        mode={mode}
-        collapsed={isMobile ? false : collapsed}
-        onSelect={this.onSelect}
+        theme={theme}
+        title={title}
+        isMobile={isMobile}
+        collapsed={collapsed}
+        onCollapse={this.collapse}
       />
     )
   }

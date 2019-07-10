@@ -24,24 +24,6 @@ class HomeController extends Controller
      */
     public function home(Request $request)
     {
-
-        $question_ids = collect(array(
-            0 => array(
-                'selectId' => 2,
-                'number'   => 0,
-            ),
-            1 =>
-                array(
-                    'selectId' => 4,
-                    'number'   => 1,
-                ),
-        ));
-        $keyed = $question_ids->keyBy('selectId')->toArray();
-
-        Log::info($keyed->toArray());
-        dd($keyed);
-
-        die;
         $articles = Article::with(['category'])->paginate(12);
         if ($request->query('isAjax')) {
             return view('components.articles.small', compact('articles'));

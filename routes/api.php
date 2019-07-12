@@ -25,13 +25,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth:jwt'], 'name' => 'a
     Route::apiResource('comment', 'CommentController');
     Route::apiResource('category', 'CategoryController');
     Route::apiResource('setting', 'SettingController');
-    Route::apiResource('role', 'RoleController');
+    // Route::apiResource('role', 'RoleController');
 
     // Dashboard
     Route::get('statistics', 'DashboardController@statistics');
 
     // File
-    Route::post('upload', 'MediaController@upload');
+    // Route::post('upload', 'MediaController@upload');
 });
 
 Route::group(['namespace' => 'Auth', 'middleware' => ['guest:jwt']], function () {

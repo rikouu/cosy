@@ -64,7 +64,7 @@ export const asyncRouterMap = [
         ]
       },
       {
-        path: 'post',
+        path: 'article',
         component: PageLayout,
         meta: {
           title: '文章',
@@ -73,32 +73,32 @@ export const asyncRouterMap = [
         children: [
           {
             path: '',
-            name: 'post.index',
-            component: () => import('@/views/posts/Index'),
+            name: 'article.index',
+            component: () => import('@/views/articles/Index'),
             meta: {
               title: '文章列表'
             }
           },
           {
             path: 'create',
-            name: 'post.create',
-            component: () => import('@/views/posts/Create'),
+            name: 'article.create',
+            component: () => import('@/views/articles/Create'),
             meta: {
               title: '创建文章'
             }
           },
           {
             path: ':id/edit',
-            name: 'post.edit',
-            component: () => import('@/views/posts/Update'),
+            name: 'article.edit',
+            component: () => import('@/views/articles/Update'),
             meta: {
               title: '编辑文章'
             }
           },
           {
             path: ':id',
-            name: 'post.detail',
-            component: () => import('@/views/posts/Detail'),
+            name: 'article.detail',
+            component: () => import('@/views/articles/Detail'),
             meta: {
               title: '文章详情'
             }

@@ -49,7 +49,7 @@ class Article extends Model
     public static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new PublishOrderScope());
+//        static::addGlobalScope(new PublishOrderScope());
     }
 
     /**

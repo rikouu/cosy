@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CategoryRequest;
+use App\Http\Requests\Admin\TagRequest;
+use App\Http\Resources\Admin\CategoryResource;
+use App\Http\Resources\Admin\TagResource;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -10,11 +16,19 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param CategoryRequest $request
+     *
+     * @return CategoryResource
      */
-    public function index()
+    public function index(CategoryRequest $request)
     {
-        //
+        $categories = Category::withCount('articles')->with(['parent'])
+            ->when($keywords = $request->get('keywords'), function ($query) use ($keywords) {
+                $query->where('name', 'like', '%'.$keywords.'%');
+            })
+            ->orderByDesc('updated_at')->paginate($request->get('per_page', 10));
+
+        return new CategoryResource($categories);
     }
 
     /**

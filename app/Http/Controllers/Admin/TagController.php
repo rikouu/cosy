@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\TagRequest;
+use App\Http\Resources\Admin\TagResource;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -10,11 +13,19 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param TagRequest $request
+     *
+     * @return TagResource
      */
-    public function index()
+    public function index(TagRequest $request)
     {
-        //
+        $tags = Tag::withCount('articles')
+            ->when($keywords = $request->get('keywords'), function ($query) use ($keywords) {
+                $query->where('name', 'like', '%'.$keywords.'%');
+            })
+            ->orderByDesc('updated_at')->paginate($request->get('per_page', 10));
+
+        return new TagResource($tags);
     }
 
     /**

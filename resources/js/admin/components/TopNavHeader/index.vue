@@ -48,7 +48,7 @@ export default {
     getMaxWidth () {
       const innerWidth = window.innerWidth || 0
       const width = (this.contentWidth === 'Fixed' && innerWidth > 1200 ? 1200 : innerWidth) - 280 - 200
-      return width + 'px'
+      return `${width}px`
     }
   },
   render () {

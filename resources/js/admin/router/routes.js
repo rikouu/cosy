@@ -241,6 +241,48 @@ export const asyncRouterMap = [
         ]
       },
       {
+        path: 'category',
+        component: PageLayout,
+        meta: {
+          title: '分类',
+          icon: 'tags'
+        },
+        children: [
+          {
+            path: '',
+            name: 'category.index',
+            component: () => import('@/views/categories/Index'),
+            meta: {
+              title: '分类列表'
+            }
+          },
+          {
+            path: 'create',
+            name: 'category.create',
+            component: () => import('@/views/categories/Create'),
+            meta: {
+              title: '新建分类'
+            }
+          },
+          {
+            path: 'edit',
+            name: 'category.edit',
+            component: () => import('@/views/categories/Update'),
+            meta: {
+              title: '编辑分类'
+            }
+          },
+          {
+            path: 'detail',
+            name: 'category.detail',
+            component: () => import('@/views/categories/Detail'),
+            meta: {
+              title: '分类详情'
+            }
+          }
+        ]
+      },
+      {
         path: 'permission',
         component: PageLayout,
         meta: {

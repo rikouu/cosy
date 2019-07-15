@@ -1,6 +1,7 @@
 const mix = require('laravel-mix')
 const webpack = require('webpack')
 const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 /*
  |--------------------------------------------------------------------------
@@ -15,7 +16,13 @@ const path = require('path')
 
 mix.webpackConfig({
   plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        path.resolve(__dirname, '/public/{css,js}/*')
+      ],
+      verbose: true
+    })
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.vue'],
@@ -48,7 +55,7 @@ mix.webpackConfig({
 
 mix
   .options({
-    extractVueStyle: true,
+    // extractVueStyle: true,
     autoprefixer: {}
   })
   .less('resources/less/admin/admin.less', 'public/css/admin.css')

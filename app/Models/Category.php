@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\Menuable;
 use App\Models\Traits\Sluggable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -22,7 +23,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'image', 'description',
+        'name', 'slug', 'image', 'description', 'parent_id',
     ];
 
     /**
@@ -31,6 +32,14 @@ class Category extends Model
     public function articles(): ?HasMany
     {
         return $this->hasMany(Article::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function parent(): ?BelongsTo
+    {
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     /**

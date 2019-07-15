@@ -1,12 +1,12 @@
 <script >
 import { Card, Col, Row, Input, Select, Table, Form, Button, Icon } from 'ant-design-vue'
-import { index } from '@/api/article'
+import { index } from '@/api/category'
 
 const FormItem = Form.Item
 const { Option } = Select
 
 export default {
-  name: 'ArticleList',
+  name: 'List',
   data () {
     return {
       selectedRowKeys: [],
@@ -19,11 +19,11 @@ export default {
           sorter: true
         },
         {
-          title: '标题',
-          dataIndex: 'title',
-          customRender: (title, record) => (
-            <RouterLink to={{ name: 'article.edit', params: { id: record.id } }}>
-              { title }
+          title: '名称',
+          dataIndex: 'name',
+          customRender: (text, record) => (
+            <RouterLink to={{ name: 'category.edit', params: { id: record.id } }}>
+              { text }
             </RouterLink>
           )
         },
@@ -32,13 +32,13 @@ export default {
           dataIndex: 'slug'
         },
         {
-          title: '分类',
-          dataIndex: 'category',
-          customRender: (category, record) => {
-            return category ? (<RouterLink to={{ name: 'article.index', query: { category: category.id } }}>
-              {category.name}
-            </RouterLink>) : (<span>—</span>)
-          }
+          title: '父级分类',
+          dataIndex: 'parent',
+          customRender: (text, record) => text ? (
+            <RouterLink to={{ name: 'category.edit', params: { id: record.id } }}>
+              { text }
+            </RouterLink>
+          ) : (<span>—</span>)
         },
         {
           title: '总数',

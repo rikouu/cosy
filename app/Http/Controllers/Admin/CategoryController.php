@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
-use App\Http\Requests\Admin\TagRequest;
 use App\Http\Resources\Admin\CategoryResource;
-use App\Http\Resources\Admin\TagResource;
 use App\Models\Category;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller

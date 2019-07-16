@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TopicRequest;
 use App\Http\Resources\Admin\TopicResource;
-use App\Models\Tag;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 

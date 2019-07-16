@@ -108,7 +108,7 @@ export default {
       const itemArr = []
       const pIndex_ = `${pIndex}_${index}`
       const routePath = path.resolve(basePath, menu.path)
-      if (!menu.hideChildrenInMenu) {
+      if (menu.meta && !menu.meta.hideChildrenInMenu) {
         menu.children.forEach((item, i) => {
           itemArr.push(that.renderItem(item, pIndex_, i, routePath))
         })
@@ -117,7 +117,7 @@ export default {
     },
     renderItem (menu, pIndex, index, basePath) {
       if (!menu.hidden) {
-        return menu.children && !menu.hideChildrenInMenu
+        return menu.children && (menu.meta && !menu.meta.hideChildrenInMenu)
           ? this.renderSubMenu(menu, pIndex, index, basePath)
           : this.renderMenuItem(menu, pIndex, index, basePath)
       }
@@ -142,19 +142,25 @@ export default {
       }
     },
     updateMenu () {
-      const routes = this.$route.matched
-        .concat()
-        .filter(item => item.path)
-        .map(item => {
-          return item.path
-        })
+      const routes = []
+      this.$route.matched.concat().every(item => {
+        if (item.path) {
+          routes.push(item.path)
+        }
+
+        if (item.meta.hideChildrenInMenu) {
+          return false
+        }
+        return true
+      })
 
       if (routes.length >= 4 && this.$route.meta.hidden) {
         routes.pop()
       }
+
       let routePath = routes.pop()
       let selectedKeys = [routePath].map(item => {
-        if (item !== '/') {
+        if (item !== undefined && item !== '/') {
           return path.resolve(item)
         }
         return item
@@ -162,13 +168,8 @@ export default {
 
       this.selectedKeys = selectedKeys
 
-      const openKeys = []
-      routes.forEach(item => {
-        if (item.length > 0) {
-          if (this.mode === 'inline') {
-            openKeys.push(item)
-          }
-        }
+      const openKeys = routes.filter(item => {
+        return item.length > 0 && this.mode === 'inline'
       })
 
       this.collapsed

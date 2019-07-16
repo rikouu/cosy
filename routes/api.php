@@ -21,6 +21,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth:jwt'], 'name' => 'a
     // Api resource
     Route::apiResource('user', 'UserController');
     Route::apiResource('tag', 'TagController');
+    Route::apiResource('topic', 'TopicController');
     Route::apiResource('article', 'ArticleController');
     Route::apiResource('comment', 'CommentController');
     Route::apiResource('category', 'CategoryController');

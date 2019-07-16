@@ -1,10 +1,12 @@
 <template>
-  <a-locale-provider :locale="locale">
-    <div id="app">
-      <loading />
-      <router-view v-if="isRouterAlive" />
-    </div>
-  </a-locale-provider>
+  <keep-alive>
+    <a-locale-provider :locale="locale">
+      <div id="app">
+        <loading />
+        <router-view v-if="isRouterAlive" />
+      </div>
+    </a-locale-provider>
+  </keep-alive>
 </template>
 
 <script>
@@ -34,7 +36,7 @@ export default {
     // setTimeout(() => {
     // document.getElementById('cosy-loader').style.display = 'none'
     // }, 200)
-    deviceEnquire((screenType) => {
+    deviceEnquire(screenType => {
       this.$store.dispatch('theme/SetScreen', screenType)
     })
   },

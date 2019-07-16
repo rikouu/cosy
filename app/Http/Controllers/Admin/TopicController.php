@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\TopicRequest;
+use App\Http\Resources\Admin\TopicResource;
+use App\Models\Tag;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 
@@ -11,11 +14,19 @@ class TopicController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param TopicRequest $request
+     *
+     * @return TopicResource
      */
-    public function index()
+    public function index(TopicRequest $request)
     {
-        //
+        $topics = Topic::withCount('articles')
+            ->when($keywords = $request->get('keywords'), function ($query) use ($keywords) {
+                $query->where('name', 'like', '%'.$keywords.'%');
+            })
+            ->orderByDesc('updated_at')->paginate($request->get('per_page', 10));
+
+        return new TopicResource($topics);
     }
 
     /**

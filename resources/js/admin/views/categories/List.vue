@@ -1,12 +1,12 @@
 <script >
 import { Card, Col, Row, Input, Select, Table, Form, Button, Icon } from 'ant-design-vue'
-import { index } from '@/api/article'
+import { list } from '@/api/category'
 
 const FormItem = Form.Item
 const { Option } = Select
 
 export default {
-  name: 'ArticleList',
+  name: 'List',
   data () {
     return {
       selectedRowKeys: [],
@@ -19,12 +19,12 @@ export default {
           sorter: true
         },
         {
-          title: '标题',
-          dataIndex: 'title',
-          customRender: (title, record) => (
-            <RouterLink to={{ name: 'article.edit', params: { id: record.id } }}>
-              { title }
-            </RouterLink>
+          title: '名称',
+          dataIndex: 'name',
+          customRender: (text, record) => (
+            text ? (<RouterLink to={{ name: 'category.edit', params: { id: record.id } }}>
+              { text }
+            </RouterLink>) : '—'
           )
         },
         {
@@ -32,13 +32,13 @@ export default {
           dataIndex: 'slug'
         },
         {
-          title: '分类',
-          dataIndex: 'category',
-          customRender: (category, record) => {
-            return category ? (<RouterLink to={{ name: 'article.index', query: { category: category.id } }}>
-              {category.name}
-            </RouterLink>) : (<span>—</span>)
-          }
+          title: '父级分类',
+          dataIndex: 'parent',
+          customRender: (text, record) => (
+            text ? (<RouterLink to={{ name: 'category.edit', params: { id: record.id } }}>
+              { text }
+            </RouterLink>) : '—'
+          )
         },
         {
           title: '总数',
@@ -59,7 +59,7 @@ export default {
   },
   created () {
     this.loading = true
-    index().then(res => {
+    list().then(res => {
       const { data, meta: { total, per_page: perPage, current_page: currentPage } } = res
       this.data = data
 
@@ -82,7 +82,7 @@ export default {
 
       query = Object.assign(query, this.$route.query)
       console.log(query)
-      index(query).then(res => {
+      list(query).then(res => {
         console.log(res)
         const { data, meta: { total, per_page: perPage, current_page: currentPage } } = res
         this.data = data
@@ -90,6 +90,7 @@ export default {
         console.log(total)
         const paginationProps = {
           showSizeChanger: true,
+          showQuickJumper: true,
           total: parseInt(total),
           pageSize: parseInt(perPage),
           current: currentPage

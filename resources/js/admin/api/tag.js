@@ -16,8 +16,8 @@ export function store (data) {
   })
 }
 
-export function update (data) {
-  const id = data.id
+export function update (id, data) {
+  delete data['id']
   return request({
     url: `/tag/${id}`,
     method: 'post',
@@ -25,8 +25,7 @@ export function update (data) {
   })
 }
 
-export function destroy (data) {
-  const id = data.id
+export function destroy (id) {
   return request({
     url: `/tag/${id}`,
     method: 'delete'

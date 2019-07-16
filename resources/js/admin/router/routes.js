@@ -1,6 +1,12 @@
-// import BasicLayout from '@/layouts/BasicLayout'
+import BasicLayout from '@/layouts/BasicLayout'
 import BlankLayout from '@/layouts/BlankLayout'
 import PageLayout from '@/layouts/PageLayout'
+
+import tagRoutes from './modules/tag'
+import topicRoutes from './modules/topic'
+import articleRoutes from './modules/article'
+import categoryRoutes from './modules/category'
+// import commentRoutes from './modules/comment'
 
 export const routes = [
   {
@@ -26,7 +32,7 @@ export const routes = [
 export const asyncRouterMap = [
   {
     path: '/',
-    component: () => import('@/layouts/BasicLayout'),
+    component: BasicLayout,
     children: [
       {
         path: '',
@@ -64,45 +70,19 @@ export const asyncRouterMap = [
         ]
       },
       {
-        path: 'article',
-        component: PageLayout,
+        path: 'content',
+        component: BlankLayout,
+        redirect: { name: 'article.index' },
         meta: {
-          title: '文章',
+          title: '内容',
           icon: 'edit'
         },
         children: [
-          {
-            path: '',
-            name: 'article.index',
-            component: () => import('@/views/articles/Index'),
-            meta: {
-              title: '文章列表'
-            }
-          },
-          {
-            path: 'create',
-            name: 'article.create',
-            component: () => import('@/views/articles/Create'),
-            meta: {
-              title: '创建文章'
-            }
-          },
-          {
-            path: ':id/edit',
-            name: 'article.edit',
-            component: () => import('@/views/articles/Update'),
-            meta: {
-              title: '编辑文章'
-            }
-          },
-          {
-            path: ':id',
-            name: 'article.detail',
-            component: () => import('@/views/articles/Detail'),
-            meta: {
-              title: '文章详情'
-            }
-          }
+          ...articleRoutes,
+          ...categoryRoutes,
+          ...tagRoutes,
+          ...topicRoutes
+          // ...commentRoutes
         ]
       },
       {
@@ -116,7 +96,7 @@ export const asyncRouterMap = [
           {
             path: '',
             name: 'user.index',
-            component: () => import('@/views/users/Index'),
+            component: () => import('@/views/users/List'),
             meta: {
               title: '用户列表'
             }
@@ -194,90 +174,6 @@ export const asyncRouterMap = [
             component: () => import('@/views/roles/Detail'),
             meta: {
               title: '角色详情'
-            }
-          }
-        ]
-      },
-      {
-        path: 'tag',
-        component: PageLayout,
-        meta: {
-          title: '标签',
-          icon: 'tags'
-        },
-        children: [
-          {
-            path: '',
-            name: 'tag.index',
-            component: () => import('@/views/tags/Index'),
-            meta: {
-              title: '标签列表'
-            }
-          },
-          {
-            path: 'create',
-            name: 'tag.create',
-            component: () => import('@/views/tags/Create'),
-            meta: {
-              title: '新建标签'
-            }
-          },
-          {
-            path: 'edit',
-            name: 'tag.edit',
-            component: () => import('@/views/tags/Update'),
-            meta: {
-              title: '编辑标签'
-            }
-          },
-          {
-            path: 'detail',
-            name: 'tag.detail',
-            component: () => import('@/views/tags/Detail'),
-            meta: {
-              title: '标签详情'
-            }
-          }
-        ]
-      },
-      {
-        path: 'category',
-        component: PageLayout,
-        meta: {
-          title: '分类',
-          icon: 'tags'
-        },
-        children: [
-          {
-            path: '',
-            name: 'category.index',
-            component: () => import('@/views/categories/Index'),
-            meta: {
-              title: '分类列表'
-            }
-          },
-          {
-            path: 'create',
-            name: 'category.create',
-            component: () => import('@/views/categories/Create'),
-            meta: {
-              title: '新建分类'
-            }
-          },
-          {
-            path: 'edit',
-            name: 'category.edit',
-            component: () => import('@/views/categories/Update'),
-            meta: {
-              title: '编辑分类'
-            }
-          },
-          {
-            path: 'detail',
-            name: 'category.detail',
-            component: () => import('@/views/categories/Detail'),
-            meta: {
-              title: '分类详情'
             }
           }
         ]

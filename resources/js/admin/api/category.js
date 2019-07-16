@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function index (params) {
+export function list (params) {
   return request({
     url: '/category',
     method: 'get',
@@ -21,6 +21,15 @@ export function update (data) {
   return request({
     url: `/category/${id}`,
     method: 'post',
+    data
+  })
+}
+
+export function show (data) {
+  const id = data.id
+  return request({
+    url: `/category/${id}`,
+    method: 'get',
     data
   })
 }

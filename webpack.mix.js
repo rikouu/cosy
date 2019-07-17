@@ -19,7 +19,7 @@ mix.webpackConfig({
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
-        path.resolve(__dirname, '/public/{css,js}/*')
+        path.resolve(__dirname, 'public/{css,js}/*')
       ],
       verbose: true
     })

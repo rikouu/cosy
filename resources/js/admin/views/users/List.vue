@@ -1,5 +1,5 @@
 <script>
-import { Card, Col, Avatar, Row, Button, Input, Form } from 'ant-design-vue'
+import { Card, Col, Avatar, Row, Button, Input, Form, Icon } from 'ant-design-vue'
 import { list, destroy } from '@/api/user'
 
 const FormItem = Form.Item
@@ -108,6 +108,12 @@ export default {
     toggleForm () {
 
     },
+    handleCreate (e) {
+      e.preventDefault()
+      this.$router.push({
+        name: 'user.create'
+      })
+    },
     handleMultiDelete (e) {
       e.preventDefault()
       console.log(this.selectedRowKeys)
@@ -187,10 +193,10 @@ export default {
           </Form>
         </div>
         <div class="tableListOperator">
-          <a-button icon="plus" type="primary" onClick={(e) => console.log(2222)} />
-          <a-button icon="delete" type="danger" onClick={(e) => this.handleTableDelete(e)} />
+          <Button type="primary" onClick={(e) => this.handleCreate(e)} >新建</Button>
+          <Button icon="delete" type="danger" onClick={(e) => this.handleTableDelete(e)} />
         </div>
-        <a-table
+        <Table
           rowKey="id"
           columns={columns}
           loading={loading}
@@ -206,8 +212,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
-@import '~@/styles/components/utils.less';
+@import "~ant-design-vue/es/style/themes/default.less";
 
 .tableList {
   .tableListOperator {

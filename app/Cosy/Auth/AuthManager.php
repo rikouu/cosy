@@ -5,9 +5,11 @@ namespace App\Cosy\Auth;
 use App\Models\User;
 use Illuminate\Auth\AuthManager as LaravelAuth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\JWTAuth;
+use Tymon\JWTAuth\JWTGuard;
 use Tymon\JWTAuth\Manager;
 
 /**
@@ -109,7 +111,7 @@ class AuthManager
      */
     public function onceUsingId($id)
     {
-        return $this->jwtAuth->onceUsingId($id);
+        return Auth::guard('jwt')->onceUsingId($id);
     }
 
     /**

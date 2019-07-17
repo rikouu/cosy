@@ -1,17 +1,13 @@
 <script >
-import { Card, Col, Row, Table, Select, Input, Form, Button, Icon } from 'ant-design-vue'
+import { Card, Col, Row, Table, Select, Input, Form, Button, Icon, Dropdown, Menu } from 'ant-design-vue'
 import { index } from '@/api/tag'
 
 const FormItem = Form.Item
+const MenuItem = Menu.Item
 const { Option } = Select.Option
 
 export default {
   name: 'Index',
-  components: {
-    'ACard': Card,
-    'ACol': Col,
-    'ARow': Row
-  },
   data () {
     return {
       selectedRowKeys: [],
@@ -72,13 +68,102 @@ export default {
       this.pagination = paginationProps
       this.loading = false
     })
+
+    const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    console.log(`arr: ${arr}`)
+    let bChange
+    let tempExchangVal
+    for (let i = 0; i < arr.length - 1; i++) {
+      bChange = false
+      for (let j = arr.length - 1; j > i; j--) {
+        console.log(`i: ${i}, j: ${j}`)
+        if (arr[j - 1] > arr[j]) {
+          tempExchangVal = arr[j]
+          arr[j] = arr[j - 1]
+          arr[j - 1] = tempExchangVal
+          bChange = true
+        }
+      }
+      if (bChange === false) { break }
+    }
   },
   methods: {
+    getActionButtons () {
+      const isEmpty = !(this.selectedRowKeys && this.selectedRowKeys.length > 0)
+      if (isEmpty) {
+        return (
+          <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+            <Col md={8} sm={24}>
+              <FormItem label="用户名">
+                <Input
+                  v-decorator={[
+                    'username',
+                    {
+                      rules: [
+                      // { required: true, message: $t('validation.required', { attribute: $t('validation.attributes.username') }) }
+                      ],
+                      validateTrigger: ['change', 'blur']
+                    }
+                  ]}
+                  placeholder="请输入"
+                />
+              </FormItem>
+            </Col>
+
+            <Col md={8} sm={24}>
+              <FormItem label="权限">
+                <Select defaultValue={0} placeholder="请选择" style="width: 100%;">
+                  <Option value={0}>
+              全部
+                  </Option>
+                  <Option value={1}>
+              管理员
+                  </Option>
+                </Select>
+              </FormItem>
+            </Col>
+
+            <Col md={8} sm={24}>
+              <span class="submitButtons">
+                <Button type="primary" htmlType="submit">查询</Button>
+                <Button type="primary" onClick={(e) => this.handleCreate(e)} >新建</Button>
+              </span>
+            </Col>
+          </Row>)
+      } else {
+        return (
+          <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+            <Col md={6} sm={24}>
+              <span class="submitButtons">
+                <Button icon="delete" onClick={this.handleDelete}>删除</Button>
+                <Dropdown overlay={<Menu onClick="handleMoreAction">
+                  <MenuItem key="1">
+                    <Icon type="delete" />删除
+                  </MenuItem>
+                </Menu>}>
+                  <Button>
+                        批量操作
+                    <Icon type="down" />
+                  </Button>
+                </Dropdown>
+              </span>
+            </Col>
+          </Row>
+        )
+      }
+    },
     handleSearch (value) {
       console.log(value)
     },
     toggleForm () {
 
+    },
+    handleCreate (e) {
+      e.preventDefault()
+      this.$router.push({
+        name: 'tag.create'
+      })
     },
     onSelectChange (selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys
@@ -113,62 +198,11 @@ export default {
       <Card>
         <div class="tableList">
           <div class="tableListForm">
-            <Form form={form} layout="inline" onSubmit="handleSearch">
-              <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-                <Col md={8} sm={24}>
-                  <FormItem label="用户名">
-                    <Input
-                      v-decorator={[
-                        'username',
-                        {
-                          rules: [
-                            // { required: true, message: $t('validation.required', { attribute: $t('validation.attributes.username') }) }
-                          ],
-                          validateTrigger: ['change', 'blur']
-                        }
-                      ]}
-                      placeholder="请输入"
-                    />
-                  </FormItem>
-                </Col>
-
-                <Col md={8} sm={24}>
-                  <FormItem label="权限">
-                    <Select defaultValue={0} placeholder="请选择" style="width: 100%;">
-                      <Option value={0}>
-                    全部
-                      </Option>
-                      <Option value={1}>
-                    管理员
-                      </Option>
-                    </Select>
-                  </FormItem>
-                </Col>
-
-                <Col md={8} sm={24}>
-                  <span class="submitButtons">
-                    <Button type="primary" htmlType="submit">
-                  查询
-                    </Button>
-                    <Button onClick={() => console.log(2222) }>
-                  重置
-                    </Button>
-                    <a onClick={this.toggleForm}>
-                  展开 <Icon type="down" />
-                    </a>
-                  </span>
-                </Col>
-              </Row>
+            <Form form={form} layout="inline" onSubmit={this.handleSearch}>
+              { this.getActionButtons() }
             </Form>
           </div>
-          <div class="tableListOperator">
-            <Button icon="plus" type="primary" onClick={() => console.log(2222) }>
-          新建
-            </Button>
-            <span>
-              <Button>批量操作</Button>
-            </span>
-          </div>
+
           <Table
             rowKey="id"
             columns={columns}
@@ -187,8 +221,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/variables.less';
-@import '~@/styles/components/utils.less';
+@import "~@/styles/variables.less";
+@import "~@/styles/components/utils.less";
 
 .tableList {
   .tableListOperator {
@@ -201,18 +235,18 @@ export default {
 
 .tableListForm {
   :global(.ant-form-item) {
-      display: flex;
-      margin-right: 0;
-      margin-bottom: 24px;
-      > .ant-form-item-label {
-        width: auto;
-        padding-right: 8px;
-        line-height: 32px;
-      }
-      .ant-form-item-control {
-        line-height: 32px;
-      }
-  :global(.ant-form-item-control-wrapper) {
+    display: flex;
+    margin-right: 0;
+    margin-bottom: 24px;
+    > .ant-form-item-label {
+      width: auto;
+      padding-right: 8px;
+      line-height: 32px;
+    }
+    .ant-form-item-control {
+      line-height: 32px;
+    }
+    :global(.ant-form-item-control-wrapper) {
       flex: 1;
     }
   }
@@ -221,7 +255,7 @@ export default {
     margin-bottom: 24px;
     white-space: nowrap;
     :global(.ant-btn) {
-     margin-right: 8px;
+      margin-right: 8px;
     }
   }
 }
@@ -237,5 +271,4 @@ export default {
     margin-right: 8px;
   }
 }
-
 </style>

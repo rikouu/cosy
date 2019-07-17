@@ -78,6 +78,12 @@ export default {
     onSelectChange (selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys
     },
+    handleCreate (e) {
+      e.preventDefault()
+      this.$router.push({
+        name: 'topic.create'
+      })
+    },
     handleTableChange (pagination, filters, sorter) {
       console.log(pagination)
       const query = {
@@ -157,9 +163,7 @@ export default {
             </Form>
           </div>
           <div class="tableListOperator">
-            <Button icon="plus" type="primary" onClick={() => console.log(2222) }>
-          新建
-            </Button>
+            <Button type="primary" onClick={(e) => this.handleCreate(e)} >新建</Button>
             <span>
               <Button>批量操作</Button>
             </span>

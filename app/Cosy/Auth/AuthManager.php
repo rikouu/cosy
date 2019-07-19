@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\JWTAuth;
-use Tymon\JWTAuth\JWTGuard;
 use Tymon\JWTAuth\Manager;
 
 /**

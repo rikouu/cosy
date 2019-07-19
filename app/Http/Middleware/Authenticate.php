@@ -9,7 +9,6 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 
 class Authenticate
 {
@@ -81,8 +80,9 @@ class Authenticate
     protected function setAuthenticationHeader($response, string $token)
     {
         if (!empty($token)) {
-            $response->headers->set('Authorization', 'Bearer ' . $token);
+            $response->headers->set('Authorization', 'Bearer '.$token);
         }
+
         return $response;
     }
 }

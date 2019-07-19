@@ -194,7 +194,7 @@ export default {
         </div>
         <div class="tableListOperator">
           <Button type="primary" onClick={(e) => this.handleCreate(e)} >新建</Button>
-          <Button icon="delete" type="danger" onClick={(e) => this.handleTableDelete(e)} />
+          <Button type="danger" onClick={(e) => this.handleTableDelete(e)} />
         </div>
         <Table
           rowKey="id"

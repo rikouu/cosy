@@ -68,25 +68,6 @@ export default {
       this.pagination = paginationProps
       this.loading = false
     })
-
-    const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-    console.log(`arr: ${arr}`)
-    let bChange
-    let tempExchangVal
-    for (let i = 0; i < arr.length - 1; i++) {
-      bChange = false
-      for (let j = arr.length - 1; j > i; j--) {
-        console.log(`i: ${i}, j: ${j}`)
-        if (arr[j - 1] > arr[j]) {
-          tempExchangVal = arr[j]
-          arr[j] = arr[j - 1]
-          arr[j - 1] = tempExchangVal
-          bChange = true
-        }
-      }
-      if (bChange === false) { break }
-    }
   },
   methods: {
     getActionButtons () {
@@ -136,12 +117,14 @@ export default {
           <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
             <Col md={6} sm={24}>
               <span class="submitButtons">
-                <Button icon="delete" onClick={this.handleDelete}>删除</Button>
-                <Dropdown overlay={<Menu onClick="handleMoreAction">
-                  <MenuItem key="1">
-                    <Icon type="delete" />删除
-                  </MenuItem>
-                </Menu>}>
+                <Button onClick={this.handleDelete}>删除</Button>
+                <Dropdown overlay={
+                  <Menu onClick={this.handleMoreAction}>
+                    <MenuItem key="1">
+                      <Icon type="delete" />删除
+                    </MenuItem>
+                  </Menu>
+                }>
                   <Button>
                         批量操作
                     <Icon type="down" />

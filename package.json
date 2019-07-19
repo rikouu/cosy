@@ -62,6 +62,7 @@
         "lodash": "^4.17.11",
         "path-to-regexp": "^3.0.0",
         "resolve-url-loader": "^2.3.2",
+        "vue-cli-plugin-ant-design": "^1.0.0",
         "vue-loader": "^15.7.0",
         "vue-template-compiler": "^2.6.10",
         "webpack": "^4.35.2",

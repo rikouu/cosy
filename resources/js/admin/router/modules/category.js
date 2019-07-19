@@ -1,5 +1,4 @@
-// const BlankLayout = () => import('@/layouts/BlankLayout/index.vue')
-const PageLayout = () => import('@/layouts/PageLayout/index.vue')
+import PageLayout from '@/layouts/PageLayout'
 
 const categoryRoutes = [
   {

@@ -32,7 +32,6 @@ if (token) {
 const app = new Vue({
   directives: {
     like: like
-    // sticky: sticky,
   },
   components: {
     BackTop: BackTop,

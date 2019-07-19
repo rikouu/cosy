@@ -1,7 +1,8 @@
 const mix = require('laravel-mix')
-const webpack = require('webpack')
+const { IgnorePlugin } = require('webpack')
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const LiveReloadPlugin = require('webpack-livereload-plugin')
 
 /*
  |--------------------------------------------------------------------------
@@ -16,13 +17,14 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 mix.webpackConfig({
   plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new IgnorePlugin(/^\.\/locale$/, /moment$/),
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
         path.resolve(__dirname, 'public/{css,js}/*')
       ],
       verbose: true
-    })
+    }),
+    new LiveReloadPlugin()
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.vue'],

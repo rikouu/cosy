@@ -46,13 +46,14 @@
 
 <script >
 import AuthLayout from '@/layouts/AuthLayout'
-import { Input } from 'ant-design-vue'
+import { Input, Icon } from 'ant-design-vue'
 
 export default {
   name: 'ForgotPassword',
   components: {
     AuthLayout,
-    AInput: Input
+    AInput: Input,
+    AIcon: Icon
   },
   data () {
     return {
